@@ -1,0 +1,3 @@
+amap_homepage:
+    path:     /home
+    defaults: { _controller: AMAPBundle:Default:index }
