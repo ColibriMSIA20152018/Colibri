@@ -1,3 +1,19 @@
 amap_homepage:
     path:     /home
     defaults: { _controller: AMAPBundle:Default:index }
+
+amap_produit:
+    path:     /produit
+    defaults: { _controller: AMAPBundle:Produit:index }
+    
+amap_produit_ajouter:
+    path:     /produit/ajouter
+    defaults: { _controller: AMAPBundle:Produit:ajouter }
+    
+amap_panier:
+    path:     /panier
+    defaults: { _controller: AMAPBundle:Panier:ajouter }
+    
+amap_panier_ajouter:
+    path:     /panier/ajouter
+    defaults: { _controller: AMAPBundle:Panier:ajouterMessage }

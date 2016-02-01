@@ -10,4 +10,9 @@ class DefaultController extends Controller
     {
         return $this->render('AMAPBundle:Default:index.html.twig');
     }
+    
+    public function produitAction()
+    {
+        return $this->render('AMAPBundle:Default:index.html.twig');
+    }
 }
