@@ -64,6 +64,7 @@ class ProduitController extends Controller
                     $stock = $em->getRepository('AMAPBundle:Stock')->findBy(array('produit' => $produit));
                             
                     $stock[0]->setQuantite($stock[0]->getQuantite()+$quantite);
+                    $em->persist($stock[0]);
                 }
                 else
                 {
@@ -71,9 +72,10 @@ class ProduitController extends Controller
 
                     $stock->setProduit($produit);
                     $stock->setQuantite($quantite);
+                    $em->persist($stock);
                 }
                    
-                $em->persist($stock[0]);
+                
                 $em->flush();
                 
                 return $this->redirect($this->generateUrl('amap_stock_ajouter'));
