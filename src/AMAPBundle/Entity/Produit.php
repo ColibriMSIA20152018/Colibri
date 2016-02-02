@@ -22,7 +22,7 @@ class Produit
     private $id;
     
     /**
-    * @ORM\ManyToOne(targetEntity="AMAPBundle\Entity\Panier")
+    * @ORM\ManyToMany(targetEntity="AMAPBundle\Entity\Panier", inversedBy="produits")
     */
     protected $panier;
 
@@ -34,11 +34,18 @@ class Produit
      */
     private $libelle;
 
+    /**
+     * Constructor
+     */
+    public function __construct()
+    {
+        $this->panier = new \Doctrine\Common\Collections\ArrayCollection();
+    }
 
     /**
      * Get id
      *
-     * @return int
+     * @return integer
      */
     public function getId()
     {
@@ -70,23 +77,33 @@ class Produit
     }
 
     /**
-     * Set panier
+     * Add panier
      *
      * @param \AMAPBundle\Entity\Panier $panier
      *
      * @return Produit
      */
-    public function setPanier(\AMAPBundle\Entity\Panier $panier = null)
+    public function addPanier(\AMAPBundle\Entity\Panier $panier)
     {
-        $this->panier = $panier;
+        $this->panier[] = $panier;
 
         return $this;
     }
 
     /**
+     * Remove panier
+     *
+     * @param \AMAPBundle\Entity\Panier $panier
+     */
+    public function removePanier(\AMAPBundle\Entity\Panier $panier)
+    {
+        $this->panier->removeElement($panier);
+    }
+
+    /**
      * Get panier
      *
-     * @return \AMAPBundle\Entity\Panier
+     * @return \Doctrine\Common\Collections\Collection
      */
     public function getPanier()
     {

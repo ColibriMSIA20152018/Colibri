@@ -13,22 +13,26 @@ class PanierController extends Controller
 {
     public function ajouterAction(Request $request)
     {
+        $em = $this->getDoctrine()->getManager();
+        
         $form = $this->createFormBuilder()
             ->add('produit', EntityType::class, array('class' => 'AMAPBundle:Produit', 'choice_label' => 'libelle') )
-            ->add('ajouter', SubmitType::class, array('label' => 'Ajouter un produit au Panier'))
+            ->add('panier', EntityType::class, array('class' => 'AMAPBundle:Panier', 'choice_label' => 'libelle') )    
+            ->add('ajouter', SubmitType::class, array('label' => 'Ajouter un produit à un Panier'))
             ->getForm();
-
+        
+        $paniers = $em->getRepository('AMAPBundle:Panier')->findAll();
+        
         if ($form->handleRequest($request)->isSubmitted()){ 
            if ($form->get('ajouter')->isClicked())
            {
                 $em = $this->getDoctrine()->getManager();
-                $data = $form->getData();
+                $data = $form->getData(); 
                 
-                $panier = new Panier();
-                
-                $panier->addProduit($data['produit']);
-                
+                $panier = $data['panier']->addProduit($data['produit']);
+                $produit = $data['produit']->addPanier($data['panier']);
                 $em->persist($panier);
+                $em->persist($produit);
                 $em->flush();
                 
                 return $this->redirect($this->generateUrl('amap_panier_ajouter'));
@@ -37,11 +41,11 @@ class PanierController extends Controller
         }
         
         return $this->render('AMAPBundle:Panier:index.html.twig',array(
-            'form' => $form->createView(),
+            'form' => $form->createView(), 'paniers' => $paniers
         ));
     }
     
-       public function ajouterMessageAction()
+    public function ajouterMessageAction()
     {
         return $this->render('AMAPBundle:Panier:messageAjouter.html.twig');
     }

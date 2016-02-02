@@ -2,7 +2,23 @@
 
 {% block body %}
     
+    {% for panier in paniers %}
+        Panier : {{ panier.libelle }}
+        <br/>
+        {% for produit in  panier.produits %}
+            <br/>
+            &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Produit  : {{ produit.libelle }}
+            <br/>
+        {% endfor %}
+        <br/>
+        <br/>
+    {% endfor %}
+    
     {{ form_start(form) }}
+        {{ form_label(form.panier) }}
+        <br/>
+        {{ form_widget(form.panier) }}
+        <br/>
         {{ form_label(form.produit) }}
         <br/>
         {{ form_widget(form.produit) }}

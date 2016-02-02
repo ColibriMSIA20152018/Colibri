@@ -17,3 +17,7 @@ amap_panier:
 amap_panier_ajouter:
     path:     /panier/ajouter
     defaults: { _controller: AMAPBundle:Panier:ajouterMessage }
+    
+amap_stock_ajouter:
+    path:     /produit/stock/ajouter
+    defaults: { _controller: AMAPBundle:Produit:ajouterStockMessage }    

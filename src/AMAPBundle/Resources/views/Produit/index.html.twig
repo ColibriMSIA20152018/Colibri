@@ -1,11 +1,37 @@
 {% extends 'base.html.twig' %}
 
 {% block body %}
-    
-    {{ form_start(form) }}
+    AJOUTER UN NOUVEAU PRODUIT
+    <br/>
+    {{ form_start(form, {'attr': {'name': 'formulaire1'}}) }}
         {{ form_label(form.libelle) }}
         <br/>
         {{ form_widget(form.libelle) }}
     {{ form_end(form) }}
+    <br/>
+    <br/>
+    AJOUTER UN PRODUIT AU STOCK
+    <br/>
+    {{ form_start(form2, {'attr': {'name': 'formulaire2'}}) }}
+        {{ form_label(form2.produit) }}
+        <br/>
+        {{ form_widget(form2.produit) }}
+        <br/>
+        {{ form_label(form2.quantite) }}
+        <br/>
+        {{ form_widget(form2.quantite) }}
+        <br/>
+    {{ form_end(form2) }}
+    <br/>
+    <br/>
+    STOCK ACTUEL
+    
+    {% for item in stock %}
+        <br/>
+        {{ item.produit.libelle }}
+        <br/>
+        {{ item.quantite }} KG
+        <br/>
+    {% endfor %}
     
 {% endblock %}
