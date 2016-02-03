@@ -5,6 +5,9 @@ namespace AMAPBundle\Controller;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Symfony\Component\HttpFoundation\Request;
 use \AMAPBundle\Entity\Panier;
+use \AMAPBundle\Entity\PanierProduit;
+use \AMAPBundle\Entity\Produit;
+use \Symfony\Component\Form\Extension\Core\Type\IntegerType;
 use Symfony\Component\Form\Extension\Core\Type\SubmitType;
 use \Symfony\Bridge\Doctrine\Form\Type\EntityType;
 
@@ -15,33 +18,73 @@ class PanierController extends Controller
     {
         $em = $this->getDoctrine()->getManager();
         
-        $form = $this->createFormBuilder()
+        $form = $this->get('form.factory')->createNamedBuilder('formulaire_ajout_produit_panier')
             ->add('produit', EntityType::class, array('class' => 'AMAPBundle:Produit', 'choice_label' => 'libelle') )
-            ->add('panier', EntityType::class, array('class' => 'AMAPBundle:Panier', 'choice_label' => 'libelle') )    
+            ->add('panier', EntityType::class, array('class' => 'AMAPBundle:Panier', 'choice_label' => 'libelle') )  
+            ->add('quantite', IntegerType::class)
             ->add('ajouter', SubmitType::class, array('label' => 'Ajouter un produit à un Panier'))
+            ->getForm();
+        
+        $form2 = $this->get('form.factory')->createNamedBuilder('formulaire_retirer_panier')
+            ->add('panier', EntityType::class, array('class' => 'AMAPBundle:Panier', 'choice_label' => 'libelle') )  
+            ->add('ajouter', SubmitType::class, array('label' => 'Retirer un Panier'))
             ->getForm();
         
         $paniers = $em->getRepository('AMAPBundle:Panier')->findAll();
         
-        if ($form->handleRequest($request)->isSubmitted()){ 
+        if ($form->handleRequest($request)->isSubmitted() || $form2->handleRequest($request)->isSubmitted() ){ 
            if ($form->get('ajouter')->isClicked())
            {
-                $em = $this->getDoctrine()->getManager();
                 $data = $form->getData(); 
                 
-                $panier = $data['panier']->addProduit($data['produit']);
-                $produit = $data['produit']->addPanier($data['panier']);
+                $panierproduit = new PanierProduit();
+                
+                
+                $panierproduit->setProduit($data['produit']);
+                $panierproduit->setQuantite($data['quantite']);
+                
+                var_dump($panierproduit);
+                
+                $panier = $data['panier']->addPanierproduit($panierproduit);
+                
+                $panierproduit->setPanier($panier);
+             
                 $em->persist($panier);
-                $em->persist($produit);
+                $em->persist($panierproduit);
                 $em->flush();
                 
-                return $this->redirect($this->generateUrl('amap_panier_ajouter'));
+               
+                //return $this->redirect($this->generateUrl('amap_panier_ajouter'));
            }
+           
+           if ($form2->get('ajouter')->isClicked())
+           {
+
+                $data2 = $form2->getData(); 
+                               
+                $panier = $data2['panier'];
+                
+                $em
+                
+                $panierproduit->setProduit($data['produit']);
+                $panierproduit->setQuantite($data['quantite']);
+                
+                $panier = $data['panier']->addPanierProduit($panierproduit);
+
+                $panierproduit->setPanier($panier);
+             
+                $em->persist($panier);
+                $em->persist($panierproduit);
+                $em->flush();
+                
+                //return $this->redirect($this->generateUrl('amap_panier_ajouter'));
+           }
+           
            
         }
         
         return $this->render('AMAPBundle:Panier:index.html.twig',array(
-            'form' => $form->createView(), 'paniers' => $paniers
+            'form' => $form->createView(), 'paniers' => $paniers, 'form2' => $form2->createView()
         ));
     }
     

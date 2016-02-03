@@ -22,10 +22,9 @@ class Produit
     private $id;
     
     /**
-    * @ORM\ManyToMany(targetEntity="AMAPBundle\Entity\Panier", inversedBy="produits")
+    * @ORM\OneToMany(targetEntity="AMAPBundle\Entity\PanierProduit", mappedBy="produit")
     */
-    protected $panier;
-
+    protected $panierproduit;
 
     /**
      * @var string
@@ -33,13 +32,14 @@ class Produit
      * @ORM\Column(name="libelle", type="string", length=255)
      */
     private $libelle;
-
+    
+  
     /**
      * Constructor
      */
     public function __construct()
     {
-        $this->panier = new \Doctrine\Common\Collections\ArrayCollection();
+        $this->panierproduit = new \Doctrine\Common\Collections\ArrayCollection();
     }
 
     /**
@@ -77,36 +77,36 @@ class Produit
     }
 
     /**
-     * Add panier
+     * Add panierproduit
      *
-     * @param \AMAPBundle\Entity\Panier $panier
+     * @param \AMAPBundle\Entity\PanierProduit $panierproduit
      *
      * @return Produit
      */
-    public function addPanier(\AMAPBundle\Entity\Panier $panier)
+    public function addPanierproduit(\AMAPBundle\Entity\PanierProduit $panierproduit)
     {
-        $this->panier[] = $panier;
+        $this->panierproduit[] = $panierproduit;
 
         return $this;
     }
 
     /**
-     * Remove panier
+     * Remove panierproduit
      *
-     * @param \AMAPBundle\Entity\Panier $panier
+     * @param \AMAPBundle\Entity\PanierProduit $panierproduit
      */
-    public function removePanier(\AMAPBundle\Entity\Panier $panier)
+    public function removePanierproduit(\AMAPBundle\Entity\PanierProduit $panierproduit)
     {
-        $this->panier->removeElement($panier);
+        $this->panierproduit->removeElement($panierproduit);
     }
 
     /**
-     * Get panier
+     * Get panierproduit
      *
      * @return \Doctrine\Common\Collections\Collection
      */
-    public function getPanier()
+    public function getPanierproduit()
     {
-        return $this->panier;
+        return $this->panierproduit;
     }
 }

@@ -29,16 +29,17 @@ class Panier
     private $libelle;
 
     /**
-    * @ORM\ManyToMany(targetEntity="AMAPBundle\Entity\Produit", mappedBy="panier")
+    * @ORM\OneToMany(targetEntity="AMAPBundle\Entity\PanierProduit", mappedBy="panier")
     */
-    protected $produits;
+    protected $panierproduit;
 
+    
     /**
      * Constructor
      */
     public function __construct()
     {
-        $this->produits = new \Doctrine\Common\Collections\ArrayCollection();
+        $this->panierproduit = new \Doctrine\Common\Collections\ArrayCollection();
     }
 
     /**
@@ -75,37 +76,5 @@ class Panier
         return $this->libelle;
     }
 
-    /**
-     * Add produit
-     *
-     * @param \AMAPBundle\Entity\Produit $produit
-     *
-     * @return Panier
-     */
-    public function addProduit(\AMAPBundle\Entity\Produit $produit)
-    {
-        $this->produits[] = $produit;
-
-        return $this;
-    }
-
-    /**
-     * Remove produit
-     *
-     * @param \AMAPBundle\Entity\Produit $produit
-     */
-    public function removeProduit(\AMAPBundle\Entity\Produit $produit)
-    {
-        $this->produits->removeElement($produit);
-    }
-
-    /**
-     * Get produits
-     *
-     * @return \Doctrine\Common\Collections\Collection
-     */
-    public function getProduits()
-    {
-        return $this->produits;
-    }
+   
 }

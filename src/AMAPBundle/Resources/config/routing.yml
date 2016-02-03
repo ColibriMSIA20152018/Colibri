@@ -1,5 +1,5 @@
 amap_homepage:
-    path:     /home
+    path:     /
     defaults: { _controller: AMAPBundle:Default:index }
 
 amap_produit:

@@ -58,7 +58,7 @@ class ProduitController extends Controller
 
                 $produit = $data2['produit'];
                 $quantite = $data2['quantite'];
-                
+                             
                 if($em->getRepository('AMAPBundle:Stock')->findBy(array('produit' => $produit)))
                 {
                     $stock = $em->getRepository('AMAPBundle:Stock')->findBy(array('produit' => $produit));

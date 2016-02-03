@@ -1,0 +1,42 @@
+<?php
+
+namespace AMAPBundle\Entity;
+
+use Doctrine\ORM\Mapping as ORM;
+
+/**
+ * PanierProduit
+ *
+ * @ORM\Table(name="panier_produit")
+ * @ORM\Entity(repositoryClass="AMAPBundle\Repository\PanierProduitRepository")
+ */
+class PanierProduit
+{
+    /**
+     * @var int
+     *
+     * @ORM\Column(name="id", type="integer")
+     * @ORM\Id
+     * @ORM\GeneratedValue(strategy="AUTO")
+     */
+    private $id;
+
+    /**
+     * @var int
+     *
+     * @ORM\Column(name="quantite", type="integer")
+     */
+    private $quantite;
+
+    /**
+    * @ORM\ManyToOne(targetEntity="AMAPBundle\Entity\Produit", inversedBy="panierproduit")
+    */
+    protected $produit;
+
+    /**
+    * @ORM\ManyToOne(targetEntity="AMAPBundle\Entity\Panier", inversedBy="panierproduit")
+    */
+    protected $panier;
+    
+
+}

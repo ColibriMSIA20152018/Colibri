@@ -1,27 +1,44 @@
 {% extends 'base.html.twig' %}
 
 {% block body %}
-    
-    {% for panier in paniers %}
-        Panier : {{ panier.libelle }}
-        <br/>
-        {% for produit in  panier.produits %}
-            <br/>
-            &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Produit  : {{ produit.libelle }}
-            <br/>
-        {% endfor %}
-        <br/>
-        <br/>
-    {% endfor %}
-    
-    {{ form_start(form) }}
-        {{ form_label(form.panier) }}
-        <br/>
-        {{ form_widget(form.panier) }}
-        <br/>
-        {{ form_label(form.produit) }}
-        <br/>
-        {{ form_widget(form.produit) }}
-    {{ form_end(form) }}
-    
+    <div class="container">
+        <div class="" style="width:50%;float:left">
+            <h1>Composition des paniers</h1>
+            {% for panier in paniers %}
+                <b>Panier :</b> {{ panier.libelle }}
+                <br/>
+                {% for panierproduit in  panier.panierproduit %}
+                    <br/>
+                    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Produit  : {{ panierproduit.produit.libelle }}
+                    <br/>
+                    <br/>
+                    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Quantité  : {{ panierproduit.quantite }} KG
+                    <br/>
+                {% endfor %}
+                <br/>
+                <br/>
+            {% endfor %}
+        </div>
+        <div class="" style="width:50%;float:left">
+            <h1>Ajouter un produit à un panier</h1>
+
+            {{ form_start(form) }}
+                {{ form_label(form.panier) }}
+                <br/>
+                {{ form_widget(form.panier) }}
+                <br/>
+                {{ form_label(form.produit) }}
+                <br/>
+                {{ form_widget(form.produit) }}
+                <br/>
+                {{ form_label(form.quantite) }}
+                <br/>
+                {{ form_widget(form.quantite) }}
+            {{ form_end(form) }}
+            
+            {{ form_start(form2) }}
+               
+            {{ form_end(form2) }}
+        </div>
+    </div>
 {% endblock %}

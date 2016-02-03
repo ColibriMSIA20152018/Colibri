@@ -29,16 +29,17 @@ class Panier
     private $libelle;
 
     /**
-    * @ORM\ManyToMany(targetEntity="AMAPBundle\Entity\Produit", mappedBy="panier")
+    * @ORM\OneToMany(targetEntity="AMAPBundle\Entity\PanierProduit", mappedBy="panier")
     */
-    protected $produits;
+    protected $panierproduit;
 
+    
     /**
      * Constructor
      */
     public function __construct()
     {
-        $this->produits = new \Doctrine\Common\Collections\ArrayCollection();
+        $this->panierproduit = new \Doctrine\Common\Collections\ArrayCollection();
     }
 
     /**
@@ -75,37 +76,39 @@ class Panier
         return $this->libelle;
     }
 
+   
+
     /**
-     * Add produit
+     * Add panierproduit
      *
-     * @param \AMAPBundle\Entity\Produit $produit
+     * @param \AMAPBundle\Entity\PanierProduit $panierproduit
      *
      * @return Panier
      */
-    public function addProduit(\AMAPBundle\Entity\Produit $produit)
+    public function addPanierproduit(\AMAPBundle\Entity\PanierProduit $panierproduit)
     {
-        $this->produits[] = $produit;
+        $this->panierproduit[] = $panierproduit;
 
         return $this;
     }
 
     /**
-     * Remove produit
+     * Remove panierproduit
      *
-     * @param \AMAPBundle\Entity\Produit $produit
+     * @param \AMAPBundle\Entity\PanierProduit $panierproduit
      */
-    public function removeProduit(\AMAPBundle\Entity\Produit $produit)
+    public function removePanierproduit(\AMAPBundle\Entity\PanierProduit $panierproduit)
     {
-        $this->produits->removeElement($produit);
+        $this->panierproduit->removeElement($panierproduit);
     }
 
     /**
-     * Get produits
+     * Get panierproduit
      *
      * @return \Doctrine\Common\Collections\Collection
      */
-    public function getProduits()
+    public function getPanierproduit()
     {
-        return $this->produits;
+        return $this->panierproduit;
     }
 }
