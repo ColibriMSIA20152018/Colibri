@@ -56,15 +56,15 @@ class ProduitController extends Controller
            {
                 $data2 = $form2->getData();
 
-                $produit = $data2['produit'];
+                $produit2 = $data2['produit'];
                 $quantite = $data2['quantite'];
-                             
-                if($em->getRepository('AMAPBundle:Stock')->findBy(array('produit' => $produit)))
+                
+                if($em->getRepository('AMAPBundle:Stock')->find($produit2))
                 {
-                    $stock = $em->getRepository('AMAPBundle:Stock')->findBy(array('produit' => $produit));
-                            
-                    $stock[0]->setQuantite($stock[0]->getQuantite()+$quantite);
-                    $em->persist($stock[0]);
+                    $stock = $em->getRepository('AMAPBundle:Stock')->find($produit2);
+                    
+                    $stock->setQuantite($stock->getQuantite()+$quantite);
+                    $em->persist($stock);
                 }
                 else
                 {

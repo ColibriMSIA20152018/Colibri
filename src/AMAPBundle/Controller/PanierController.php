@@ -64,17 +64,16 @@ class PanierController extends Controller
                                
                 $panier = $data2['panier'];
                 
-                $em
+                $panierproduit = $panier->getPanierproduit();
                 
-                $panierproduit->setProduit($data['produit']);
-                $panierproduit->setQuantite($data['quantite']);
-                
-                $panier = $data['panier']->addPanierProduit($panierproduit);
-
-                $panierproduit->setPanier($panier);
-             
-                $em->persist($panier);
-                $em->persist($panierproduit);
+                foreach ($panierproduit as $produit) {
+                    $stock = $em->getRepository('AMAPBundle:Stock')->find($produit->getProduit());
+                    
+                    $stock->setQuantite($stock->getQuantite() - $produit->getQuantite());
+                    
+                    $em->persist($stock);   
+                }
+               
                 $em->flush();
                 
                 //return $this->redirect($this->generateUrl('amap_panier_ajouter'));
