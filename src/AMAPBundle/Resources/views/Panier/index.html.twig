@@ -20,6 +20,11 @@
             {% endfor %}
         </div>
         <div class="" style="width:50%;float:left">
+            <h1>Création d'un panier</h1>
+            {{ form_start(form3) }}
+
+            {{ form_end(form3) }}
+            <br/><br/>
             <h1>Ajouter un produit à un panier</h1>
 
             {{ form_start(form) }}
@@ -35,7 +40,9 @@
                 <br/>
                 {{ form_widget(form.quantite) }}
             {{ form_end(form) }}
-            
+            <br/>
+            <br/>
+            <h1>Retrait d'un panier</h1>
             {{ form_start(form2) }}
                
             {{ form_end(form2) }}

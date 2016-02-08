@@ -70,7 +70,7 @@ class ProduitController extends Controller
                 {
                     $stock = new Stock();
 
-                    $stock->setProduit($produit);
+                    $stock->setProduit($produit2);
                     $stock->setQuantite($quantite);
                     $em->persist($stock);
                 }
