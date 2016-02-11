@@ -33,6 +33,10 @@ class Panier
     */
     protected $panierproduit;
 
+    /**
+    * @ORM\ManyToOne(targetEntity="AMAPBundle\Entity\Saison")
+    */
+    protected $saison;
     
     /**
      * Constructor
@@ -110,5 +114,29 @@ class Panier
     public function getPanierproduit()
     {
         return $this->panierproduit;
+    }
+
+    /**
+     * Set saison
+     *
+     * @param \AMAPBundle\Entity\Saison $saison
+     *
+     * @return Panier
+     */
+    public function setSaison(\AMAPBundle\Entity\Saison $saison = null)
+    {
+        $this->saison = $saison;
+
+        return $this;
+    }
+
+    /**
+     * Get saison
+     *
+     * @return \AMAPBundle\Entity\Saison
+     */
+    public function getSaison()
+    {
+        return $this->saison;
     }
 }

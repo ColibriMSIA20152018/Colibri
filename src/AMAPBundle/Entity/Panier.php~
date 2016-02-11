@@ -33,6 +33,10 @@ class Panier
     */
     protected $panierproduit;
 
+    /**
+    * @ORM\ManyToOne(targetEntity="AMAPBundle\Entity\Saison")
+    */
+    protected $saison;
     
     /**
      * Constructor
@@ -77,4 +81,38 @@ class Panier
     }
 
    
+
+    /**
+     * Add panierproduit
+     *
+     * @param \AMAPBundle\Entity\PanierProduit $panierproduit
+     *
+     * @return Panier
+     */
+    public function addPanierproduit(\AMAPBundle\Entity\PanierProduit $panierproduit)
+    {
+        $this->panierproduit[] = $panierproduit;
+
+        return $this;
+    }
+
+    /**
+     * Remove panierproduit
+     *
+     * @param \AMAPBundle\Entity\PanierProduit $panierproduit
+     */
+    public function removePanierproduit(\AMAPBundle\Entity\PanierProduit $panierproduit)
+    {
+        $this->panierproduit->removeElement($panierproduit);
+    }
+
+    /**
+     * Get panierproduit
+     *
+     * @return \Doctrine\Common\Collections\Collection
+     */
+    public function getPanierproduit()
+    {
+        return $this->panierproduit;
+    }
 }

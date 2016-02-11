@@ -7,6 +7,7 @@ use Symfony\Component\HttpFoundation\Request;
 use \AMAPBundle\Entity\Panier;
 use \AMAPBundle\Entity\PanierProduit;
 use \AMAPBundle\Entity\Produit;
+use \AMAPBundle\Entity\Saison;
 use \Symfony\Component\Form\Extension\Core\Type\IntegerType;
 use \Symfony\Component\Form\Extension\Core\Type\TextType;
 use Symfony\Component\Form\Extension\Core\Type\SubmitType;
@@ -32,7 +33,8 @@ class PanierController extends Controller
             ->getForm();
         
         $form3 = $this->get('form.factory')->createNamedBuilder('formulaire_creation_panier')
-            ->add('libelle', TextType::class )  
+            ->add('libelle', TextType::class )
+            ->add('saison', EntityType::class,array('class' => 'AMAPBundle:Saison', 'choice_label' => 'libelle'))
             ->add('ajouter', SubmitType::class, array('label' => 'Créer le panier'))
             ->getForm();
         
@@ -92,6 +94,7 @@ class PanierController extends Controller
                 $panier = new Panier();
                 
                 $panier->setLibelle($data['libelle']);
+                $panier->setSaison($data['saison']);
                           
                 $em->persist($panier);
                 $em->flush();

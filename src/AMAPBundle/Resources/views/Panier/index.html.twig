@@ -5,7 +5,10 @@
         <div class="" style="width:50%;float:left">
             <h1>Composition des paniers</h1>
             {% for panier in paniers %}
+               
                 <b>Panier :</b> {{ panier.libelle }}
+                <br/>
+                <b>Saison :</b> {{ panier.saison.libelle}}
                 <br/>
                 {% for panierproduit in  panier.panierproduit %}
                     <br/>
