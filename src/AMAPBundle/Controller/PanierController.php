@@ -8,6 +8,7 @@ use \AMAPBundle\Entity\Panier;
 use \AMAPBundle\Entity\PanierProduit;
 use \AMAPBundle\Entity\Produit;
 use \AMAPBundle\Entity\Saison;
+use \AMAPBundle\Entity\Stock;
 use \Symfony\Component\Form\Extension\Core\Type\IntegerType;
 use \Symfony\Component\Form\Extension\Core\Type\TextType;
 use Symfony\Component\Form\Extension\Core\Type\SubmitType;
@@ -105,9 +106,13 @@ class PanierController extends Controller
            
         }
         
+        $stockFinal = $em->getRepository('AMAPBundle:Stock')->findAll();
+        
         return $this->render('AMAPBundle:Panier:index.html.twig',array(
-            'form' => $form->createView(), 'paniers' => $paniers, 
+            'form' => $form->createView(), 
+            'paniers' => $paniers, 
             'form2' => $form2->createView(),
+            'stock' => $stockFinal,
             'form3' => $form3->createView()
         ));
     }
