@@ -25,7 +25,7 @@ class ActeurController extends Controller
         $form = $this->get('form.factory')->createNamedBuilder('formulaire_creation_acteur')
             ->add('nom', TextType::class )
             ->add('prenom', TextType::class )
-            ->add('dateNaissance', DateType::class, array('input'=>'datetime','widget' => 'choice') )
+            ->add('dateNaissance', DateType::class, array('input'=>'datetime','years' => range(1900, date('Y'))))
             ->add('ajouter', SubmitType::class, array('label' => 'Créer acteur'))
             ->getForm();
         
