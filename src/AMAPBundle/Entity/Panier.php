@@ -39,6 +39,19 @@ class Panier
     protected $saison;
     
     /**
+     * @var integer
+     *
+     * @ORM\Column(name="prix", type="integer")
+     */
+    protected $prix;
+
+
+    /**
+    * @ORM\ManyToOne(targetEntity="AMAPBundle\Entity\TypePanier")
+    */
+    protected $typePanier;
+    
+    /**
      * Constructor
      */
     public function __construct()
@@ -138,5 +151,53 @@ class Panier
     public function getSaison()
     {
         return $this->saison;
+    }
+
+    /**
+     * Set typePanier
+     *
+     * @param \AMAPBundle\Entity\TypePanier $typePanier
+     *
+     * @return Panier
+     */
+    public function setTypePanier(\AMAPBundle\Entity\TypePanier $typePanier = null)
+    {
+        $this->typePanier = $typePanier;
+
+        return $this;
+    }
+
+    /**
+     * Get typePanier
+     *
+     * @return \AMAPBundle\Entity\TypePanier
+     */
+    public function getTypePanier()
+    {
+        return $this->typePanier;
+    }
+
+    /**
+     * Set prix
+     *
+     * @param integer $prix
+     *
+     * @return Panier
+     */
+    public function setPrix($prix)
+    {
+        $this->prix = $prix;
+
+        return $this;
+    }
+
+    /**
+     * Get prix
+     *
+     * @return integer
+     */
+    public function getPrix()
+    {
+        return $this->prix;
     }
 }

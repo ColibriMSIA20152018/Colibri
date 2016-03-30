@@ -1,7 +1,25 @@
 {% extends 'base.html.twig' %}
 
+{% block title %}
+    Welcome Panier
+{% endblock%}
+
 {% block body %}
     <div class="container">
+        <div class="" style="width:100%;float:left">
+            <h1>STOCK ACTUEL</h1>
+            <div class="" style="width:100%;float:left">
+                <table class="table table-striped">
+                    <th>Nom du produit</th><th>Famille</th><th>Quantité</th>
+                {% for item in stock %}
+                    <tr>
+                        <td>{{item.produit.libelle}}</td><td>{{item.produit.famille.libelle}}</td><td>{{ item.quantite }} KG</td>
+                    </tr>
+                {% endfor %}
+
+                </table>
+            </div>
+        </div>
         <div class="" style="width:50%;float:left">
             <h1>Composition des paniers</h1>
             {% for panier in paniers %}
@@ -9,6 +27,11 @@
                 <b>Panier :</b> {{ panier.libelle }}
                 <br/>
                 <b>Saison :</b> {{ panier.saison.libelle}}
+                <br/>
+                
+                <b>Type panier :</b> {{ panier.typePanier.getLibelle}}
+                <br/>
+                <b>Prix panier :</b> {{ panier.prix}} €
                 <br/>
                 {% for panierproduit in  panier.panierproduit %}
                     <br/>
@@ -22,6 +45,13 @@
                 <br/>
             {% endfor %}
         </div>
+        <div class="" style="width:50%;float:left">
+            <h1>Création du type panier </h1>
+            {{ form_start(form4) }}
+
+            {{ form_end(form4) }}
+        </div>        
+        <br/>
         <div class="" style="width:50%;float:left">
             <h1>Création d'un panier</h1>
             {{ form_start(form3) }}
