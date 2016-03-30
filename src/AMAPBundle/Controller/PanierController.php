@@ -38,6 +38,13 @@ class PanierController extends Controller
             ->add('ajouter', SubmitType::class, array('label' => 'Créer le panier'))
             ->getForm();
         
+        $form4 = $this->get('form.factory')->createNamedBuilder('formulaire_creation_acteur')
+            ->add('nom', TextType::class )
+            ->add('prenom', TextType::class )
+            ->add('dateNaissance', TextType::class )
+            ->add('ajouter', SubmitType::class, array('label' => 'Créer acteur'))
+            ->getForm();
+        
         $paniers = $em->getRepository('AMAPBundle:Panier')->findAll();
         
         if ($form->handleRequest($request)->isSubmitted() || 

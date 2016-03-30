@@ -21,3 +21,7 @@ amap_panier_ajouter:
 amap_stock_ajouter:
     path:     /produit/stock/ajouter
     defaults: { _controller: AMAPBundle:Produit:ajouterStockMessage }    
+    
+amap_acteur:
+    path:     /acteur
+    defaults: { _controller: AMAPBundle:Acteur:ajouter }
