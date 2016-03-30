@@ -2,6 +2,29 @@
 
 {% block body %}
     <div class="container">
+        <div class="" style="width:100%;float:left">
+            <h1>STOCK ACTUEL</h1>
+            <div class="" style="width:100%;float:left">
+                <table class="table table-striped">
+                    <th>Nom du produit</th><th>Famille</th><th>Quantité</th>
+                {% for item in stock %}
+                    <tr>
+                        <td>{{item.produit.libelle}}</td><td>{{item.produit.famille.libelle}}</td><td>{{ item.quantite }} KG</td>
+                    </tr>
+                {% endfor %}
+
+                </table>
+            </div>
+        </div>
+        <br/><br/>
+        <div class="" style="width:50%;float:left">
+            <h1>AJOUTER UNE FAMILLE DE PRODUIT</h1>
+            {{ form_start(form3) }}
+                {{ form_label(form3.libelle) }}
+                <br/>
+                {{ form_widget(form3.libelle) }}
+            {{ form_end(form3) }}
+        </div>        
         <div class="" style="width:50%;float:left">
             <h1>AJOUTER UN NOUVEAU PRODUIT</h1>
             <br/>
@@ -19,6 +42,14 @@
             <br/>
         </div>
         <div class="" style="width:50%;float:left">
+            <h1>CREER UNE SAISON</h1>
+            {{ form_start(form4) }}
+                {{ form_label(form4.libelle) }}
+                <br/>
+                {{ form_widget(form4.libelle) }}
+            {{ form_end(form4) }}
+        </div> 
+        <div class="" style="width:50%;float:left">
             <h1>AJOUTER UN PRODUIT AU STOCK</h1>
             <br/>
             {{ form_start(form2) }}
@@ -34,49 +65,12 @@
             <br/>
             <br/>
         </div>
-        <div class="" style="width:50%;float:left">
-            <h1>AJOUTER UNE FAMILLE DE PRODUIT</h1>
-            {{ form_start(form3) }}
-                {{ form_label(form3.libelle) }}
-                <br/>
-                {{ form_widget(form3.libelle) }}
-            {{ form_end(form3) }}
-        </div>
-        <div class="" style="width:50%;float:left">
+       
+        <div class="" style="width:100%;float:left">
             <h1>LISTE FAMILLE DE PRODUIT</h1>
             {% for item in listFamille %}
                 <h3>{{ item.libelle }}</h3>
             {% endfor %}
-        </div>
-        <div class="" style="width:100%;float:left">
-            <h1>CREER UNE SAISON</h1>
-            {{ form_start(form4) }}
-                {{ form_label(form4.libelle) }}
-                <br/>
-                {{ form_widget(form4.libelle) }}
-            {{ form_end(form4) }}
-        </div>
-        <div class="" style="width:100%;float:left">
-            <h1>STOCK ACTUEL</h1>
-
-            {% for item in stock %}
-                <br/>
-                {{ item.produit.libelle }}
-                <br/>
-                {{ item.quantite }} KG
-                <br/>
-            {% endfor %}
-        </div>
-        <br/><br/><br/><br/>
-        <div class="" style="width:100%;float:left">
-            <table class="table table-striped">
-                <th>Nom du produit</th><th>Famille</th>
-                {% for item in listProduit %}
-                <tr>
-                    <td>{{item.libelle}}</td><td>{{item.famille.libelle}}</td>
-                </tr>
-                {% endfor %}
-            </table>
-        </div>
+        </div>    
     </div>
 {% endblock %}
