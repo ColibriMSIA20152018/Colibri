@@ -1,5 +1,9 @@
 {% extends 'base.html.twig' %}
 
+{% block title %}
+    Welcome Panier
+{% endblock%}
+
 {% block body %}
     <div class="container">
         <div class="" style="width:100%;float:left">
@@ -24,6 +28,11 @@
                 <br/>
                 <b>Saison :</b> {{ panier.saison.libelle}}
                 <br/>
+                
+                <b>Type panier :</b> {{ panier.typePanier.getLibelle}}
+                <br/>
+                <b>Prix panier :</b> {{ panier.prix}} €
+                <br/>
                 {% for panierproduit in  panier.panierproduit %}
                     <br/>
                     &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Produit  : {{ panierproduit.produit.libelle }}
@@ -36,6 +45,13 @@
                 <br/>
             {% endfor %}
         </div>
+        <div class="" style="width:50%;float:left">
+            <h1>Création du type panier </h1>
+            {{ form_start(form4) }}
+
+            {{ form_end(form4) }}
+        </div>        
+        <br/>
         <div class="" style="width:50%;float:left">
             <h1>Création d'un panier</h1>
             {{ form_start(form3) }}

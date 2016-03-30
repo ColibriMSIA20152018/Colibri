@@ -5,6 +5,7 @@ namespace AMAPBundle\Controller;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Symfony\Component\HttpFoundation\Request;
 use \AMAPBundle\Entity\Panier;
+use \AMAPBundle\Entity\TypePanier;
 use \AMAPBundle\Entity\PanierProduit;
 use \AMAPBundle\Entity\Produit;
 use \AMAPBundle\Entity\Saison;
@@ -36,14 +37,24 @@ class PanierController extends Controller
         $form3 = $this->get('form.factory')->createNamedBuilder('formulaire_creation_panier')
             ->add('libelle', TextType::class )
             ->add('saison', EntityType::class,array('class' => 'AMAPBundle:Saison', 'choice_label' => 'libelle'))
+            ->add('type_panier', EntityType::class,array('class' => 'AMAPBundle:TypePanier', 'choice_label' => 'libelle'))
+            ->add('prix', IntegerType::class)
             ->add('ajouter', SubmitType::class, array('label' => 'Créer le panier'))
+            ->getForm();
+        
+        
+        
+         $form4 = $this->createFormBuilder()
+            ->add('libelle', TextType::class )
+            ->add('ajouter', SubmitType::class, array('label' => 'Créer Type Panier'))
             ->getForm();
         
         $paniers = $em->getRepository('AMAPBundle:Panier')->findAll();
         
         if ($form->handleRequest($request)->isSubmitted() || 
                 $form2->handleRequest($request)->isSubmitted() || 
-                $form3->handleRequest($request)->isSubmitted() ){ 
+                $form3->handleRequest($request)->isSubmitted() ||
+                $form4->handleRequest($request)->isSubmitted()){ 
            if ($form->get('ajouter')->isClicked())
            {
                 $data = $form->getData(); 
@@ -96,8 +107,22 @@ class PanierController extends Controller
                 
                 $panier->setLibelle($data['libelle']);
                 $panier->setSaison($data['saison']);
-                          
+                $panier->setPrix($data['prix']);
+                
                 $em->persist($panier);
+                $em->flush();
+
+                //return $this->redirect($this->generateUrl('amap_panier_ajouter'));
+           }
+           
+           if ($form4->get('ajouter')->isClicked())
+           {
+                $data = $form4->getData(); 
+                
+                $typePanier = new TypePanier();
+                
+                          
+                $em->persist($typePanier);
                 $em->flush();
 
                 //return $this->redirect($this->generateUrl('amap_panier_ajouter'));
@@ -113,6 +138,7 @@ class PanierController extends Controller
             'paniers' => $paniers, 
             'form2' => $form2->createView(),
             'stock' => $stockFinal,
+            'form4' => $form4->createView(),
             'form3' => $form3->createView()
         ));
     }
