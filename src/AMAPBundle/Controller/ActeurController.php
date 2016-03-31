@@ -48,8 +48,11 @@ class ActeurController extends Controller
            }
         }
         
+        $listacteur = $em->getRepository('AMAPBundle:Acteur')->findAll();
+        
         return $this->render('AMAPBundle:Acteur:index.html.twig',array(
-            'form' => $form->createView()
-        ));
+            'form' => $form->createView(),
+            'page_courante' => 'acteur',
+            'listacteur' => $listacteur));
     }
 }

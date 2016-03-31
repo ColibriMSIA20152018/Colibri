@@ -137,6 +137,7 @@ class ProduitController extends Controller
                                                                         'form3' => $form3->createView(),
                                                                         'form4' => $form4->createView(),
                                                                         'stock' => $stockFinal,
+                                                                        'page_courante' => 'produit',
                                                                         'listFamille' => $listFamille,
                                                                         'listProduit' => $listProduit,
                                                                         'listSaison' => $listSaison));

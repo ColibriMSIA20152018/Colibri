@@ -3,6 +3,21 @@
 {% block body %}
     <div class="container">
         <div class="" style="width:100%;float:left">
+            <h1>ACTEURS</h1>
+            <div class="" style="width:100%;float:left">
+                <table class="table table-striped">
+                    <th>Nom</th><th>Prenom</th><th>Date de naissance</th>
+                {% for item in listacteur %}
+                    <tr>
+                        <td>{{item.nom}}</td><td>{{item.prenom}}</td><td>{{ item.Datenaissance.format("d/m/Y") }} </td>
+                    </tr>
+                {% endfor %}
+
+                </table>
+            </div>
+        </div>
+        <br/><br/>
+        <div class="" style="width:100%;float:left">
             <h1>Création d'un acteur</h1>
             {{ form_start(form) }}
 

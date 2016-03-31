@@ -25,12 +25,35 @@
           </button>
           <a class="navbar-brand" href="#">AM<i id="a-amap-menu">A</i>P</a>
         </div>
+
         <div class="navbar-collapse collapse">
           <ul class="nav navbar-nav navbar-right">
+            {%if page_courante == 'default' %}
             <li class="active"><a href="{{path('amap_homepage')}}">ACCUEIL</a></li>
-            <li><a href="about.html">A PROPOS</a></li>
-            <li><a href="{{path('amap_panier')}}">PANIERS</a></li>
-            <li><a href="{{path('amap_produit')}}">PRODUITS</a></li>
+            {%else%}
+            <li><a href="{{path('amap_homepage')}}">ACCUEIL</a></li>         
+            {%endif%}
+
+            <!-- <li><a href="about.html">A PROPOS</a></li> -->
+
+            {%if page_courante == 'panier' %}
+            <li class="active"><a href="{{path('amap_panier')}}">PANIERS</a></li>
+            {%else%}
+            <li><a href="{{path('amap_panier')}}">PANIERS</a></li>            
+            {%endif%}
+
+            {%if page_courante == 'produit' %}
+            <li class="active"><a href="{{path('amap_produit')}}">PRODUITS</a></li>
+            {%else%}
+            <li><a href="{{path('amap_produit')}}">PRODUITS</a></li>            
+            {%endif%}
+
+            {%if page_courante == 'acteur' %}
+            <li class="active"><a href="{{path('amap_acteur')}}">ACTEURS</a></li>
+            {%else%}
+            <li><a href="{{path('amap_acteur')}}">ACTEURS</a></li>            
+            {%endif%}
+
             <li><a data-toggle="modal" data-target="#myModal" href="#myModal"><i class="fa fa-envelope-o"></i></a></li>
           </ul>
         </div><!--/.nav-collapse -->

@@ -138,7 +138,8 @@ class PanierController extends Controller
             'form2' => $form2->createView(),
             'stock' => $stockFinal,
             'form4' => $form4->createView(),
-            'form3' => $form3->createView()
+            'form3' => $form3->createView(),
+            'page_courante' => 'panier'
         ));
     }
     
