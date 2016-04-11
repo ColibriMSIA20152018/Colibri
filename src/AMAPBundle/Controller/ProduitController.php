@@ -108,7 +108,7 @@ class ProduitController extends Controller
                 $em->persist($famille);
                 $em->flush();
                 
-                return $this->redirect($this->generateUrl('amap_produit_ajouter'));
+                
            }
            
            if ($form4->get('ajouter')->isClicked())

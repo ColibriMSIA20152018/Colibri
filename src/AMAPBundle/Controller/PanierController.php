@@ -120,14 +120,13 @@ class PanierController extends Controller
                 
                 $typePanier = new TypePanier();
                 
+                $typePanier->setLibelle($data['libelle']);
                           
                 $em->persist($typePanier);
                 $em->flush();
 
                 //return $this->redirect($this->generateUrl('amap_panier_ajouter'));
-           }
-           
-           
+           }             
         }
         
         $stockFinal = $em->getRepository('AMAPBundle:Stock')->findAll();

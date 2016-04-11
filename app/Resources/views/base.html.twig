@@ -53,6 +53,12 @@
             {%else%}
             <li><a href="{{path('amap_acteur')}}">ACTEURS</a></li>            
             {%endif%}
+            
+            {%if page_courante == 'contrat' %}
+            <li class="active"><a href="{{path('amap_contrat')}}">CONTRATS</a></li>
+            {%else%}
+            <li><a href="{{path('amap_contrat')}}">CONTRATS</a></li>            
+            {%endif%}
 
             <li><a data-toggle="modal" data-target="#myModal" href="#myModal"><i class="fa fa-envelope-o"></i></a></li>
           </ul>

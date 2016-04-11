@@ -17,3 +17,6 @@
 /composer.lock
 /web/config.php
 /bin/*
+nbproject/private/private.xml
+nbproject/private/private.xml
+composer.lock

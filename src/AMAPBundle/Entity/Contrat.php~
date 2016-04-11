@@ -1,0 +1,49 @@
+<?php
+
+namespace AMAPBundle\Entity;
+
+use Doctrine\ORM\Mapping as ORM;
+
+/**
+ * Contrat
+ *
+ * @ORM\Table(name="contrat")
+ * @ORM\Entity(repositoryClass="AMAPBundle\Repository\ContratRepository")
+ */
+class Contrat
+{
+    /**
+     * @var int
+     *
+     * @ORM\Column(name="id", type="integer")
+     * @ORM\Id
+     * @ORM\GeneratedValue(strategy="AUTO")
+     */
+    private $id;
+
+    /**
+    * @ORM\ManyToOne(targetEntity="AMAPBundle\Entity\Acteur")
+    */
+    private $consommateur;
+    
+    /**
+    * @ORM\ManyToOne(targetEntity="AMAPBundle\Entity\Acteur")
+    */
+    private $producteur;
+    
+    /**
+    * @ORM\ManyToOne(targetEntity="AMAPBundle\Entity\Panier")
+    */
+    private $panier;
+    
+    /**
+     * Get id
+     *
+     * @return int
+     */
+    public function getId()
+    {
+        return $this->id;
+    }
+}
+

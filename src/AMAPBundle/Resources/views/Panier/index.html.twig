@@ -13,7 +13,11 @@
                     <th>Nom du produit</th><th>Famille</th><th>Quantité</th>
                 {% for item in stock %}
                     <tr>
-                        <td>{{item.produit.libelle}}</td><td>{{item.produit.famille.libelle}}</td><td>{{ item.quantite }} KG</td>
+                        {% if item.produit.famille is null %}
+                            <td></td><td></td><td></td>
+                        {% else %}
+                            <td>{{item.produit.libelle}}</td><td>{{item.produit.famille.libelle}}</td><td>{{ item.quantite }} KG</td>
+                        {% endif %}
                     </tr>
                 {% endfor %}
 
@@ -23,13 +27,17 @@
         <div class="" style="width:50%;float:left">
             <h1>Composition des paniers</h1>
             {% for panier in paniers %}
-               
-                <b>Panier :</b> {{ panier.libelle }}
+                {% if panier.libelle is not null %}
+                    <b>Panier :</b> {{ panier.libelle }}
+                {% endif %}
                 <br/>
-                <b>Saison :</b> {{ panier.saison.libelle}}
+                {% if panier.saison is not null %}
+                    <b>Saison :</b> {{ panier.saison.libelle}}
+                {% endif %}
                 <br/>
-                
-                <b>Type panier :</b> {{ panier.typePanier.getLibelle}}
+                {% if panier.typePanier is not null %}
+                    <b>Type panier :</b> {{ panier.typePanier.getLibelle}}
+                {% endif %}
                 <br/>
                 <b>Prix panier :</b> {{ panier.prix}} €
                 <br/>

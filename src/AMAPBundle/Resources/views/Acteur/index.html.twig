@@ -6,10 +6,10 @@
             <h1>ACTEURS</h1>
             <div class="" style="width:100%;float:left">
                 <table class="table table-striped">
-                    <th>Nom</th><th>Prenom</th><th>Date de naissance</th>
+                    <th>Nom</th><th>Prenom</th><th>Date de naissance</th><th>Type acteur</th>
                 {% for item in listacteur %}
                     <tr>
-                        <td>{{item.nom}}</td><td>{{item.prenom}}</td><td>{{ item.Datenaissance.format("d/m/Y") }} </td>
+                        <td>{{item.nom}}</td><td>{{item.prenom}}</td><td>{{ item.Datenaissance.format("d/m/Y") }} </td><td>{{ item.typeActeur.libelle }}</td>
                     </tr>
                 {% endfor %}
 
@@ -17,11 +17,18 @@
             </div>
         </div>
         <br/><br/>
-        <div class="" style="width:100%;float:left">
+        <div class="" style="width:50%;float:left">
+            <h1>Création d'un type acteur</h1>
+            {{ form_start(form2) }}
+
+            {{ form_end(form2) }}
+        </div>
+        <div class="" style="width:50%;float:left">
             <h1>Création d'un acteur</h1>
             {{ form_start(form) }}
 
             {{ form_end(form) }}
         </div>
+
     </div>
 {% endblock %}
