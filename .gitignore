@@ -18,6 +18,9 @@
 /web/config.php
 /bin/*
 nbproject/private/private.xml
-nbproject/private/private.xml
 composer.lock
 github-sync.php
+var/SymfonyRequirements.php
+web/config.php
+bin/symfony_requirements
+

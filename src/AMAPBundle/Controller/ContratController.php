@@ -21,7 +21,7 @@ use Symfony\Component\Form\Extension\Core\Type\DateType;
 class ContratController extends Controller
 {
     public function creerAction(Request $request)
-    {       
+    {
         $em = $this->getDoctrine()->getManager();
 
         $form = $this->get('form.factory')->createNamedBuilder('formulaire_creer_contrat')
@@ -42,27 +42,27 @@ class ContratController extends Controller
             ->add('panier',EntityType::class,array('class' => 'AMAPBundle:Panier', 'choice_label' => 'libelle'))
             ->add('ajouter', SubmitType::class, array('label' => 'Créer contrat'))
             ->getForm();
-        
-        if ($form->handleRequest($request)->isSubmitted()){ 
+
+        if ($form->handleRequest($request)->isSubmitted()){
            if ($form->get('ajouter')->isClicked())
            {
-                $data = $form->getData(); 
-                
+                $data = $form->getData();
+
                 $contrat = new Contrat();
-                
+
                 $contrat->setProducteur($data['producteur']);
                 $contrat->setConsommateur($data['consommateur']);
-                $contrat->setPanier($data['panier']);                
-             
+                $contrat->setPanier($data['panier']);
+
                 $em->persist($contrat);
                 $em->flush();
 
                 //return $this->redirect($this->generateUrl('amap_panier_ajouter'));
            }
         }
-        
+
         $listcontrat = $em->getRepository('AMAPBundle:Contrat')->findAll();
-        
+
         return $this->render('AMAPBundle:Contrat:index.html.twig',array(
             'form' => $form->createView(),
             'page_courante' => 'contrat',
