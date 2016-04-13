@@ -29,3 +29,8 @@ amap_acteur:
 amap_contrat:
     path:     /contrat
     defaults: { _controller: AMAPBundle:Contrat:creer }
+    
+amap_adresse:
+    path: /adresse
+    defaults: { _controller: AMAPBundle:Acteur:ajouterAdresse }
+    

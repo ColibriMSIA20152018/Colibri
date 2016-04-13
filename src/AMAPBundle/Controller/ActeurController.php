@@ -9,6 +9,7 @@ use \AMAPBundle\Entity\PanierProduit;
 use \AMAPBundle\Entity\Produit;
 use \AMAPBundle\Entity\Saison;
 use \AMAPBundle\Entity\Acteur;
+use \AMAPBundle\Entity\Adresse;
 use \AMAPBundle\Entity\TypeActeur;
 use \Symfony\Component\Form\Extension\Core\Type\IntegerType;
 use \Symfony\Component\Form\Extension\Core\Type\TextType;
@@ -74,5 +75,41 @@ class ActeurController extends Controller
             'form2' => $form2->createView(),
             'page_courante' => 'acteur',
             'listacteur' => $listacteur));
+    }
+    
+    public function ajouterAdresseAction(Request $request)
+    {
+        
+        $em = $this->getDoctrine()->getManager();
+        
+        $form = $this->get('form.factory')->createNamedBuilder('formulaire_ajout_adresse')
+            ->add('numRue',TextType::class)
+            ->add('typeVoie', TextType::class )
+            ->add('nomVoie', TextType::class )
+            ->add('ville', TextType::class )
+            ->add('cp', TextType::class )
+            ->add('ajouter', SubmitType::class, array('label' => 'Ajouter adresse'))
+            ->getForm();
+        
+        if ($form->handleRequest($request)->isSubmitted()){
+                $data = $form->getData(); 
+                
+                $adresse = new Adresse();
+
+                $adresse->setNumRue($data['numRue']);
+                $adresse->setTypeVoie($data['typeVoie']);
+                $adresse->setNomVoie($data['nomVoie']);
+                $adresse->setville($data['ville']);
+                $adresse->setCp($data['cp']);
+                
+                $em->persist($adresse);
+                $em->flush();
+
+                //return $this->redirect($this->generateUrl('amap_panier_ajouter'));
+           }
+        
+        return $this->render('AMAPBundle:Acteur:index2.html.twig',array(
+            'form' => $form->createView(),
+            'page_courante' => 'acteur'));
     }
 }
