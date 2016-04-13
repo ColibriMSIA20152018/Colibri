@@ -25,8 +25,20 @@ class ContratController extends Controller
         $em = $this->getDoctrine()->getManager();
 
         $form = $this->get('form.factory')->createNamedBuilder('formulaire_creer_contrat')
-            ->add('producteur',EntityType::class,array('class' => 'AMAPBundle:Acteur', 'choice_label' => 'nom'))
-            ->add('consommateur',EntityType::class,array('class' => 'AMAPBundle:Acteur', 'choice_label' => 'nom'))
+            ->add('producteur',EntityType::class,array('class' => 'AMAPBundle:Acteur',
+                                                        'choice_label' => 'nom',
+                                                        'query_builder' => function(\Doctrine\ORM\EntityRepository $er){
+                                                            return $er->createQueryBuilder('s')
+                                                            ->where('s.typeActeur = ?1')
+                                                            ->setParameter(1,'1');
+                                                        }))
+            ->add('consommateur',EntityType::class,array('class' => 'AMAPBundle:Acteur',
+                                                         'choice_label' => 'nom',
+                                                         'query_builder' => function(\Doctrine\ORM\EntityRepository $er){
+                                                            return $er->createQueryBuilder('s')
+                                                            ->where('s.typeActeur = ?1')
+                                                            ->setParameter(1,'2');
+                                                        }))
             ->add('panier',EntityType::class,array('class' => 'AMAPBundle:Panier', 'choice_label' => 'libelle'))
             ->add('ajouter', SubmitType::class, array('label' => 'Créer contrat'))
             ->getForm();
