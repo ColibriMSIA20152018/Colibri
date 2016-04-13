@@ -20,3 +20,7 @@
 nbproject/private/private.xml
 nbproject/private/private.xml
 composer.lock
+var/SymfonyRequirements.php
+var/SymfonyRequirements.php
+web/config.php
+bin/symfony_requirements
