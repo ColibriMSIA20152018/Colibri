@@ -21,7 +21,7 @@ use Symfony\Component\Form\Extension\Core\Type\DateType;
 class ActeurController extends Controller
 {
     public function ajouterAction(Request $request)
-    {       
+    {
         $em = $this->getDoctrine()->getManager();
 
         $form = $this->get('form.factory')->createNamedBuilder('formulaire_creation_acteur')
@@ -29,28 +29,46 @@ class ActeurController extends Controller
             ->add('nom', TextType::class )
             ->add('prenom', TextType::class )
             ->add('dateNaissance', DateType::class, array('input'=>'datetime','years' => range(1900, date('Y'))))
+			->add('numRue',TextType::class)
+            ->add('typeVoie', TextType::class )
+            ->add('nomVoie', TextType::class )
+            ->add('ville', TextType::class )
+            ->add('cp', TextType::class )
             ->add('ajouter', SubmitType::class, array('label' => 'Créer acteur'))
             ->getForm();
-        
+
         $form2 = $this->get('form.factory')->createNamedBuilder('formulaire_creation_type_acteur')
             ->add('libelle', TextType::class )
             ->add('ajouter', SubmitType::class, array('label' => 'Créer type acteur'))
             ->getForm();
-        
-        if ($form->handleRequest($request)->isSubmitted() || 
-            $form2->handleRequest($request)->isSubmitted()){ 
+
+
+        if ($form->handleRequest($request)->isSubmitted() ||
+            $form2->handleRequest($request)->isSubmitted()){
            if ($form->get('ajouter')->isClicked())
            {
-                $data = $form->getData(); 
-                
+                $data = $form->getData();
+
                 $acteur = new Acteur();
-                
+
                 $acteur->setTypeActeur($data['typeActeur']);
                 $acteur->setNom($data['nom']);
-                $acteur->setPrenom($data['prenom']);                
+                $acteur->setPrenom($data['prenom']);
                 $acteur->setDateNaissance($data['dateNaissance']);
-             
+
+				$adresse = new Adresse();
+
+                $adresse->setNumRue($data['numRue']);
+                $adresse->setTypeVoie($data['typeVoie']);
+                $adresse->setNomVoie($data['nomVoie']);
+                $adresse->setville($data['ville']);
+                $adresse->setCp($data['cp']);
+
+				$acteur->setAdresse($adresse);
+
+				$em->persist($adresse);
                 $em->persist($acteur);
+
                 $em->flush();
 
                 //return $this->redirect($this->generateUrl('amap_panier_ajouter'));
@@ -58,58 +76,22 @@ class ActeurController extends Controller
            if ($form2->get('ajouter')->isClicked())
            {
                $data2 = $form2->getData();
-               
+
                $typeActeur = new TypeActeur();
-               
+
                $typeActeur->setLibelle($data2['libelle']);
-               
+
                $em->persist($typeActeur);
-               $em->flush();   
+               $em->flush();
            }
         }
-        
+
         $listacteur = $em->getRepository('AMAPBundle:Acteur')->findAll();
-        
+
         return $this->render('AMAPBundle:Acteur:index.html.twig',array(
             'form' => $form->createView(),
             'form2' => $form2->createView(),
             'page_courante' => 'acteur',
             'listacteur' => $listacteur));
-    }
-    
-    public function ajouterAdresseAction(Request $request)
-    {
-        
-        $em = $this->getDoctrine()->getManager();
-        
-        $form = $this->get('form.factory')->createNamedBuilder('formulaire_ajout_adresse')
-            ->add('numRue',TextType::class)
-            ->add('typeVoie', TextType::class )
-            ->add('nomVoie', TextType::class )
-            ->add('ville', TextType::class )
-            ->add('cp', TextType::class )
-            ->add('ajouter', SubmitType::class, array('label' => 'Ajouter adresse'))
-            ->getForm();
-        
-        if ($form->handleRequest($request)->isSubmitted()){
-                $data = $form->getData(); 
-                
-                $adresse = new Adresse();
-
-                $adresse->setNumRue($data['numRue']);
-                $adresse->setTypeVoie($data['typeVoie']);
-                $adresse->setNomVoie($data['nomVoie']);
-                $adresse->setville($data['ville']);
-                $adresse->setCp($data['cp']);
-                
-                $em->persist($adresse);
-                $em->flush();
-
-                //return $this->redirect($this->generateUrl('amap_panier_ajouter'));
-           }
-        
-        return $this->render('AMAPBundle:Acteur:index2.html.twig',array(
-            'form' => $form->createView(),
-            'page_courante' => 'acteur'));
     }
 }

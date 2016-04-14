@@ -47,6 +47,11 @@ class Acteur
     */
     private $typeActeur;
 
+	/**
+   * @ORM\OneToOne(targetEntity="AMAPBundle\Entity\Adresse", cascade={"persist"})
+   */
+	private $adresse;
+
     /**
      * Get id
      *

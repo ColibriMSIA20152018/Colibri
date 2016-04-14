@@ -6,11 +6,25 @@
             <h1>ACTEURS</h1>
             <div class="" style="width:100%;float:left">
                 <table class="table table-striped">
-                    <th>Nom</th><th>Prenom</th><th>Date de naissance</th><th>Type acteur</th>
+                    <th>Nom</th>
+					<th>Prenom</th>
+					<th>Date de naissance</th>
+					<th>Type acteur</th>
+					<th>Adresse</th>
                 {% for item in listacteur %}
+					{% if item is not null %}
                     <tr>
-                        <td>{{item.nom}}</td><td>{{item.prenom}}</td><td>{{ item.Datenaissance.format("d/m/Y") }} </td><td>{{ item.typeActeur.libelle }}</td>
+                        <td>{{item.nom}}</td>
+						<td>{{item.prenom}}</td>
+						<td>{{ item.Datenaissance.format("d/m/Y") }} </td>
+						<td>{{ item.typeActeur.libelle }}</td>
+						{% if item.adresse.numRue is not null %}
+							<td>{{ item.adresse.numRue }} {{ item.adresse.typeVoie }} {{ item.adresse.nomVoie }}, {{ item.adresse.cp }} {{ item.adresse.ville }}</td>
+						{% else %}
+
+						{% endif %}
                     </tr>
+					{% endif %}
                 {% endfor %}
 
                 </table>
