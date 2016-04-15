@@ -52,6 +52,11 @@ class Acteur
    */
 	private $adresse;
 
+	/**
+    * @ORM\ManyToOne(targetEntity="AMAPBundle\Entity\Amap")
+    */
+    private $amap;
+
     /**
      * Get id
      *
@@ -180,5 +185,29 @@ class Acteur
     public function getAdresse()
     {
         return $this->adresse;
+    }
+
+    /**
+     * Set amap
+     *
+     * @param \AMAPBundle\Entity\Amap $amap
+     *
+     * @return Acteur
+     */
+    public function setAmap(\AMAPBundle\Entity\Amap $amap = null)
+    {
+        $this->amap = $amap;
+
+        return $this;
+    }
+
+    /**
+     * Get amap
+     *
+     * @return \AMAPBundle\Entity\Amap
+     */
+    public function getAmap()
+    {
+        return $this->amap;
     }
 }

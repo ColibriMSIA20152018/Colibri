@@ -8,11 +8,7 @@ class DefaultController extends Controller
 {
     public function indexAction()
     {
-        return $this->render('AMAPBundle:Default:index.html.twig',array('page_courante' => 'default'));
+        return $this->render('AMAPBundle:Default:index.html.twig',array('page_courante' => 'default','select' => null));
     }
-    
-    public function produitAction()
-    {
-        return $this->render('AMAPBundle:Default:index.html.twig',array('page_courante' => 'default'));
-    }
+
 }

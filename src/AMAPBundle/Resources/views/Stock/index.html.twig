@@ -1,0 +1,41 @@
+{% extends 'base.html.twig' %}
+
+{% block body %}
+    <div class="container">
+        <div class="" style="width:100%;float:left">
+            <h1>STOCK ACTUEL</h1>
+            <div class="" style="width:100%;float:left">
+                <table class="table table-striped">
+                    <th>Nom du produit</th><th>Famille</th><th>Quantité</th><th>Entrepot</th>
+                {% for item in stock %}
+                    <tr>
+                        {% if item.produit.famille is null %}
+                            <td></td><td></td><td></td>
+                        {% else %}
+                            <td>{{item.produit.libelle}}</td><td>{{item.produit.famille.libelle}}</td><td>{{ item.quantite }} KG</td><td>{{item.entrepot.libelle}}</td>
+                        {% endif %}
+                    </tr>
+                {% endfor %}
+
+                </table>
+            </div>
+        </div>
+        <br/><br/>
+        <div class="" style="width:100%;float:left">
+            <h1>AJOUTER UN PRODUIT AU STOCK</h1>
+            <br/>
+            {{ form_start(form) }}
+                {{ form_label(form.produit) }}
+                <br/>
+                {{ form_widget(form.produit) }}
+                <br/>
+                {{ form_label(form.quantite) }}
+                <br/>
+                {{ form_widget(form.quantite) }}
+                <br/>
+            {{ form_end(form) }}
+            <br/>
+            <br/>
+        </div>
+    </div>
+{% endblock %}

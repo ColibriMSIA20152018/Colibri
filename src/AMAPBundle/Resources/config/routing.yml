@@ -18,15 +18,30 @@ amap_panier_ajouter:
     path:     /panier/ajouter
     defaults: { _controller: AMAPBundle:Panier:ajouterMessage }
 
+amap_entrepot:
+    path:     /entrepot
+    defaults: { _controller: AMAPBundle:Entrepot:creer }
+
+amap_stock:
+    path:     /stock
+    defaults: { _controller: AMAPBundle:Stock:index }
+
 amap_stock_ajouter:
     path:     /produit/stock/ajouter
-    defaults: { _controller: AMAPBundle:Produit:ajouterStockMessage }
+    defaults: { _controller: AMAPBundle:Stock:ajouterStockMessage }
+
+amap_select_amap:
+    path:     /selectAmap
+    defaults: { _controller: AMAPBundle:Acteur:selectAmap }
 
 amap_acteur:
-    path:     /acteur
+    path:     /{amap}/acteur
     defaults: { _controller: AMAPBundle:Acteur:ajouter }
 
 amap_contrat:
     path:     /contrat
     defaults: { _controller: AMAPBundle:Contrat:creer }
 
+amap_amap:
+    path:     /amap
+    defaults: { _controller: AMAPBundle:Amap:ajouter }

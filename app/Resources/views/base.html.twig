@@ -13,7 +13,7 @@
         <link rel="icon" type="image/x-icon" href="{{ asset('favicon.ico') }}" />
     </head>
     <body>
-    
+
     <!-- Fixed navbar -->
     <div class="navbar navbar-inverse navbar-fixed-top">
       <div class="container">
@@ -31,7 +31,7 @@
             {%if page_courante == 'default' %}
             <li class="active"><a href="{{path('amap_homepage')}}">ACCUEIL</a></li>
             {%else%}
-            <li><a href="{{path('amap_homepage')}}">ACCUEIL</a></li>         
+            <li><a href="{{path('amap_homepage')}}">ACCUEIL</a></li>
             {%endif%}
 
             <!-- <li><a href="about.html">A PROPOS</a></li> -->
@@ -39,25 +39,51 @@
             {%if page_courante == 'panier' %}
             <li class="active"><a href="{{path('amap_panier')}}">PANIERS</a></li>
             {%else%}
-            <li><a href="{{path('amap_panier')}}">PANIERS</a></li>            
+            <li><a href="{{path('amap_panier')}}">PANIERS</a></li>
             {%endif%}
 
             {%if page_courante == 'produit' %}
             <li class="active"><a href="{{path('amap_produit')}}">PRODUITS</a></li>
             {%else%}
-            <li><a href="{{path('amap_produit')}}">PRODUITS</a></li>            
+            <li><a href="{{path('amap_produit')}}">PRODUITS</a></li>
             {%endif%}
 
-            {%if page_courante == 'acteur' %}
-            <li class="active"><a href="{{path('amap_acteur')}}">ACTEURS</a></li>
-            {%else%}
-            <li><a href="{{path('amap_acteur')}}">ACTEURS</a></li>            
-            {%endif%}
-            
+
+			{% if page_courante == 'acteur' %}
+				<li class="active"><a href="{{path('amap_select_amap')}}">ACTEURS</a></li>
+			{%else%}
+				<li><a href="{{path('amap_select_amap')}}">ACTEURS</a></li>
+			{%endif%}
+
+				{#{% if page_courante == 'acteur' %}
+				<li class="active"><a href="{{path('amap_acteur')}}">ACTEURS</a></li>
+				{%else%}
+				<li><a href="{{path('amap_acteur')}}">ACTEURS</a></li>
+				{%endif%}#}
+
+
             {%if page_courante == 'contrat' %}
             <li class="active"><a href="{{path('amap_contrat')}}">CONTRATS</a></li>
             {%else%}
-            <li><a href="{{path('amap_contrat')}}">CONTRATS</a></li>            
+            <li><a href="{{path('amap_contrat')}}">CONTRATS</a></li>
+            {%endif%}
+
+			{%if page_courante == 'amap' %}
+            <li class="active"><a href="{{path('amap_amap')}}">AMAP</a></li>
+            {%else%}
+            <li><a href="{{path('amap_amap')}}">AMAP</a></li>
+            {%endif%}
+
+			{%if page_courante == 'stock' %}
+            <li class="active"><a href="{{path('amap_stock')}}">STOCK</a></li>
+            {%else%}
+            <li><a href="{{path('amap_stock')}}">STOCK</a></li>
+            {%endif%}
+
+			{%if page_courante == 'entrepot' %}
+            <li class="active"><a href="{{path('amap_entrepot')}}">ENTREPOT</a></li>
+            {%else%}
+            <li><a href="{{path('amap_entrepot')}}">ENTREPOT</a></li>
             {%endif%}
 
             <li><a data-toggle="modal" data-target="#myModal" href="#myModal"><i class="fa fa-envelope-o"></i></a></li>
@@ -79,7 +105,7 @@
     <br/>
     <br/>
         {% block body %}{% endblock %}
-       <div id="blanc" style="height:400px">   <div/>      
+       <div id="blanc" style="height:400px">   <div/>
         <!-- MODAL FOR CONTACT -->
 	<!-- Modal -->
 	<div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
@@ -100,7 +126,7 @@
 		        	</p>
 		        	<div id="mapwrap">
 		<iframe height="300" width="100%" frameborder="0" scrolling="no" marginheight="0" marginwidth="0" src="https://www.google.es/maps?t=m&amp;ie=UTF8&amp;ll=52.752693,22.791016&amp;spn=67.34552,156.972656&amp;z=2&amp;output=embed"></iframe>
-					</div>	
+					</div>
 		        </div>
 	      </div>
 	      <div class="modal-footer">
@@ -109,7 +135,7 @@
 	    </div><!-- /.modal-content -->
 	  </div><!-- /.modal-dialog -->
 	</div><!-- /.modal -->
-    {% block javascripts %}{% endblock %} 
+    {% block javascripts %}{% endblock %}
     <!-- Bootstrap core JavaScript
     ================================================== -->
     <!-- Placed at the end of the document so the pages load faster -->

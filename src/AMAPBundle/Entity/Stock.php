@@ -27,13 +27,17 @@ class Stock
      * @ORM\Column(name="quantite", type="integer")
      */
     private $quantite;
-    
+
     /**
-    * @ORM\OneToOne(targetEntity="AMAPBundle\Entity\Produit")
+    * @ORM\ManyToOne(targetEntity="AMAPBundle\Entity\Produit")
     */
     protected $produit;
-    
 
+	/**
+	* @ORM\ManyToOne(targetEntity="AMAPBundle\Entity\Entrepot", inversedBy="stock")
+	* @ORM\JoinColumn(nullable=false)
+	*/
+	private $entrepot;
 
     /**
      * Get id
@@ -91,5 +95,29 @@ class Stock
     public function getProduit()
     {
         return $this->produit;
+    }
+
+    /**
+     * Set entrepot
+     *
+     * @param \AMAPBundle\Entity\Entrepot $entrepot
+     *
+     * @return Entrepot
+     */
+    public function setEntrepot(\AMAPBundle\Entity\Entrepot $entrepot)
+    {
+        $this->entrepot = $entrepot;
+
+        return $this;
+    }
+
+    /**
+     * Get entrepot
+     *
+     * @return \AMAPBundle\Entity\Entrepot
+     */
+    public function getEntrepot()
+    {
+        return $this->entrepot;
     }
 }

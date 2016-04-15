@@ -25,17 +25,22 @@ class Contrat
     * @ORM\ManyToOne(targetEntity="AMAPBundle\Entity\Acteur")
     */
     private $consommateur;
-    
+
     /**
     * @ORM\ManyToOne(targetEntity="AMAPBundle\Entity\Acteur")
     */
     private $producteur;
-    
+
+	/**
+    * @ORM\ManyToOne(targetEntity="AMAPBundle\Entity\Amap")
+    */
+    private $amap;
+
     /**
     * @ORM\ManyToOne(targetEntity="AMAPBundle\Entity\Panier")
     */
     private $panier;
-    
+
     /**
      * Get id
      *

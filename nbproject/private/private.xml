@@ -3,9 +3,11 @@
     <editor-bookmarks xmlns="http://www.netbeans.org/ns/editor-bookmarks/2" lastBookmarkId="0"/>
     <open-files xmlns="http://www.netbeans.org/ns/projectui-open-files/2">
         <group>
+            <file>file:/C:/wamp/www/Colibri/app/Resources/views/base.html.twig</file>
             <file>file:/C:/wamp/www/Colibri/src/AMAPBundle/Controller/ActeurController.php</file>
-            <file>file:/C:/wamp/www/Colibri/src/AMAPBundle/Controller/ContratController.php</file>
-            <file>file:/C:/wamp/www/Colibri/symfony.sql</file>
+            <file>file:/C:/wamp/www/Colibri/src/AMAPBundle/Resources/config/routing.yml</file>
+            <file>file:/C:/wamp/www/Colibri/app/Resources/views/default/index.html.twig</file>
+            <file>file:/C:/wamp/www/Colibri/src/AMAPBundle/Controller/DefaultController.php</file>
         </group>
     </open-files>
 </project-private>

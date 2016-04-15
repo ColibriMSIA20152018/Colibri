@@ -25,17 +25,22 @@ class Contrat
     * @ORM\ManyToOne(targetEntity="AMAPBundle\Entity\Acteur")
     */
     private $consommateur;
-    
+
     /**
     * @ORM\ManyToOne(targetEntity="AMAPBundle\Entity\Acteur")
     */
     private $producteur;
-    
+
+	/**
+    * @ORM\ManyToOne(targetEntity="AMAPBundle\Entity\Amap")
+    */
+    private $amap;
+
     /**
     * @ORM\ManyToOne(targetEntity="AMAPBundle\Entity\Panier")
     */
     private $panier;
-    
+
     /**
      * Get id
      *
@@ -116,5 +121,29 @@ class Contrat
     public function getPanier()
     {
         return $this->panier;
+    }
+
+    /**
+     * Set amap
+     *
+     * @param \AMAPBundle\Entity\Amap $amap
+     *
+     * @return Contrat
+     */
+    public function setAmap(\AMAPBundle\Entity\Amap $amap = null)
+    {
+        $this->amap = $amap;
+
+        return $this;
+    }
+
+    /**
+     * Get amap
+     *
+     * @return \AMAPBundle\Entity\Amap
+     */
+    public function getAmap()
+    {
+        return $this->amap;
     }
 }

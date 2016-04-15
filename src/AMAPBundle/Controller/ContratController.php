@@ -39,6 +39,7 @@ class ContratController extends Controller
                                                             ->where('s.typeActeur = ?1')
                                                             ->setParameter(1,'2');
                                                         }))
+			->add('amap',EntityType::class,array('class' => 'AMAPBundle:Amap', 'choice_label' => 'libelle'))
             ->add('panier',EntityType::class,array('class' => 'AMAPBundle:Panier', 'choice_label' => 'libelle'))
             ->add('ajouter', SubmitType::class, array('label' => 'Créer contrat'))
             ->getForm();
@@ -52,12 +53,11 @@ class ContratController extends Controller
 
                 $contrat->setProducteur($data['producteur']);
                 $contrat->setConsommateur($data['consommateur']);
+				$contrat->setAmap($amap);
                 $contrat->setPanier($data['panier']);
 
                 $em->persist($contrat);
                 $em->flush();
-
-                //return $this->redirect($this->generateUrl('amap_panier_ajouter'));
            }
         }
 

@@ -11,6 +11,7 @@
 					<th>Date de naissance</th>
 					<th>Type acteur</th>
 					<th>Adresse</th>
+					<th>AMAP</th>
                 {% for item in listacteur %}
 					{% if item is not null %}
                     <tr>
@@ -18,11 +19,16 @@
 						<td>{{item.prenom}}</td>
 						<td>{{ item.Datenaissance.format("d/m/Y") }} </td>
 						<td>{{ item.typeActeur.libelle }}</td>
-						{% if item.adresse.numRue is not null %}
+						{% if item.adresse is not null %}
 							<td>{{ item.adresse.numRue }} {{ item.adresse.typeVoie }} {{ item.adresse.nomVoie }}, {{ item.adresse.cp }} {{ item.adresse.ville }}</td>
 						{% else %}
 
 						{% endif %}
+						<td>
+						{% if item.amap is not null %}
+							{{ item.amap.libelle }}
+						{% endif %}
+						</td>
                     </tr>
 					{% endif %}
                 {% endfor %}

@@ -1,0 +1,32 @@
+{% extends 'base.html.twig' %}
+
+{% block body %}
+    <div class="container">
+        <div class="" style="width:100%;float:left">
+            <h1>Créer un entrepot</h1>
+
+            {{ form_start(form) }}
+
+            {{ form_end(form) }}
+        </div>
+    </div>
+
+	<div class="container">
+        <div class="" style="width:100%;float:left">
+            <h1>Liste entrepot</h1>
+			<table class="table table-striped">
+				<th>Entrepot</th>
+				<th>Stock produit</th>
+				<th>Qte</th>
+			{% for entrepot in listEntrepot %}
+			<tr><td>{{entrepot.libelle}}</td><td></td><td></td></tr>
+				{% for stock in entrepot.stock %}
+				<tr>
+					<td></td><td>{{stock.produit.libelle}}</td><td>{{stock.quantite}}</td>
+				</tr>
+				{% endfor %}
+			{% endfor %}
+			</table>
+        </div>
+    </div>
+{% endblock %}

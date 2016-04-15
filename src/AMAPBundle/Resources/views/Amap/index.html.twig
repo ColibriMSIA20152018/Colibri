@@ -1,0 +1,38 @@
+{% extends 'base.html.twig' %}
+
+{% block body %}
+    <div class="container">
+        <div class="" style="width:100%;float:left">
+            <h1>AMAPs</h1>
+            <div class="" style="width:100%;float:left">
+                <table class="table table-striped">
+                    <th>Nom de l'AMAP</th>
+					<th>Adresse</th>
+                {% for item in listamap %}
+					{% if item is not null %}
+						<tr>
+							<td>{{item.libelle}}</td>
+							<td>{% if item.adresse is not null %}
+
+									{% if item.adresse.numRue is not null %}
+										{{ item.adresse.numRue }}
+									{% endif %}
+
+									{{ item.adresse.typeVoie }} {{ item.adresse.nomVoie }}, {{ item.adresse.cp }} {{ item.adresse.ville }}</td>
+
+								{% endif %}
+						</tr>
+					{% endif %}
+                {% endfor %}
+                </table>
+            </div>
+        </div>
+        <br/><br/>
+        <div class="" style="width:100%;float:left">
+            <h1>Créer une amap</h1>
+            {{ form_start(form) }}
+
+            {{ form_end(form) }}
+        </div>
+    </div>
+{% endblock %}

@@ -20,7 +20,27 @@ use Symfony\Component\Form\Extension\Core\Type\DateType;
 
 class ActeurController extends Controller
 {
-    public function ajouterAction(Request $request)
+
+	public function selectAmapAction(Request $request)
+	{
+		$em = $this->getDoctrine()->getManager();
+
+        $form = $this->get('form.factory')->createNamedBuilder('formulaire_select_amap')
+			->add('amap',EntityType::class,array('class' => 'AMAPBundle:Amap', 'choice_label' => 'libelle'))
+            ->add('ajouter', SubmitType::class, array('label' => 'Selection d\'une AMAP'))
+            ->getForm();
+
+		if ($form->handleRequest($request)->isSubmitted()){
+			$data = $form->getData();
+			
+			return $this->redirectToRoute('amap_acteur', array('amap' => $data['amap']->getId()));
+		}
+
+		 return $this->render('AMAPBundle:Acteur:selectAmap.html.twig',array(
+            'form' => $form->createView(),
+            'page_courante' => 'acteur'));
+	}
+    public function ajouterAction($amap,Request $request)
     {
         $em = $this->getDoctrine()->getManager();
 
@@ -34,6 +54,7 @@ class ActeurController extends Controller
             ->add('nomVoie', TextType::class )
             ->add('ville', TextType::class )
             ->add('cp', TextType::class )
+			->add('amap',EntityType::class,array('class' => 'AMAPBundle:Amap', 'choice_label' => 'libelle'))
             ->add('ajouter', SubmitType::class, array('label' => 'Créer acteur'))
             ->getForm();
 
@@ -66,6 +87,8 @@ class ActeurController extends Controller
 
 				$acteur->setAdresse($adresse);
 
+				$acteur->setAmap($data['amap']);
+
 				$em->persist($adresse);
                 $em->persist($acteur);
 
@@ -86,7 +109,7 @@ class ActeurController extends Controller
            }
         }
 
-        $listacteur = $em->getRepository('AMAPBundle:Acteur')->findAll();
+        $listacteur = $em->getRepository('AMAPBundle:Acteur')->findBy(array('amap' => $amap));
 
         return $this->render('AMAPBundle:Acteur:index.html.twig',array(
             'form' => $form->createView(),
