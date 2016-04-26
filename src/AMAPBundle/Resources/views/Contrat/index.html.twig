@@ -28,5 +28,33 @@
 
             {{ form_end(form) }}
         </div>
-    </div>
+   
+        <br/>
+        <br/>
+        <br/>
+        <br/>
+        <h1>Quantité à produire pour les producteurs</h1>
+        
+        <div>
+            <table class="table table-striped">
+                <th>Producteur</th>
+                <th>Produit</th>
+                <th>Quantité</th>
+            {% for producteur in tabProd %}
+                <tr>
+                    <td style="background-color:yellow"><b>{{producteur[0]}}</b></td>
+                    <td></td>
+                    <td></td>
+                {% for panierproduit in producteur[1].panierproduit %}
+                    <tr>
+                        <td></td>
+                        <td>{{panierproduit.produit.libelle}}</td>
+                        <td>{{panierproduit.quantite}}</td>
+                    </tr>
+                {% endfor %}
+                </tr>
+            {% endfor %}
+            </table>
+        </div>
+     </div>
 {% endblock %}

@@ -32,7 +32,9 @@ class ActeurController extends Controller
 
 		if ($form->handleRequest($request)->isSubmitted()){
 			$data = $form->getData();
-			
+			$session =  $request->getSession();
+                        
+                        $session->set('amap',$data['amap']->getId());
 			return $this->redirectToRoute('amap_acteur', array('amap' => $data['amap']->getId()));
 		}
 

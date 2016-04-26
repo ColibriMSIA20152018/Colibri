@@ -31,7 +31,7 @@ class PanierController extends Controller
 
         $form2 = $this->get('form.factory')->createNamedBuilder('formulaire_retirer_panier')
             ->add('panier', EntityType::class, array('class' => 'AMAPBundle:Panier', 'choice_label' => 'libelle') )
-			->add('entrepot', EntityType::class, array('class' => 'AMAPBundle:Entrepot', 'choice_label' => 'libelle'))
+	    ->add('amap', EntityType::class, array('class' => 'AMAPBundle:Amap', 'choice_label' => 'libelle'))
             ->add('ajouter', SubmitType::class, array('label' => 'Retirer un Panier'))
             ->getForm();
 
@@ -82,11 +82,12 @@ class PanierController extends Controller
                 $data2 = $form2->getData();
 
                 $panier = $data2['panier'];
+                $entrepot = $data2['amap']->getEntrepot();
 
                 $panierproduit = $panier->getPanierproduit();
 
                 foreach ($panierproduit as $produit) {
-                    $stock = $em->getRepository('AMAPBundle:Stock')->findBy(array('produit' => $produit->getProduit(), 'entrepot' => $data2['entrepot']));
+                    $stock = $em->getRepository('AMAPBundle:Stock')->findBy(array('produit' => $produit->getProduit(), 'entrepot' => $entrepot));
 
 					$stock[0]->setQuantite($stock[0]->getQuantite() - $produit->getQuantite());
 

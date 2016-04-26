@@ -53,7 +53,7 @@ class ContratController extends Controller
 
                 $contrat->setProducteur($data['producteur']);
                 $contrat->setConsommateur($data['consommateur']);
-				$contrat->setAmap($amap);
+		$contrat->setAmap($data['amap']);
                 $contrat->setPanier($data['panier']);
 
                 $em->persist($contrat);
@@ -62,10 +62,47 @@ class ContratController extends Controller
         }
 
         $listcontrat = $em->getRepository('AMAPBundle:Contrat')->findAll();
-
+        $typeProducteur = $em->getRepository('AMAPBundle:TypeActeur')->findBy(array('libelle' => 'Producteur'));
+        $listproducteur = $em->getRepository('AMAPBundle:Acteur')->findBy(array('typeActeur' => $typeProducteur));
+        
+        $tab = array();
+            $i = 0;
+            foreach ($listproducteur as $producteur) {
+                    
+                    $j = 0;
+                    
+                    $panier = new Panier();
+                    $tab[$i][$j] = $producteur->getNom();
+                    foreach ($listcontrat as $contrat) {
+                        if ($producteur == $contrat->getProducteur()) {
+                            // BOUCLE PRODUIT PANIER
+                            // Créer un panier temporaire non mis en BD pour faire le comptage 
+                            foreach($contrat->getPanier()->getPanierproduit() as $panierproduit)
+                            {
+                                $check=false;
+                                foreach($panier->getPanierproduit() as $panierproduit2){
+                                    if($panierproduit2->getProduit() == $panierproduit->getProduit()){
+                                        $panierproduit2->setQuantite($panierproduit2->getQuantite() + $panierproduit->getQuantite());
+                                        $check=true;
+                                    }
+                                }
+                                if(!$check){
+                                    $panier->addPanierproduit($panierproduit);
+                                }
+                            }
+                        }
+                    }
+                    $j++;
+                    $tab[$i][$j] = $panier;
+                    $i++;
+            }
+        
         return $this->render('AMAPBundle:Contrat:index.html.twig',array(
             'form' => $form->createView(),
             'page_courante' => 'contrat',
-            'listcontrat' => $listcontrat));
+            'listproducteur' => $listproducteur,
+            'listcontrat' => $listcontrat,
+            'tabProd' => $tab
+              ));
     }
 }
