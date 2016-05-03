@@ -5,8 +5,19 @@
         <div class="" style="width:100%;float:left">
             <h1>Produits</h1>
             <div class="" style="width:100%;float:left">
-                <table class="table table-striped">
-                    <th>Nom du produit</th><th>Famille</th>
+                <table id="tableau" class="table table-striped">
+					<thead>
+						<tr>
+							<th>Nom du produit</th>
+							<th>Famille</th>
+						</tr>
+					</thead>
+					<tfoot>
+						<tr>
+							<th>Nom du produit</th>
+							<th>Famille</th>
+						</tr>
+					</tfoot>
                 {% for item in listProduit %}
                     <tr>
                         {% if item.famille is null %}
@@ -74,4 +85,44 @@
             {{ form_end(form4) }}
         </div>
     </div>
+{% endblock %}
+{% block javascripts %}
+	<script>
+	$(document).ready(function() {
+		// Setup - add a text input to each footer cell
+		$('#tableau tfoot th').each( function () {
+			var title = $(this).text();
+			$(this).html( '<input type="text" placeholder="Rechercher '+title+'" />' );
+		} );
+
+		// DataTable
+		var table = $('#tableau').DataTable({
+				"language":{
+					"search": "Recherche",
+					"lengthMenu": "Afficher _MENU_ entrées par page",
+					"zeroRecords": "Aucun élément trouvé ! Désolé...",
+					"info": "Page _PAGE_ sur _PAGES_",
+					"infoEmpty": "Les entrées ne sont pas disponibles",
+					"paginate":{
+						"previous": "Précédent",
+						"next": "Suivant"
+					},
+					"infoFiltered": "(filtré sur _MAX_ entrées)"
+				}
+		});
+
+			// Apply the search
+			table.columns().every( function () {
+				var that = this;
+
+				$( 'input', this.footer() ).on( 'keyup change', function () {
+					if ( that.search() !== this.value ) {
+						that
+							.search( this.value )
+							.draw();
+					}
+				} );
+			} );
+	} );
+</script>
 {% endblock %}
