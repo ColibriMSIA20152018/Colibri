@@ -53,7 +53,7 @@ class ContratController extends Controller
 
                 $contrat->setProducteur($data['producteur']);
                 $contrat->setConsommateur($data['consommateur']);
-		$contrat->setAmap($data['amap']);
+				$contrat->setAmap($data['amap']);
                 $contrat->setPanier($data['panier']);
 
                 $em->persist($contrat);
@@ -64,39 +64,62 @@ class ContratController extends Controller
         $listcontrat = $em->getRepository('AMAPBundle:Contrat')->findAll();
         $typeProducteur = $em->getRepository('AMAPBundle:TypeActeur')->findBy(array('libelle' => 'Producteur'));
         $listproducteur = $em->getRepository('AMAPBundle:Acteur')->findBy(array('typeActeur' => $typeProducteur));
-        
-        $tab = array();
+
+		/*
+		 * FONCTION DE CALCUL DE QUANTITE A PRODUIRE POUR LE PRODUCTEUR
+		 */
+			$tab = array();
             $i = 0;
+			/*
+			 * BOUCLE PRODUCTEURS
+			 */
             foreach ($listproducteur as $producteur) {
-                    
+
                     $j = 0;
-                    
+					// Panier TEMP
                     $panier = new Panier();
                     $tab[$i][$j] = $producteur->getNom();
+					/*
+					 * BOUCLE CONTRATS
+					 */
                     foreach ($listcontrat as $contrat) {
-                        if ($producteur == $contrat->getProducteur()) {
-                            // BOUCLE PRODUIT PANIER
-                            // Créer un panier temporaire non mis en BD pour faire le comptage 
+						//SI LE CONTRAT COURANT ET CELUI DU PRODUCTEUR COURANT
+                        if ($producteur == $contrat->getProducteur())
+						{
+							/*
+							 * BOUCLE PANIERPRODUIT DU CONTRAT COURANT
+							 */
                             foreach($contrat->getPanier()->getPanierproduit() as $panierproduit)
                             {
                                 $check=false;
-                                foreach($panier->getPanierproduit() as $panierproduit2){
-                                    if($panierproduit2->getProduit() == $panierproduit->getProduit()){
+								/*
+								 * BOUCLE DU PANIER TEMP
+								 */
+                                foreach($panier->getPanierproduit() as $panierproduit2)
+								{
+									// SI DANS LE PANIER TEMP IL Y A DEJA LE PRODUIT DU CONTRAT
+                                    if($panierproduit2->getProduit() == $panierproduit->getProduit())
+									{
                                         $panierproduit2->setQuantite($panierproduit2->getQuantite() + $panierproduit->getQuantite());
                                         $check=true;
                                     }
                                 }
+								// SI DANS LE PANIER IL N'Y A PAS LE PRODUIT DU CONTRAT
                                 if(!$check){
-                                    $panier->addPanierproduit($panierproduit);
+									$newPanierProd = new Panierproduit();
+									$newPanierProd->setQuantite($panierproduit->getQuantite());
+									$newPanierProd->setProduit($panierproduit->getProduit());
+                                    $panier->addPanierproduit($newPanierProd);
                                 }
                             }
                         }
                     }
                     $j++;
+					// AJOUT DANS LE TAB QUI SERA RENVOYER A LA VUE
                     $tab[$i][$j] = $panier;
                     $i++;
             }
-        
+
         return $this->render('AMAPBundle:Contrat:index.html.twig',array(
             'form' => $form->createView(),
             'page_courante' => 'contrat',
