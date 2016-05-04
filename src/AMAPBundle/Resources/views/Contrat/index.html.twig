@@ -1,4 +1,4 @@
-{% extends 'base.html.twig' %}
+{% extends 'content.html.twig' %}
 
 {% block body %}
     <div class="container">
@@ -58,9 +58,9 @@
 				</thead>
             {% for producteur in tabProd %}
                 <tr>
-                    <td style="background-color:yellow"><b>{{producteur[0]}}</b></td>
-                    <td style="background-color:yellow"></td>
-                    <td style="background-color:yellow"></td>
+                    <td style="background-color:#82b440"><b>{{producteur[0]}}</b></td>
+                    <td style="background-color:#82b440"></td>
+                    <td style="background-color:#82b440"></td>
                 {% for panierproduit in producteur[1].panierproduit %}
                     <tr>
                         <td></td>

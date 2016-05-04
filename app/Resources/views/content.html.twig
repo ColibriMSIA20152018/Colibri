@@ -6,7 +6,7 @@
 -->
 <html>
 	<head>
-		<title>No Sidebar - Solarize by TEMPLATED</title>
+		<title>AMAP</title>
 		<meta http-equiv="content-type" content="text/html; charset=utf-8" />
 		<meta name="description" content="" />
 		<meta name="keywords" content="" />
@@ -14,6 +14,10 @@
 		{% block stylesheet %}{% endblock %}
 		<link rel="stylesheet" href="{{asset('css/skel.css')}}" />
 		<link rel="stylesheet" href="{{asset('css/style.css')}}" />
+		<link href="{{ asset('css/bootstrap.css') }}" rel="stylesheet">
+        <link href="{{ asset('css/font-awesome.min.css') }}" rel="stylesheet">
+		<link rel="stylesheet" type="text/css" href="{{asset('DataTables/datatables.min.css')}}"/>
+		<link rel="icon" type="image/x-icon" href="{{ asset('favicon.ico') }}" />
 
 		<!--[if lte IE 8]><link rel="stylesheet" href="css/ie/v8.css" /><![endif]-->
 	</head>
@@ -27,37 +31,62 @@
 					<div class="container">
 
 						<!-- Logo -->
-							<h1><a href="#" id="logo">Solarize</a></h1>
+							<h1 id="logosite2"><a href="#" id="logosite">AMAP</a></h1>
 
 						<!-- Nav -->
 							<nav id="nav">
 								<ul>
-									<li class="active"><a href="index.html">Home</a></li>
-									<li>
-										<a href="">Dropdown</a>
-										<ul>
-											<li><a href="#">Lorem ipsum dolor</a></li>
-											<li><a href="#">Magna phasellus</a></li>
-											<li><a href="#">Etiam dolore nisl</a></li>
-											<li>
-												<a href="">Phasellus consequat</a>
-												<ul>
-													<li><a href="#">Lorem ipsum dolor</a></li>
-													<li><a href="#">Phasellus consequat</a></li>
-													<li><a href="#">Magna phasellus</a></li>
-													<li><a href="#">Etiam dolore nisl</a></li>
-													<li><a href="#">Veroeros feugiat</a></li>
-												</ul>
-											</li>
-											<li><a href="#">Veroeros feugiat</a></li>
-										</ul>
-									</li>
-									<li><a href="left-sidebar.html">Left Sidebar</a></li>
-									<li><a href="right-sidebar.html">Right Sidebar</a></li>
-									<li><a href="no-sidebar.html">No Sidebar</a></li>
+									{%if page_courante == 'default' %}
+									<li class="active"><a href="{{path('amap_homepage')}}">ACCUEIL</a></li>
+									{%else%}
+									<li><a href="{{path('amap_homepage')}}">ACCUEIL</a></li>
+									{%endif%}
+
+									<!-- <li><a href="about.html">A PROPOS</a></li> -->
+
+									{%if page_courante == 'panier' %}
+									<li class="active"><a href="{{path('amap_panier')}}">PANIERS</a></li>
+									{%else%}
+									<li><a href="{{path('amap_panier')}}">PANIERS</a></li>
+									{%endif%}
+
+									{%if page_courante == 'produit' %}
+									<li class="active"><a href="{{path('amap_produit')}}">PRODUITS</a></li>
+									{%else%}
+									<li><a href="{{path('amap_produit')}}">PRODUITS</a></li>
+									{%endif%}
+
+									{% if page_courante == 'acteur' %}
+										<li class="active"><a href="{{path('amap_select_amap')}}">ACTEURS</a></li>
+									{%else%}
+										<li><a href="{{path('amap_select_amap')}}">ACTEURS</a></li>
+									{%endif%}
+
+									{%if page_courante == 'contrat' %}
+									<li class="active"><a href="{{path('amap_contrat')}}">CONTRATS</a></li>
+									{%else%}
+									<li><a href="{{path('amap_contrat')}}">CONTRATS</a></li>
+									{%endif%}
+
+									{%if page_courante == 'amap' %}
+									<li class="active"><a href="{{path('amap_amap')}}">AMAP</a></li>
+									{%else%}
+									<li><a href="{{path('amap_amap')}}">AMAP</a></li>
+									{%endif%}
+
+									{%if page_courante == 'stock' %}
+									<li class="active"><a href="{{path('amap_stock')}}">STOCK</a></li>
+									{%else%}
+									<li><a href="{{path('amap_stock')}}">STOCK</a></li>
+									{%endif%}
+
+									{%if page_courante == 'entrepot' %}
+									<li class="active"><a href="{{path('amap_entrepot')}}">ENTREPOT</a></li>
+									{%else%}
+									<li><a href="{{path('amap_entrepot')}}">ENTREPOT</a></li>
+									{%endif%}
 								</ul>
 							</nav>
-
 					</div>
 				</div>
 			</div>
@@ -133,5 +162,7 @@
 		<script src="{{asset('js/skel.min.js')}}"></script>
 		<script src="{{asset('js/skel-layers.min.js')}}"></script>
 		<script src="{{asset('js/init.js')}}"></script>
+		<script type="text/javascript" src="{{asset('DataTables/datatables.min.js')}}"></script>
+		<script src="{{ asset('js/bootstrap.min.js') }}"></script>
 		{% block javascripts %}{% endblock %}
 </html>

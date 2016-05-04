@@ -1,149 +1,264 @@
-<!DOCTYPE html>
+<!DOCTYPE HTML>
+<!--
+	Solarize by TEMPLATED
+	templated.co @templatedco
+	Released for free under the Creative Commons Attribution 3.0 license (templated.co/license)
+-->
 <html>
-    <head>
-        <meta charset="UTF-8" />
-        <title>{% block title %}Welcome!{% endblock %}</title>
-        <!-- Bootstrap core CSS -->
-        <link href="{{ asset('css/bootstrap.css') }}" rel="stylesheet">
+	<head>
+		<title>AMAP</title>
+		<meta http-equiv="content-type" content="text/html; charset=utf-8" />
+		<meta name="description" content="" />
+		<meta name="keywords" content="" />
+		<!--[if lte IE 8]><script src="css/ie/html5shiv.js"></script><![endif]-->
+		<link href="{{ asset('css/bootstrap.css') }}" rel="stylesheet">
         <link href="{{ asset('css/font-awesome.min.css') }}" rel="stylesheet">
 		<link rel="stylesheet" type="text/css" href="{{asset('DataTables/datatables.min.css')}}"/>
+		<link rel="icon" type="image/x-icon" href="{{ asset('favicon.ico') }}" />
+		<link rel="stylesheet" href="{{asset('css/skel.css')}}" />
+		<link rel="stylesheet" href="{{asset('css/style.css')}}" />
+		<!--[if lte IE 8]><link rel="stylesheet" href="css/ie/v8.css" /><![endif]-->
+	</head>
+	<body class="homepage">
 
-        <!-- Custom styles for this template -->
-        <link href="{{ asset('css/main.css') }}" rel="stylesheet">
-        {% block stylesheets %}{% endblock %}
-        <link rel="icon" type="image/x-icon" href="{{ asset('favicon.ico') }}" />
-    </head>
-    <body>
+		<!-- Header Wrapper -->
+			<div class="wrapper style1">
 
-    <!-- Fixed navbar -->
-    <div class="navbar navbar-inverse navbar-fixed-top">
-      <div class="container">
-        <div class="navbar-header">
-          <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
-            <span class="icon-bar"></span>
-            <span class="icon-bar"></span>
-            <span class="icon-bar"></span>
-          </button>
-          <a class="navbar-brand" href="#">AM<i id="a-amap-menu">A</i>P</a>
-        </div>
+			<!-- Header -->
+				<div id="header">
+					<div class="container">
 
-        <div class="navbar-collapse collapse">
-          <ul class="nav navbar-nav navbar-right">
-            {%if page_courante == 'default' %}
-            <li class="active"><a href="{{path('amap_homepage')}}">ACCUEIL</a></li>
-            {%else%}
-            <li><a href="{{path('amap_homepage')}}">ACCUEIL</a></li>
-            {%endif%}
+						<!-- Logo -->
+							<h1><a href="#" id="logo">AMAP</a></h1>
 
-            <!-- <li><a href="about.html">A PROPOS</a></li> -->
+						<!-- Nav -->
+							<nav id="nav">
+								<ul>
+									{%if page_courante == 'default' %}
+									<li class="active"><a href="{{path('amap_homepage')}}">ACCUEIL</a></li>
+									{%else%}
+									<li><a href="{{path('amap_homepage')}}">ACCUEIL</a></li>
+									{%endif%}
 
-            {%if page_courante == 'panier' %}
-            <li class="active"><a href="{{path('amap_panier')}}">PANIERS</a></li>
-            {%else%}
-            <li><a href="{{path('amap_panier')}}">PANIERS</a></li>
-            {%endif%}
+									<!-- <li><a href="about.html">A PROPOS</a></li> -->
 
-            {%if page_courante == 'produit' %}
-            <li class="active"><a href="{{path('amap_produit')}}">PRODUITS</a></li>
-            {%else%}
-            <li><a href="{{path('amap_produit')}}">PRODUITS</a></li>
-            {%endif%}
+									{%if page_courante == 'panier' %}
+									<li class="active"><a href="{{path('amap_panier')}}">PANIERS</a></li>
+									{%else%}
+									<li><a href="{{path('amap_panier')}}">PANIERS</a></li>
+									{%endif%}
 
+									{%if page_courante == 'produit' %}
+									<li class="active"><a href="{{path('amap_produit')}}">PRODUITS</a></li>
+									{%else%}
+									<li><a href="{{path('amap_produit')}}">PRODUITS</a></li>
+									{%endif%}
 
-			{% if page_courante == 'acteur' %}
-				<li class="active"><a href="{{path('amap_select_amap')}}">ACTEURS</a></li>
-			{%else%}
-				<li><a href="{{path('amap_select_amap')}}">ACTEURS</a></li>
-			{%endif%}
+									{% if page_courante == 'acteur' %}
+										<li class="active"><a href="{{path('amap_select_amap')}}">ACTEURS</a></li>
+									{%else%}
+										<li><a href="{{path('amap_select_amap')}}">ACTEURS</a></li>
+									{%endif%}
 
-				{#{% if page_courante == 'acteur' %}
-				<li class="active"><a href="{{path('amap_acteur')}}">ACTEURS</a></li>
-				{%else%}
-				<li><a href="{{path('amap_acteur')}}">ACTEURS</a></li>
-				{%endif%}#}
+									{%if page_courante == 'contrat' %}
+									<li class="active"><a href="{{path('amap_contrat')}}">CONTRATS</a></li>
+									{%else%}
+									<li><a href="{{path('amap_contrat')}}">CONTRATS</a></li>
+									{%endif%}
 
+									{%if page_courante == 'amap' %}
+									<li class="active"><a href="{{path('amap_amap')}}">AMAP</a></li>
+									{%else%}
+									<li><a href="{{path('amap_amap')}}">AMAP</a></li>
+									{%endif%}
 
-            {%if page_courante == 'contrat' %}
-            <li class="active"><a href="{{path('amap_contrat')}}">CONTRATS</a></li>
-            {%else%}
-            <li><a href="{{path('amap_contrat')}}">CONTRATS</a></li>
-            {%endif%}
+									{%if page_courante == 'stock' %}
+									<li class="active"><a href="{{path('amap_stock')}}">STOCK</a></li>
+									{%else%}
+									<li><a href="{{path('amap_stock')}}">STOCK</a></li>
+									{%endif%}
 
-			{%if page_courante == 'amap' %}
-            <li class="active"><a href="{{path('amap_amap')}}">AMAP</a></li>
-            {%else%}
-            <li><a href="{{path('amap_amap')}}">AMAP</a></li>
-            {%endif%}
+									{%if page_courante == 'entrepot' %}
+									<li class="active"><a href="{{path('amap_entrepot')}}">ENTREPOT</a></li>
+									{%else%}
+									<li><a href="{{path('amap_entrepot')}}">ENTREPOT</a></li>
+									{%endif%}
+								</ul>
+							</nav>
 
-			{%if page_courante == 'stock' %}
-            <li class="active"><a href="{{path('amap_stock')}}">STOCK</a></li>
-            {%else%}
-            <li><a href="{{path('amap_stock')}}">STOCK</a></li>
-            {%endif%}
-
-			{%if page_courante == 'entrepot' %}
-            <li class="active"><a href="{{path('amap_entrepot')}}">ENTREPOT</a></li>
-            {%else%}
-            <li><a href="{{path('amap_entrepot')}}">ENTREPOT</a></li>
-            {%endif%}
-
-            <li><a data-toggle="modal" data-target="#myModal" href="#myModal"><i class="fa fa-envelope-o"></i></a></li>
-          </ul>
-        </div><!--/.nav-collapse -->
-      </div>
-    </div>
-
-    <!--<div id="headerwrap">
-        <div class="container">
-            <div class="row centered">
-                <div class="col-lg-8 col-lg-offset-2">
-                    <h1>It Doesn't Take a Rocket <b>Scientist</b></h1>
-                    <h2>It Takes a Designer</h2>
-                </div>
-            </div><
-        </div>
-    </div>-->
-    <br/>
-    <br/>
-        {% block body %}{% endblock %}
-       <div id="blanc" style="height:400px">   <div/>
-        <!-- MODAL FOR CONTACT -->
-	<!-- Modal -->
-	<div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
-	  <div class="modal-dialog">
-	    <div class="modal-content">
-	      <div class="modal-header">
-	        <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
-	        <h4 class="modal-title" id="myModalLabel">contact us</h4>
-	      </div>
-	      <div class="modal-body">
-		        <div class="row centered">
-		        	<p>We are available 24/7, so don't hesitate to contact us.</p>
-		        	<p>
-		        		Somestreet Ave, 987<br/>
-						London, UK.<br/>
-						+44 8948-4343<br/>
-						hi@blacktie.co
-		        	</p>
-		        	<div id="mapwrap">
-		<iframe height="300" width="100%" frameborder="0" scrolling="no" marginheight="0" marginwidth="0" src="https://www.google.es/maps?t=m&amp;ie=UTF8&amp;ll=52.752693,22.791016&amp;spn=67.34552,156.972656&amp;z=2&amp;output=embed"></iframe>
 					</div>
-		        </div>
-	      </div>
-	      <div class="modal-footer">
-	        <button type="button" class="btn btn-danger" data-dismiss="modal">Save & Go</button>
-	      </div>
-	    </div><!-- /.modal-content -->
-	  </div><!-- /.modal-dialog -->
-	</div><!-- /.modal -->
+				</div>
 
-    <!-- Bootstrap core JavaScript
-    ================================================== -->
-    <!-- Placed at the end of the document so the pages load faster -->
-    <script src="https://code.jquery.com/jquery-1.10.2.min.js"></script>
-	<script type="text/javascript" src="{{asset('DataTables/datatables.min.js')}}"></script>
-    <script src="{{ asset('js/bootstrap.min.js') }}"></script>
-	
-	{% block javascripts %}{% endblock %}
-    </body>
+			<!-- Banner -->
+				<div id="banner">
+					<section class="container">
+						<h2>AMAP</h2>
+						<span>Design by Templated</span>
+						<p>Pellentesque pede. Donec pulvinar ullamcorper metus. In eu odio at lectus pulvinar mollis. Vestibulum sem magna.</p>
+					</section>
+				</div>
+
+			</div>
+
+		<!-- Section One -->
+			<div class="wrapper style2">
+				<section class="container">
+					<div class="row double">
+						<div class="6u">
+							<header class="major">
+								<h2>Pellentesque viverra vulputate enim. Aliquam volutpat. Pellentesque tristique Risus</h2>
+								<span class="byline">In posuere eleifend odio. Quisque semper augue mattis wisi. Maecenas ligula. Pellentesque viverra vulputate enim. Donec pulvinar ullamcorper metus.</span>
+							</header>
+						</div>
+						<div class="6u">
+							<h3>Suspendisse dictum porta</h3>
+							<p>Donec leo. Vivamus fermentum nibh in augue. Praesent a lacus at urna congue rutrum. Nulla enim eros, porttitor eu, tempus id, varius non, nibh. Vestibulum imperdiet, magna nec eleifend semper augue mattis wisi maecenas ligula nunc lectus vestibulum euismod lacinia quam nisl.</p>
+							<a href="#" class="button">Nulla aluctus eleifend</a>
+						</div>
+					</div>
+				</section>
+			</div>
+
+		<!-- Section Two -->
+			<div class="wrapper style3">
+				<section class="container">
+					<header class="major">
+						<h2>Cras vitae metus aliNuam</h2>
+					</header>
+					<p>Pellentesque pede. Donec pulvinar ullamcorper metus. In eu odio at lectus pulvinar mollis. Vestibulum sem magna, elementum vestibulum arcu.</p>
+					<a href="#" class="button alt">Nulla aluctus eleifend</a>
+				</section>
+			</div>
+
+		<!-- Section Three -->
+			<div class="wrapper style4">
+				<section class="container">
+					<header class="major">
+						<h2>Cras vitae metus aliNuam</h2>
+						<span class="byline">pulvinar mollis. Vestibulum sem magna, elementum vestibulum arcu.</span>
+					</header>
+					<div class="row flush">
+						<div class="4u">
+							<ul class="special-icons">
+								<li>
+									<span class="fa fa-cogs"></span>
+									<h3>Nulla luctus eleifend</h3>
+									<p>In posuere eleifend odio. Quisque semper augue mattis wisi. Maecenas ligula pellentesque.</p>
+								</li>
+								<li>
+									<span class="fa fa-wrench"></span>
+									<h3>Etiam posuere augue</h3>
+									<p>Maecenas ligula. Pellentesque viverra vulputate enim. Aliquam erat volutpat liguala.</p>
+								</li>
+								<li>
+									<span class="fa fa-leaf"></span>
+									<h3>Fusce ultrices fringilla</h3>
+									<p>Maecenas pede nisl, elementum eu, ornare ac, malesuada at, erat. Proin gravida orci porttitor.</p>
+								</li>
+							</ul>
+						</div>
+						<div class="4u">
+							<ul class="special-icons">
+								<li>
+									<span class="fa fa-cogs"></span>
+									<h3>Nulla luctus eleifend</h3>
+									<p>In posuere eleifend odio. Quisque semper augue mattis wisi. Maecenas ligula pellentesque.</p>
+								</li>
+								<li>
+									<span class="fa fa-wrench"></span>
+									<h3>Etiam posuere augue</h3>
+									<p>Maecenas ligula. Pellentesque viverra vulputate enim. Aliquam erat volutpat liguala.</p>
+								</li>
+								<li>
+									<span class="fa fa-leaf"></span>
+									<h3>Fusce ultrices fringilla</h3>
+									<p>Maecenas pede nisl, elementum eu, ornare ac, malesuada at, erat. Proin gravida orci porttitor.</p>
+								</li>
+							</ul>
+						</div>
+						<div class="4u">
+							<ul class="special-icons">
+								<li>
+									<span class="fa fa-cogs"></span>
+									<h3>Nulla luctus eleifend</h3>
+									<p>In posuere eleifend odio. Quisque semper augue mattis wisi. Maecenas ligula pellentesque.</p>
+								</li>
+								<li>
+									<span class="fa fa-wrench"></span>
+									<h3>Etiam posuere augue</h3>
+									<p>Maecenas ligula. Pellentesque viverra vulputate enim. Aliquam erat volutpat liguala.</p>
+								</li>
+								<li>
+									<span class="fa fa-leaf"></span>
+									<h3>Fusce ultrices fringilla</h3>
+									<p>Maecenas pede nisl, elementum eu, ornare ac, malesuada at, erat. Proin gravida orci porttitor.</p>
+								</li>
+							</ul>
+						</div>
+					</div>
+				</section>
+			</div>
+
+		<!-- Team -->
+			<div class="wrapper style5">
+				<section id="team" class="container">
+					<header class="major">
+						<h2>Cras vitae metus aliNuam</h2>
+						<span class="byline">pulvinar mollis. Vestibulum sem magna, elementum vestibulum arcu</span>
+					</header>
+					<div class="row">
+						<div class="3u">
+							<a href="#" class="image"><img src="images/placeholder.png" alt=""></a>
+							<h3>Molly Millions</h3>
+							<p>In posuere eleifend odio quisque semper augue wisi ligula.</p>
+						</div>
+						<div class="3u">
+							<a href="#" class="image"><img src="images/placeholder.png" alt=""></a>
+							<h3>Henry Dorsett Case</h3>
+							<p>In posuere eleifend odio quisque semper augue wisi ligula.</p>
+						</div>
+						<div class="3u">
+							<a href="#" class="image"><img src="images/placeholder.png" alt=""></a>
+							<h3>Willis Corto</h3>
+							<p>In posuere eleifend odio quisque semper augue wisi ligula.</p>
+						</div>
+						<div class="3u">
+							<a href="#" class="image"><img src="images/placeholder.png" alt=""></a>
+							<h3>Linda Lee</h3>
+							<p>In posuere eleifend odio quisque semper augue wisi ligula.</p>
+						</div>
+					</div>
+				</section>
+			</div>
+
+	<!-- Footer -->
+		<div id="footer">
+			<section class="container">
+				<header class="major">
+					<h2>Connect with us</h2>
+					<span class="byline">Integer sit amet pede vel arcu aliquet pretium</span>
+				</header>
+				<ul class="icons">
+					<li class="active"><a href="#" class="fa fa-facebook"><span>Facebook</span></a></li>
+					<li><a href="#" class="fa fa-twitter"><span>Twitter</span></a></li>
+					<li><a href="#" class="fa fa-dribbble"><span>Pinterest</span></a></li>
+					<li><a href="#" class="fa fa-google-plus"><span>Google+</span></a></li>
+				</ul>
+				<hr />
+			</section>
+
+			<!-- Copyright -->
+				<div id="copyright">
+					Design: <a href="http://templated.co">TEMPLATED</a> Images: <a href="http://unsplash.com">Unsplash</a> (<a href="http://unsplash.com/cc0">CC0</a>)
+				</div>
+		</div>
+		<script src="{{asset('js/jquery.min.js')}}"></script>
+		<script src="{{asset('js/jquery.dropotron.min.js')}}"></script>
+		<script src="{{asset('js/skel.min.js')}}"></script>
+		<script src="{{asset('js/skel-layers.min.js')}}"></script>
+		<script src="{{asset('js/init.js')}}"></script>
+		<script type="text/javascript" src="{{asset('DataTables/datatables.min.js')}}"></script>
+		<script src="{{ asset('js/bootstrap.min.js') }}"></script>
+		{% block javascripts %}{% endblock %}
+	</body>
 </html>
