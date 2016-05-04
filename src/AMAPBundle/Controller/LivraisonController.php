@@ -111,10 +111,6 @@ class LivraisonController extends Controller
         
         public function effectuerOneAction($idpanier,$id,$date){
             $em = $this->getDoctrine()->getManager();
-          
-            $form = $this->get('form.factory')->createNamedBuilder('formulaire_effectuer_livraison')
-                            ->add('livrer', SubmitType::class, array('label' => 'Effectuer la livraison'))
-                            ->getForm();
             
             $contrat = $em->getRepository('AMAPBundle:Contrat')->findBy(array('id' => $id));
             $listContrat = $em->getRepository('AMAPBundle:Contrat')->findBy(array('panier' => $idpanier));
@@ -123,7 +119,6 @@ class LivraisonController extends Controller
                
                 if($livraison->getDateLivraison()->format('Y-m-d H:i:s') == $date)
                 {
-                    var_dump('ici');
                     $livraison->setEstLivree(true);
                     $em->persist($livraison);
                 }
@@ -131,9 +126,7 @@ class LivraisonController extends Controller
             
             $em->flush();
             
-            return $this->render('AMAPBundle:Livraison:effectuer.html.twig', array('form' => $form->createView(),
-                                                                                    'page_courante' => 'livraison',
-                                                                                    'listContrat' => $listContrat));
+            return $this->redirect($this->generateUrl('amap_effectue_livraison', array('id'=>$idpanier)));
             
         }
 
