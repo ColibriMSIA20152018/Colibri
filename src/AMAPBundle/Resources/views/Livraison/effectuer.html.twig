@@ -36,15 +36,18 @@
 
 						<td>{{livraison.dateLivraison|date('d-m-Y H:i:s')}}</td>
 						{% if livraison.estLivree %}
-							<td>OUI</td>
+                                                    <td>OUI</td>
 						{% else %}
-							<td>NON</td>
+							<td>NON <a href="{{path('amap_effectuer_one_livraison', {idpanier : contrat.panier.id, id : contrat.id, date : livraison.dateLivraison|date('Y-m-d H:i:s')})}}"><i class="fa fa-check"/></a></td>
 						{%endif%}
 					</tr>
 					{% endfor %}
 			{% endfor %}
 		</tbody>
 	</table>
+        <h1> Effectuer livraisons !</h1>
+        {{ form_start(form) }}
+        {{ form_end(form) }}
 {% endblock %}
 {% block javascripts %}
 	<script>

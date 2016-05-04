@@ -53,3 +53,7 @@ amap_effectue_livraison:
 amap_amap:
     path:     /amap
     defaults: { _controller: AMAPBundle:Amap:ajouter }
+    
+amap_effectuer_one_livraison:
+    path:     /livraison/{idpanier}/one/{id}/{date}
+    defaults: { _controller: AMAPBundle:Livraison:effectuerOne }
