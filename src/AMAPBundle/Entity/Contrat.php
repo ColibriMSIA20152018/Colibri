@@ -41,6 +41,11 @@ class Contrat
     */
     private $panier;
 
+	/**
+	 * @ORM\ManyToMany(targetEntity="AMAPBundle\Entity\Livraison")
+	 */
+	private $livraisons;
+
     /**
      * Get id
      *
@@ -145,5 +150,46 @@ class Contrat
     public function getAmap()
     {
         return $this->amap;
+    }
+    /**
+     * Constructor
+     */
+    public function __construct()
+    {
+        $this->livraisons = new \Doctrine\Common\Collections\ArrayCollection();
+    }
+
+    /**
+     * Add livraison
+     *
+     * @param \AMAPBundle\Entity\Livraison $livraison
+     *
+     * @return Contrat
+     */
+    public function addLivraison(\AMAPBundle\Entity\Livraison $livraison)
+    {
+        $this->livraisons[] = $livraison;
+
+        return $this;
+    }
+
+    /**
+     * Remove livraison
+     *
+     * @param \AMAPBundle\Entity\Livraison $livraison
+     */
+    public function removeLivraison(\AMAPBundle\Entity\Livraison $livraison)
+    {
+        $this->livraisons->removeElement($livraison);
+    }
+
+    /**
+     * Get livraisons
+     *
+     * @return \Doctrine\Common\Collections\Collection
+     */
+    public function getLivraisons()
+    {
+        return $this->livraisons;
     }
 }

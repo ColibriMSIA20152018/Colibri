@@ -42,6 +42,14 @@ amap_contrat:
     path:     /contrat
     defaults: { _controller: AMAPBundle:Contrat:creer }
 
+amap_livraison:
+    path:     /livraison
+    defaults: { _controller: AMAPBundle:Livraison:index }
+
+amap_effectue_livraison:
+    path:     /livraison/{id}
+    defaults: { _controller: AMAPBundle:Livraison:effectuer }
+
 amap_amap:
     path:     /amap
     defaults: { _controller: AMAPBundle:Amap:ajouter }

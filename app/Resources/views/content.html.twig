@@ -85,6 +85,12 @@
 									{%else%}
 									<li><a href="{{path('amap_entrepot')}}">ENTREPOT</a></li>
 									{%endif%}
+
+									{%if page_courante == 'livraison' %}
+									<li class="active"><a href="{{path('amap_livraison')}}">LIVRAISON</a></li>
+									{%else%}
+									<li><a href="{{path('amap_livraison')}}">LIVRAISON</a></li>
+									{%endif%}
 								</ul>
 							</nav>
 					</div>

@@ -112,4 +112,28 @@ class Entrepot
     {
         return $this->stock;
     }
+
+    /**
+     * Set adresse
+     *
+     * @param \AMAPBundle\Entity\Adresse $adresse
+     *
+     * @return Entrepot
+     */
+    public function setAdresse(\AMAPBundle\Entity\Adresse $adresse = null)
+    {
+        $this->adresse = $adresse;
+
+        return $this;
+    }
+
+    /**
+     * Get adresse
+     *
+     * @return \AMAPBundle\Entity\Adresse
+     */
+    public function getAdresse()
+    {
+        return $this->adresse;
+    }
 }
