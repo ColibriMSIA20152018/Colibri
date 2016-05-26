@@ -1,50 +1,111 @@
 {% extends 'base.html.twig' %}
 
 {% block body %}
-<div class="container w">
-        <div class="row centered">
-            <br><br>
-            <div class="col-lg-4">
-                <i class="fa fa-heart"></i>
-                <h4>DESIGN</h4>
-                <p>There are many variations of passages of Lorem Ipsum available, but the majority have suffered alteration in some form, by injected humour, or randomised words which don't look even believable.</p>
-            </div><!-- col-lg-4 -->
-
-            <div class="col-lg-4">
-                <i class="fa fa-laptop"></i>
-                <h4>BOOTSTRAP</h4>
-                <p>There are many variations of passages of Lorem Ipsum available, but the majority have suffered alteration in some form, by injected humour, or randomised words which don't look even believable.</p>
-            </div><!-- col-lg-4 -->
-
-            <div class="col-lg-4">
-                <i class="fa fa-trophy"></i>
-                <h4>SUPPORT</h4>
-                <p>There are many variations of passages of Lorem Ipsum available, but the majority have suffered alteration in some form, by injected humour, or randomised words which don't look even believable.</p>
-            </div><!-- col-lg-4 -->
-        </div><!-- row -->
-        <br>
-        <br>
-    </div><!-- container -->
-
-    <div id="r">
-		<div class="container">
-			<div class="row centered">
-				<div class="col-lg-8 col-lg-offset-2">
-					<h4>WE ARE STORYTELLERS. BRANDS ARE OUR SUBJECTS. DESIGN IS OUR VOICE.</h4>
-					<p>We believe ideas come from everyone, everywhere. At BlackTie, everyone within our agency walls is a designer in their own right. And there are a few principles we believe—and we believe everyone should believe—about our design craft. These truths drive us, motivate us, and ultimately help us redefine the power of design.</p>
+                <!-- Banner -->
+				<div id="banner">
+					<section class="container">
+						<h2>AMAP</h2>
+                                                <br/><br/>
+						<span>Design by Templated</span>
+						<p>Pellentesque pede. Donec pulvinar ullamcorper metus. In eu odio at lectus pulvinar mollis. Vestibulum sem magna.</p>
+					</section>
 				</div>
-			</div><!-- row -->
-		</div><!-- container -->
-	</div><! -- r wrap -->
-	
-	
-	<!-- FOOTER -->
-	<div id="f">
-		<div class="container">
-			<div class="row centered">
-				<a href="#"><i class="fa fa-twitter"></i></a><a href="#"><i class="fa fa-facebook"></i></a><a href="#"><i class="fa fa-dribbble"></i></a>
-		
-			</div><!-- row -->
-		</div><!-- container -->
-	</div><!-- Footer -->
+
+			</div>
+
+		<!-- Section One -->
+			<div class="wrapper style2">
+				<section class="container">
+					<div class="row double">
+						
+						<div class="12u">
+							<div style="text-align:center">
+                                                            <h3>Une agriculture, une ville, un panier</h3>
+                                                            <p>Donec leo. Vivamus fermentum nibh in augue. Praesent a lacus at urna congue rutrum. Nulla enim eros, porttitor eu, tempus id, varius non, nibh. Vestibulum imperdiet, magna nec eleifend semper augue mattis wisi maecenas ligula nunc lectus vestibulum euismod lacinia quam nisl.</p>
+                                                            <a href="{{path('amap_select_amap')}}" class="button">Choisir son amap</a>
+                                                        </div>
+						</div>
+					</div>
+				</section>
+			</div>
+
+		<!-- Section Two -->
+			<div class="wrapper style3">
+				<section class="container">
+					<header class="major">
+						<h2>Cras vitae metus aliNuam</h2>
+					</header>
+					<p>Pellentesque pede. Donec pulvinar ullamcorper metus. In eu odio at lectus pulvinar mollis. Vestibulum sem magna, elementum vestibulum arcu.</p>
+					<a href="#" class="button alt">Nulla aluctus eleifend</a>
+				</section>
+			</div>
+
+		<!-- Section Three -->
+			<div class="wrapper style4">
+				<section class="container">
+					<header class="major">
+						<h2>Cras vitae metus aliNuam</h2>
+						<span class="byline">pulvinar mollis. Vestibulum sem magna, elementum vestibulum arcu.</span>
+					</header>
+					<div class="row flush">
+						<div class="4u">
+							<ul class="special-icons">
+								<li>
+									<span class="fa fa-cogs"></span>
+									<h3>Nulla luctus eleifend</h3>
+									<p>In posuere eleifend odio. Quisque semper augue mattis wisi. Maecenas ligula pellentesque.</p>
+								</li>
+								<li>
+									<span class="fa fa-wrench"></span>
+									<h3>Etiam posuere augue</h3>
+									<p>Maecenas ligula. Pellentesque viverra vulputate enim. Aliquam erat volutpat liguala.</p>
+								</li>
+								<li>
+									<span class="fa fa-leaf"></span>
+									<h3>Fusce ultrices fringilla</h3>
+									<p>Maecenas pede nisl, elementum eu, ornare ac, malesuada at, erat. Proin gravida orci porttitor.</p>
+								</li>
+							</ul>
+						</div>
+						<div class="4u">
+							<ul class="special-icons">
+								<li>
+									<span class="fa fa-cogs"></span>
+									<h3>Nulla luctus eleifend</h3>
+									<p>In posuere eleifend odio. Quisque semper augue mattis wisi. Maecenas ligula pellentesque.</p>
+								</li>
+								<li>
+									<span class="fa fa-wrench"></span>
+									<h3>Etiam posuere augue</h3>
+									<p>Maecenas ligula. Pellentesque viverra vulputate enim. Aliquam erat volutpat liguala.</p>
+								</li>
+								<li>
+									<span class="fa fa-leaf"></span>
+									<h3>Fusce ultrices fringilla</h3>
+									<p>Maecenas pede nisl, elementum eu, ornare ac, malesuada at, erat. Proin gravida orci porttitor.</p>
+								</li>
+							</ul>
+						</div>
+						<div class="4u">
+							<ul class="special-icons">
+								<li>
+									<span class="fa fa-cogs"></span>
+									<h3>Nulla luctus eleifend</h3>
+									<p>In posuere eleifend odio. Quisque semper augue mattis wisi. Maecenas ligula pellentesque.</p>
+								</li>
+								<li>
+									<span class="fa fa-wrench"></span>
+									<h3>Etiam posuere augue</h3>
+									<p>Maecenas ligula. Pellentesque viverra vulputate enim. Aliquam erat volutpat liguala.</p>
+								</li>
+								<li>
+									<span class="fa fa-leaf"></span>
+									<h3>Fusce ultrices fringilla</h3>
+									<p>Maecenas pede nisl, elementum eu, ornare ac, malesuada at, erat. Proin gravida orci porttitor.</p>
+								</li>
+							</ul>
+						</div>
+					</div>
+				</section>
+			</div>
 {% endblock %}

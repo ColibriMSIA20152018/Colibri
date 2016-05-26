@@ -2,6 +2,10 @@ amap_homepage:
     path:     /
     defaults: { _controller: AMAPBundle:Default:index }
 
+amap_select_amap:
+    path:     /selectAmap
+    defaults: { _controller: AMAPBundle:Default:selectAmap }
+
 amap_produit:
     path:     /produit
     defaults: { _controller: AMAPBundle:Produit:index }
@@ -30,12 +34,8 @@ amap_stock_ajouter:
     path:     /produit/stock/ajouter
     defaults: { _controller: AMAPBundle:Stock:ajouterStockMessage }
 
-amap_select_amap:
-    path:     /selectAmap
-    defaults: { _controller: AMAPBundle:Acteur:selectAmap }
-
 amap_acteur:
-    path:     /{amap}/acteur
+    path:     /acteur
     defaults: { _controller: AMAPBundle:Acteur:ajouter }
 
 amap_contrat:

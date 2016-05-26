@@ -25,7 +25,8 @@
 
 		<!-- Header Wrapper -->
 			<div class="wrapper style1">
-
+   
+                        {% if app.session.get('amap') %}     
 			<!-- Header -->
 				<div id="header">
 					<div class="container">
@@ -95,6 +96,9 @@
 							</nav>
 					</div>
 				</div>
+                            {% else %}
+                                                                        
+                            {% endif %}                                   
 			</div>
 
 		<!-- Main -->

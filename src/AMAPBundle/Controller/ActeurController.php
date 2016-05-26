@@ -20,29 +20,7 @@ use Symfony\Component\Form\Extension\Core\Type\DateType;
 
 class ActeurController extends Controller
 {
-
-	public function selectAmapAction(Request $request)
-	{
-		$em = $this->getDoctrine()->getManager();
-
-        $form = $this->get('form.factory')->createNamedBuilder('formulaire_select_amap')
-			->add('amap',EntityType::class,array('class' => 'AMAPBundle:Amap', 'choice_label' => 'libelle'))
-            ->add('ajouter', SubmitType::class, array('label' => 'Selection d\'une AMAP'))
-            ->getForm();
-
-		if ($form->handleRequest($request)->isSubmitted()){
-			$data = $form->getData();
-			$session =  $request->getSession();
-
-                        $session->set('amap',$data['amap']->getId());
-			return $this->redirectToRoute('amap_acteur', array('amap' => $data['amap']->getId()));
-		}
-
-		 return $this->render('AMAPBundle:Acteur:selectAmap.html.twig',array(
-            'form' => $form->createView(),
-            'page_courante' => 'acteur'));
-	}
-    public function ajouterAction($amap,Request $request)
+    public function ajouterAction(Request $request)
     {
         $em = $this->getDoctrine()->getManager();
 
@@ -110,12 +88,15 @@ class ActeurController extends Controller
                $em->flush();
            }
         }
+        
+       $session =  $request->getSession();
+       
 
-        $listacteur = $em->getRepository('AMAPBundle:Acteur')->findBy(array('amap' => $amap));
+        $listacteur = $em->getRepository('AMAPBundle:Acteur')->findBy(array('amap' => $session->get('amap')));
 		$typeProd = $em->getRepository('AMAPBundle:TypeActeur')->findBy(array('libelle' => "Producteur"));
 		$typeAd =$em->getRepository('AMAPBundle:TypeActeur')->findBy(array('libelle' => "Consommateur"));
-		$listProd = $em->getRepository('AMAPBundle:Acteur')->findBy(array('amap' => $amap, 'typeActeur' => $typeProd));
-		$listAd = $em->getRepository('AMAPBundle:Acteur')->findBy(array('amap' => $amap, 'typeActeur' => $typeAd));
+		$listProd = $em->getRepository('AMAPBundle:Acteur')->findBy(array('amap' => $session->get('amap'), 'typeActeur' => $typeProd));
+		$listAd = $em->getRepository('AMAPBundle:Acteur')->findBy(array('amap' => $session->get('amap'), 'typeActeur' => $typeAd));
 
         return $this->render('AMAPBundle:Acteur:index.html.twig',array(
             'form' => $form->createView(),
