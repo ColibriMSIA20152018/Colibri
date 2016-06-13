@@ -7,11 +7,18 @@
 {% block body %}
     <div class="container">
             <h1>Composition des paniers</h1>
+            <br/>
             <div class="row">
             {% for panier in paniers %}
                     <div class="col-sm-6 col-md-4">
                       <div class="thumbnail">
+                        {% if panier.typePanier.getLibelle == "Petit" %}
                         <img src="{{ asset('images/petit_panier.jpg') }}" width="375" height="275" alt="panier">
+                        {% elseif panier.typePanier.getLibelle == "Moyen" %}
+                            <img src="{{ asset('images/moyen_panier.png') }}" width="375" height="275" alt="panier">
+                        {% else %}
+                            <img src="{{ asset('images/grand_panier.jpg') }}" width="375" height="275" alt="panier">
+                        {% endif %}
                         <div class="caption">
                           <h3>
                                 {% if panier.libelle is not null %}
