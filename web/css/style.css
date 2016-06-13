@@ -567,6 +567,22 @@
 					border-color: white;
 				}
 
+		.wrapper.style6 {
+			padding-bottom: 6em;
+			background: #222;
+			color: #FFF;
+			text-align: center;
+		}
+
+			.wrapper.style6 .container {
+				padding-left: 6em;
+				padding-right: 6em;
+			}
+
+			.wrapper.style6 p {
+				font-size: 1.6em;
+			}
+
 /* Header */
 
 	#header {
