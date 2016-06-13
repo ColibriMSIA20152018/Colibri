@@ -1,0 +1,25 @@
+{% extends 'admin.html.twig' %}
+
+{% block title %}
+    Welcome Panier
+{% endblock%}
+
+{% block body %}
+    <div class="container">
+            <h1>Ajouter un produit à un panier</h1>
+
+            {{ form_start(form) }}
+                {{ form_label(form.panier) }}
+                <br/>
+                {{ form_widget(form.panier) }}
+                <br/>
+                {{ form_label(form.produit) }}
+                <br/>
+                {{ form_widget(form.produit) }}
+                <br/>
+                {{ form_label(form.quantite) }}
+                <br/>
+                {{ form_widget(form.quantite) }}
+            {{ form_end(form) }}     
+    </div>
+{% endblock %}

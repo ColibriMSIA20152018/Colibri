@@ -5,7 +5,19 @@ amap_homepage:
 amap_admin:
     path:     /admin
     defaults: { _controller: AMAPBundle:Admin:index }
-
+    
+amap_creer_panier:
+    path:     /creerPanier
+    defaults: { _controller: AMAPBundle:Admin:creerPanier }
+    
+amap_ajout_prod_panier:
+    path:     /ajoutProdPanier
+    defaults: { _controller: AMAPBundle:Admin:ajouterProduitPanier }
+    
+amap_retrait_panier:
+    path:     /retraitPanier
+    defaults: { _controller: AMAPBundle:Admin:retraitPanier }
+    
 amap_select_amap:
     path:     /selectAmap
     defaults: { _controller: AMAPBundle:Default:selectAmap }
