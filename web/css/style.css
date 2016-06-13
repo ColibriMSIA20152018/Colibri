@@ -784,6 +784,16 @@
 			text-align: center;
 		}
 
+	#admin {
+		text-align: center;
+		color: white;
+		background-color: #222222;
+	}
+		
+	a:link{
+		text-decoration:none;
+	}
+
 /* Copyright */
 
 	#copyright {
