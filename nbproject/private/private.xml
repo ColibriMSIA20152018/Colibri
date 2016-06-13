@@ -5,6 +5,8 @@
         <group>
             <file>file:/C:/wamp/www/Colibri/src/AMAPBundle/Controller/ProduitController.php</file>
             <file>file:/C:/wamp/www/Colibri/src/AMAPBundle/Resources/config/routing.yml</file>
+            <file>file:/C:/wamp/www/Colibri/app/Resources/views/content.html.twig</file>
+            <file>file:/C:/wamp/www/Colibri/src/AMAPBundle/Resources/views/Admin/Produit/listProduit.html.twig</file>
             <file>file:/C:/wamp/www/Colibri/src/AMAPBundle/Controller/AdminController.php</file>
             <file>file:/C:/wamp/www/Colibri/app/Resources/views/admin.html.twig</file>
             <file>file:/C:/wamp/www/Colibri/src/AMAPBundle/Resources/views/Produit/index.html.twig</file>

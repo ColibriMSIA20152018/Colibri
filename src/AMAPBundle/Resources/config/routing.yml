@@ -22,6 +22,18 @@ amap_lister_produit_admin:
     path:     /admin/listerProduit
     defaults: { _controller: AMAPBundle:Admin:listerProduit }
     
+amap_ajout_produit:
+    path: /admin/ajouterProduit
+    defaults: { _controller: AMAPBundle:Admin:ajouterProduit }
+    
+amap_creer_saison:
+    path: /admin/creerSaison
+    defaults: { _controller: AMAPBundle:Admin:creerSaison }
+
+amap_creer_famille:
+    path: /admin/creerFamille
+    defaults: { _controller: AMAPBundle:Admin:creerFamille }
+    
 amap_select_amap:
     path:     /selectAmap
     defaults: { _controller: AMAPBundle:Default:selectAmap }

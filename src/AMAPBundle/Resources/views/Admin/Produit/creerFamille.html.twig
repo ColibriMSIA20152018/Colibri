@@ -1,0 +1,21 @@
+{% extends 'admin.html.twig' %}
+
+{% block body %}
+    <div class="container">
+            <h1>LISTE FAMILLE DE PRODUIT</h1>
+            <table class="table table-striped" >
+		<th>Famille</th>
+            {% for item in listFamille %}
+		<tr><td>{{ item.libelle }}</td></tr>
+            {% endfor %}
+            </table>
+
+            <h1>AJOUTER UNE FAMILLE DE PRODUIT</h1>
+            {{ form_start(form) }}
+                {{ form_label(form.libelle) }}
+                <br/>
+                {{ form_widget(form.libelle) }}
+            {{ form_end(form) }}
+        </div>
+       </div>
+{% endblock %}

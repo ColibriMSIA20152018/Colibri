@@ -144,4 +144,90 @@ class AdminController extends Controller
         
         return $this->render('AMAPBundle:Admin/Produit:listProduit.html.twig',array('listProduit'=>$listProduit));
     }
+    
+    public function ajouterProduitAction(Request $request){
+        $em = $this->getDoctrine()->getManager();
+
+        /* Création du formulaire pour ajouter un nouveau type de produit */
+        $form = $this->get('form.factory')->createNamedBuilder('formulaire_produit')
+            ->setAttributes(array('name' => 'formulaire'))
+            ->add('libelle', TextType::class)
+            ->add('famille', EntityType::class,array('class' => 'AMAPBundle:Famille', 'choice_label' => 'libelle'))
+            ->add('ajouter', SubmitType::class, array('label' => 'Ajouter un produit'))
+            ->getForm();
+        
+        if ($form->handleRequest($request)->isSubmitted()){
+
+            /* Gestion du formulaire pour ajouter un nouveau type de produit */
+           if ($form->get('ajouter')->isClicked())
+           {
+                $data = $form->getData();
+
+                $produit = new Produit();
+
+                $produit->setLibelle($data['libelle']);
+                $produit->setFamille($data['famille']);
+
+                $em->persist($produit);
+                $em->flush();
+           }
+        }
+        
+        return $this->render('AMAPBundle:Admin/Produit:ajouterProduit.html.twig',array('form'=>$form->createView()));
+    }
+    
+    public function creerSaisonAction(Request $request){
+        $em = $this->getDoctrine()->getManager();
+        
+        $listSaison = $em->getRepository('AMAPBundle:Saison')->findAll();
+        
+        $form = $this->get('form.factory')->createNamedBuilder('formulaire_creation_saison')
+            ->add('libelle', TextType::class)
+            ->add('ajouter', SubmitType::class, array('label' => 'Créer la saison'))
+            ->getForm();
+        if ($form->handleRequest($request)->isSubmitted()){
+            if ($form->get('ajouter')->isClicked())
+            {
+                $data = $form->getData();
+
+                $saison = new Saison();
+
+                $saison->setLibelle($data['libelle']);
+
+                $em->persist($saison);
+                $em->flush();
+            }
+        }
+        
+        return $this->render('AMAPBundle:Admin/Produit:creerSaison.html.twig',array('form'=>$form->createView(),'listSaison'=>$listSaison));
+    }
+    
+    public function creerFamilleAction(Request $request){
+        
+        $em = $this->getDoctrine()->getManager();
+        
+        $listFamille = $em->getRepository('AMAPBundle:Famille')->findAll();
+        
+         $form = $this->get('form.factory')->createNamedBuilder('formulaire_creation_famille')
+            ->add('libelle', TextType::class)
+            ->add('ajouter', SubmitType::class, array('label' => 'Créer la famille'))
+            ->getForm();
+        
+        if ($form->handleRequest($request)->isSubmitted())
+        {
+           if ($form->get('ajouter')->isClicked())
+           {
+                $data = $form->getData();
+
+                $famille = new Famille();
+
+                $famille->setLibelle($data['libelle']);
+
+                $em->persist($famille);
+                $em->flush();
+           }
+        }
+        
+        return $this->render('AMAPBundle:Admin/Produit:creerFamille.html.twig',array('form'=>$form->createView(),'listFamille'=>$listFamille));
+    }
 }
