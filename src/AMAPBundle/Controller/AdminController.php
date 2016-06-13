@@ -132,4 +132,16 @@ class AdminController extends Controller
     /*******************************
      ********* FIN PANIER***********
      *******************************/
+    
+    /*******************************
+     ********* DEBUT PRODUIT********
+     *******************************/
+    
+    public function listerProduitAction(){
+        $em = $this->getDoctrine()->getManager();
+        
+        $listProduit = $em->getRepository('AMAPBundle:Produit')->findAll();
+        
+        return $this->render('AMAPBundle:Admin/Produit:listProduit.html.twig',array('listProduit'=>$listProduit));
+    }
 }

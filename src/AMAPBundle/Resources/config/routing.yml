@@ -7,16 +7,20 @@ amap_admin:
     defaults: { _controller: AMAPBundle:Admin:index }
     
 amap_creer_panier:
-    path:     /creerPanier
+    path:     /admin/creerPanier
     defaults: { _controller: AMAPBundle:Admin:creerPanier }
     
 amap_ajout_prod_panier:
-    path:     /ajoutProdPanier
+    path:     /admin/ajoutProdPanier
     defaults: { _controller: AMAPBundle:Admin:ajouterProduitPanier }
     
 amap_retrait_panier:
-    path:     /retraitPanier
+    path:     /admin/retraitPanier
     defaults: { _controller: AMAPBundle:Admin:retraitPanier }
+    
+amap_lister_produit_admin:
+    path:     /admin/listerProduit
+    defaults: { _controller: AMAPBundle:Admin:listerProduit }
     
 amap_select_amap:
     path:     /selectAmap

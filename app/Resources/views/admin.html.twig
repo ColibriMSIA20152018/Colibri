@@ -8,6 +8,7 @@
   <meta content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no" name="viewport">
   <!-- Bootstrap 3.3.6 -->
   <link rel="stylesheet" href="{{ asset('bootstrap/css/bootstrap.min.css') }}">
+  <link rel="stylesheet" type="text/css" href="{{asset('DataTables/datatables.min.css')}}"/>
   <!-- Font Awesome -->
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.5.0/css/font-awesome.min.css">
   <!-- Ionicons -->
@@ -341,7 +342,7 @@
           <a href="#">
             <i class="fa fa-files-o"></i>
             <span>Paniers</span>
-            <span class="label label-primary pull-right">4</span>
+            <i class="fa fa-angle-left pull-right"></i>
           </a>
           <ul class="treeview-menu">
             <li><a href="{{ path('amap_creer_panier') }}"><i class="fa fa-circle-o"></i> Création panier</a></li>
@@ -350,11 +351,17 @@
             <li><a href="pages/layout/collapsed-sidebar.html"><i class="fa fa-circle-o"></i> Collapsed Sidebar</a></li>
           </ul>
         </li>
-        <li>
-          <a href="pages/widgets.html">
+        <li class="treeview">
+          <a href="#">
             <i class="fa fa-th"></i> <span>Produits</span>
-            <small class="label pull-right bg-green">new</small>
+            <i class="fa fa-angle-left pull-right"></i>
           </a>
+           <ul class="treeview-menu">
+            <li><a href="{{ path('amap_lister_produit_admin') }}"><i class="fa fa-circle-o"></i> Lister les produits</a></li>
+            <li><a href="{{ path('amap_ajout_prod_panier') }}"><i class="fa fa-circle-o"></i> Ajouter un produit</a></li>
+            <li><a href="{{ path('amap_retrait_panier') }}"><i class="fa fa-circle-o"></i> Créer une famille</a></li>
+            <li><a href="pages/layout/collapsed-sidebar.html"><i class="fa fa-circle-o"></i> Créer une saison</a></li>
+          </ul>
         </li>
         <li class="treeview">
           <a href="#">
@@ -732,5 +739,15 @@
 <script src="{{ asset('dist/js/pages/dashboard.js') }}"></script>
 <!-- AdminLTE for demo purposes -->
 <script src="{{ asset('dist/js/demo.js') }}"></script>
+
+<!--<script src="{{asset('js/jquery.min.js')}}"></script>
+<script src="{{asset('js/jquery.dropotron.min.js')}}"></script>
+<script src="{{asset('js/skel.min.js')}}"></script>
+<script src="{{asset('js/skel-layers.min.js')}}"></script>
+<script src="{{asset('js/init.js')}}"></script>-->
+
+<!-- DataTables -->
+<!--<script type="text/javascript" src="{{asset('DataTables/datatables.min.js')}}"></script>-->
+{% block javascripts %}{% endblock %}
 </body>
 </html>
