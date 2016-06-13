@@ -1,6 +1,10 @@
 amap_homepage:
     path:     /
     defaults: { _controller: AMAPBundle:Default:index }
+    
+amap_admin:
+    path:     /admin
+    defaults: { _controller: AMAPBundle:Admin:index }
 
 amap_select_amap:
     path:     /selectAmap
