@@ -18,6 +18,10 @@ amap_panier:
     path:     /panier
     defaults: { _controller: AMAPBundle:Panier:ajouter }
 
+amap_consulter_panier:
+    path:     /consulterPaniers
+    defaults: { _controller: AMAPBundle:Panier:consulter }
+
 amap_panier_ajouter:
     path:     /panier/ajouter
     defaults: { _controller: AMAPBundle:Panier:ajouterMessage }

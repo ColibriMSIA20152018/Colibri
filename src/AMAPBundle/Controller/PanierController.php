@@ -143,6 +143,16 @@ class PanierController extends Controller
         ));
     }
 
+     public function consulterAction()
+    {
+        $em = $this->getDoctrine()->getManager();
+        
+        $paniers = $em->getRepository('AMAPBundle:Panier')->findAll();
+        
+        return $this->render('AMAPBundle:Panier:consulterPaniers.html.twig',array('paniers'=>$paniers,
+                                                                                    'page_courante'=>'panier'));
+    }
+    
     public function ajouterMessageAction()
     {
         return $this->render('AMAPBundle:Panier:messageAjouter.html.twig');
