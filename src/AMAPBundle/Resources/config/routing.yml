@@ -34,6 +34,70 @@ amap_creer_famille:
     path: /admin/creerFamille
     defaults: { _controller: AMAPBundle:Admin:creerFamille }
     
+amap_lister_acteur:
+    path: /admin/listerActeur
+    defaults: { _controller: AMAPBundle:Admin:listerActeur }
+    
+amap_creer_acteur:
+    path: /admin/creerAdmin
+    defaults: { _controller: AMAPBundle:Admin:creerActeur }
+    
+amap_creer_contrat:
+    path: /admin/creerContrat
+    defaults: { _controller: AMAPBundle:Admin:creerContrat }
+
+amap_lister_contrat:
+    path: /admin/listerContrats
+    defaults: { _controller: AMAPBundle:Admin:listerContrats }
+    
+amap_lister_amap:
+    path: /admin/listerAmap
+    defaults: { _controller: AMAPBundle:Admin:listerAmap }
+    
+amap_creer_amap:
+    path: /admin/creerAmap
+    defaults: { _controller: AMAPBundle:Admin:creerAmap }
+    
+amap_ajouter_stock:
+    path: /admin/ajouterStock
+    defaults: { _controller: AMAPBundle:Admin:ajouterStock }
+    
+amap_lister_stock:
+    path: /admin/listerStock
+    defaults: { _controller: AMAPBundle:Admin:listerStock }
+    
+amap_lister_entrepot:
+    path: /admin/listerEntrepot
+    defaults: { _controller: AMAPBundle:Admin:listerEntrepot }
+    
+amap_creer_entrepot:
+    path: /admin/creerEntrepot
+    defaults: { _controller: AMAPBundle:Admin:creerEntrepot }
+    
+amap_lister_livraison:
+    path: /admin/listerLivraisons
+    defaults: { _controller: AMAPBundle:Admin:listerLivraison }
+    
+amap_ajouter_livraison:
+    path: /admin/ajouterLivraison
+    defaults: { _controller: AMAPBundle:Admin:ajouterLivraison }
+    
+amap_preparer_livraison:
+    path: /admin/preparerLivraison
+    defaults: { _controller: AMAPBundle:Admin:preparerLivraison }
+    
+amap_effectuer_livraison:
+    path: /admin/effectuerLivraison/{id}
+    defaults: { _controller: AMAPBundle:Admin:effectuerLivraison }
+    
+amap_effectuer_one_livraison:
+    path:     /admin/livraison/{idpanier}/one/{id}/{date}
+    defaults: { _controller: AMAPBundle:Admin:effectuerOne }
+    
+amap_consulter_panier_admin:
+    path: /admin/consulterPanier
+    defaults: { _controller: AMAPBundle:Admin:consulter }
+    
 amap_select_amap:
     path:     /selectAmap
     defaults: { _controller: AMAPBundle:Default:selectAmap }
@@ -90,6 +154,3 @@ amap_amap:
     path:     /amap
     defaults: { _controller: AMAPBundle:Amap:ajouter }
     
-amap_effectuer_one_livraison:
-    path:     /livraison/{idpanier}/one/{id}/{date}
-    defaults: { _controller: AMAPBundle:Livraison:effectuerOne }

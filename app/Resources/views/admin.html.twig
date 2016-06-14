@@ -311,8 +311,7 @@
           <img src="dist/img/user2-160x160.jpg" class="img-circle" alt="User Image">
         </div>
         <div class="pull-left info">
-          <p>Alexander Pierce</p>
-          <a href="#"><i class="fa fa-circle text-success"></i> Online</a>
+            <a href="{{ path('amap_homepage') }}" style="font-size:18px"><p>Retour au site</p></a>
         </div>
       </div>
       <!-- search form -->
@@ -331,24 +330,15 @@
         <li class="header">MAIN NAVIGATION</li>
         <li class="active treeview">
           <a href="#">
-            <i class="fa fa-dashboard"></i> <span>Dashboard</span> <i class="fa fa-angle-left pull-right"></i>
-          </a>
-          <ul class="treeview-menu">
-            <li class="active"><a href="index.html"><i class="fa fa-circle-o"></i> Dashboard v1</a></li>
-            <li><a href="index2.html"><i class="fa fa-circle-o"></i> Dashboard v2</a></li>
-          </ul>
-        </li>
-        <li class="treeview">
-          <a href="#">
             <i class="fa fa-files-o"></i>
             <span>Paniers</span>
             <i class="fa fa-angle-left pull-right"></i>
           </a>
           <ul class="treeview-menu">
+            <li><a href="{{ path('amap_consulter_panier_admin') }}"><i class="fa fa-circle-o"></i> Consulter les paniers</a></li>
             <li><a href="{{ path('amap_creer_panier') }}"><i class="fa fa-circle-o"></i> Création panier</a></li>
             <li><a href="{{ path('amap_ajout_prod_panier') }}"><i class="fa fa-circle-o"></i> Ajouter un produit</a></li>
             <li><a href="{{ path('amap_retrait_panier') }}"><i class="fa fa-circle-o"></i> Retirer un panier</a></li>
-            <li><a href="pages/layout/collapsed-sidebar.html"><i class="fa fa-circle-o"></i> Collapsed Sidebar</a></li>
           </ul>
         </li>
         <li class="treeview">
@@ -370,10 +360,8 @@
             <i class="fa fa-angle-left pull-right"></i>
           </a>
           <ul class="treeview-menu">
-            <li><a href="pages/charts/chartjs.html"><i class="fa fa-circle-o"></i> ChartJS</a></li>
-            <li><a href="pages/charts/morris.html"><i class="fa fa-circle-o"></i> Morris</a></li>
-            <li><a href="pages/charts/flot.html"><i class="fa fa-circle-o"></i> Flot</a></li>
-            <li><a href="pages/charts/inline.html"><i class="fa fa-circle-o"></i> Inline charts</a></li>
+            <li><a href="{{ path('amap_lister_acteur') }}"><i class="fa fa-circle-o"></i> Liste des acteurs</a></li>
+            <li><a href="{{ path('amap_creer_acteur') }}"><i class="fa fa-circle-o"></i> Ajouter un acteur</a></li>
           </ul>
         </li>
         <li class="treeview">
@@ -383,12 +371,8 @@
             <i class="fa fa-angle-left pull-right"></i>
           </a>
           <ul class="treeview-menu">
-            <li><a href="pages/UI/general.html"><i class="fa fa-circle-o"></i> General</a></li>
-            <li><a href="pages/UI/icons.html"><i class="fa fa-circle-o"></i> Icons</a></li>
-            <li><a href="pages/UI/buttons.html"><i class="fa fa-circle-o"></i> Buttons</a></li>
-            <li><a href="pages/UI/sliders.html"><i class="fa fa-circle-o"></i> Sliders</a></li>
-            <li><a href="pages/UI/timeline.html"><i class="fa fa-circle-o"></i> Timeline</a></li>
-            <li><a href="pages/UI/modals.html"><i class="fa fa-circle-o"></i> Modals</a></li>
+            <li><a href="{{ path('amap_lister_contrat') }}"><i class="fa fa-circle-o"></i> Liste des contrats</a></li>
+            <li><a href="{{ path('amap_creer_contrat') }}"><i class="fa fa-circle-o"></i> Créer un contrat</a></li>
           </ul>
         </li>
         <li class="treeview">
@@ -397,9 +381,8 @@
             <i class="fa fa-angle-left pull-right"></i>
           </a>
           <ul class="treeview-menu">
-            <li><a href="pages/forms/general.html"><i class="fa fa-circle-o"></i> General Elements</a></li>
-            <li><a href="pages/forms/advanced.html"><i class="fa fa-circle-o"></i> Advanced Elements</a></li>
-            <li><a href="pages/forms/editors.html"><i class="fa fa-circle-o"></i> Editors</a></li>
+            <li><a href="{{ path('amap_lister_amap') }}"><i class="fa fa-circle-o"></i> Lister les amap</a></li>
+            <li><a href="{{ path('amap_creer_amap') }}"><i class="fa fa-circle-o"></i> Créer une amap</a></li>
           </ul>
         </li>
         <li class="treeview">
@@ -408,23 +391,42 @@
             <i class="fa fa-angle-left pull-right"></i>
           </a>
           <ul class="treeview-menu">
-            <li><a href="pages/tables/simple.html"><i class="fa fa-circle-o"></i> Simple tables</a></li>
-            <li><a href="pages/tables/data.html"><i class="fa fa-circle-o"></i> Data tables</a></li>
+            <li><a href="{{ path('amap_lister_stock') }}"><i class="fa fa-circle-o"></i> Lister le stock</a></li>
+            <li><a href="{{ path('amap_ajouter_stock') }}"><i class="fa fa-circle-o"></i> Ajouter du stock</a></li>
           </ul>
         </li>
-        <li>
-          <a href="pages/calendar.html">
+        <li class="treeview">
+          <a href="#">
             <i class="fa fa-calendar"></i> <span>Entrepot</span>
-            <small class="label pull-right bg-red">3</small>
+            <i class="fa fa-angle-left pull-right"></i>
           </a>
-        </li>
-        <li>
-          <a href="pages/mailbox/mailbox.html">
-            <i class="fa fa-envelope"></i> <span>Livraison</span>
-            <small class="label pull-right bg-yellow">12</small>
-          </a>
+           <ul class="treeview-menu">
+            <li><a href="{{ path('amap_lister_entrepot') }}"><i class="fa fa-circle-o"></i> Lister les entrepots</a></li>
+            <li><a href="{{ path('amap_creer_entrepot') }}"><i class="fa fa-circle-o"></i> Créer un entrepot</a></li>
+          </ul>
         </li>
         <li class="treeview">
+          <a href="#">
+            <i class="fa fa-envelope"></i> <span>Livraison</span>
+            <i class="fa fa-angle-left pull-right"></i>
+          </a>
+          <ul class="treeview-menu">
+            <li><a href="{{ path('amap_lister_livraison') }}"><i class="fa fa-circle-o"></i> Lister les livraisons</a></li>
+            <li><a href="{{ path('amap_ajouter_livraison') }}"><i class="fa fa-circle-o"></i> Ajouter une livraison</a></li>
+            <li><a href="{{ path('amap_preparer_livraison') }}"><i class="fa fa-circle-o"></i> Effectuer une livraison</a></li>
+          </ul>
+        </li>
+        <li class="header">LABELS</li>
+        <li class="active treeview">
+          <a href="#">
+            <i class="fa fa-dashboard"></i> <span>Dashboard</span> <i class="fa fa-angle-left pull-right"></i>
+          </a>
+          <ul class="treeview-menu">
+            <li class="active"><a href="index.html"><i class="fa fa-circle-o"></i> Dashboard v1</a></li>
+            <li><a href="index2.html"><i class="fa fa-circle-o"></i> Dashboard v2</a></li>
+          </ul>
+        </li>
+         <li class="treeview">
           <a href="#">
             <i class="fa fa-folder"></i> <span>Examples</span>
             <i class="fa fa-angle-left pull-right"></i>
@@ -465,7 +467,6 @@
           </ul>
         </li>
         <li><a href="documentation/index.html"><i class="fa fa-book"></i> <span>Documentation</span></a></li>
-        <li class="header">LABELS</li>
         <li><a href="#"><i class="fa fa-circle-o text-red"></i> <span>Important</span></a></li>
         <li><a href="#"><i class="fa fa-circle-o text-yellow"></i> <span>Warning</span></a></li>
         <li><a href="#"><i class="fa fa-circle-o text-aqua"></i> <span>Information</span></a></li>

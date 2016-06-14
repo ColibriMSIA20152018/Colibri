@@ -1,0 +1,58 @@
+{% extends 'admin.html.twig' %}
+
+{% block title %}
+    Welcome Panier
+{% endblock%}
+
+{% block body %}
+    <div class="container">
+            <h1>Composition des paniers</h1>
+            <br/>
+            <div class="row">
+            {% for panier in paniers %}
+                    <div class="col-sm-6 col-md-4">
+                      <div class="thumbnail">
+                        {% if panier.typePanier.getLibelle == "Petit" %}
+                        <img src="{{ asset('images/petit_panier.jpg') }}" width="375" height="275" alt="panier">
+                        {% elseif panier.typePanier.getLibelle == "Moyen" %}
+                            <img src="{{ asset('images/moyen_panier.png') }}" width="375" height="275" alt="panier">
+                        {% else %}
+                            <img src="{{ asset('images/grand_panier.jpg') }}" width="375" height="275" alt="panier">
+                        {% endif %}
+                        <div class="caption">
+                          <h3>
+                                {% if panier.libelle is not null %}
+                                    <b>Panier :</b> {{ panier.libelle }}
+                                {% endif %}
+                          </h3>
+                          <p>
+                                <br/>
+                                {% if panier.saison is not null %}
+                                    <b>Saison :</b> {{ panier.saison.libelle}}
+                                {% endif %}
+                                <br/>
+                                {% if panier.typePanier is not null %}
+                                    <b>Type panier :</b> {{ panier.typePanier.getLibelle}}
+                                {% endif %}
+                                <br/>
+                                <b>Prix panier :</b> {{ panier.prix}} €
+                                <br/>
+                                <br/>
+                                <b>Produits  :</b>
+                                <br/>
+                                <ul style="padding-left:25px">
+                                {% for panierproduit in  panier.panierproduit %}
+                                    <li>
+                                        <b>{{ panierproduit.produit.libelle }}</b> - {{ panierproduit.quantite }} KG
+                                    </li>
+                                {% endfor %}
+                                </ul>
+                          </p>
+                          <p><a href="#" class="btn btn-primary" role="button">Button</a> <a href="#" class="btn btn-default" role="button">Button</a></p>
+                        </div>
+                      </div>
+                    </div>
+            {% endfor %}
+            </div>
+    </div>
+{% endblock %}

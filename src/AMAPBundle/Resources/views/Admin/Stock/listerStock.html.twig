@@ -1,0 +1,24 @@
+{% extends 'admin.html.twig' %}
+
+{% block body %}
+    <div class="container">
+        <div class="" style="width:100%;float:left">
+            <h1>STOCK ACTUEL</h1>
+            <div class="" style="width:100%;float:left">
+                <table class="table table-striped">
+                    <th>Nom du produit</th><th>Famille</th><th>Quantité</th><th>Entrepot</th>
+                {% for item in stock %}
+                    <tr>
+                        {% if item.produit.famille is null %}
+                            <td></td><td></td><td></td>
+                        {% else %}
+                            <td>{{item.produit.libelle}}</td><td>{{item.produit.famille.libelle}}</td><td>{{ item.quantite }} KG</td><td>{{item.entrepot.libelle}}</td>
+                        {% endif %}
+                    </tr>
+                {% endfor %}
+
+                </table>
+            </div>
+        </div>
+    </div>
+{% endblock %}
