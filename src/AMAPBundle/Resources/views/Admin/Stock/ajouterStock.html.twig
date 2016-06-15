@@ -1,0 +1,22 @@
+{% extends 'admin.html.twig' %}
+
+{% block body %}
+    <div class="container">
+        <div class="" style="width:100%;float:left">
+            <h1>AJOUTER UN PRODUIT AU STOCK</h1>
+            <br/>
+            {{ form_start(form) }}
+                {{ form_label(form.produit) }}
+                <br/>
+                {{ form_widget(form.produit) }}
+                <br/>
+                {{ form_label(form.quantite) }}
+                <br/>
+                {{ form_widget(form.quantite) }}
+                <br/>
+            {{ form_end(form) }}
+            <br/>
+            <br/>
+        </div>
+    </div>
+{% endblock %}

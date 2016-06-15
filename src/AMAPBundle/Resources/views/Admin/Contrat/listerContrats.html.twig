@@ -1,0 +1,79 @@
+{% extends 'admin.html.twig' %}
+
+{% block body %}
+    <div class="container">
+        <div class="" style="width:100%;float:left">
+            <h1>CONTRATS</h1>
+            <div class="" style="width:100%;float:left">
+                <table id="tableau" class="table table-striped">
+					<thead>
+						<tr>
+							<th>Producteur</th>
+							<th>Consommateur</th>
+							<th>Amap</th>
+							<th>Panier</th>
+						</tr>
+					</thead>
+					<tfoot>
+						<tr>
+							<th>Producteur</th>
+							<th>Consommateur</th>
+							<th>Amap</th>
+							<th>Panier</th>
+						</tr>
+					</tfoot>
+					<tbody>
+					{% for item in listcontrat %}
+						<tr>
+							<td>{{item.producteur.nom}}</td>
+							<td>{{item.consommateur.nom}}</td>
+							<td>{{item.amap.libelle}}</td>
+							<td>{{item.panier.libelle}}</td>
+						</tr>
+					{% endfor %}
+					</tboby>
+                </table>
+            </div>
+        </div> 
+     </div>
+{% endblock %}
+{% block javascripts %}
+	<script>
+	$(document).ready(function() {
+		// Setup - add a text input to each footer cell
+		$('#tableau tfoot th').each( function () {
+			var title = $(this).text();
+			$(this).html( '<input type="text" placeholder="Rechercher '+title+'" />' );
+		} );
+
+		// DataTable
+		var table = $('#tableau').DataTable({
+				"language":{
+					"search": "Recherche",
+					"lengthMenu": "Afficher _MENU_ entrées par page",
+					"zeroRecords": "Aucun élément trouvé ! Désolé...",
+					"info": "Page _PAGE_ sur _PAGES_",
+					"infoEmpty": "Les entrées ne sont pas disponibles",
+					"paginate":{
+						"previous": "Précédent",
+						"next": "Suivant"
+					},
+					"infoFiltered": "(filtré sur _MAX_ entrées)"
+				}
+		});
+
+			// Apply the search
+			table.columns().every( function () {
+				var that = this;
+
+				$( 'input', this.footer() ).on( 'keyup change', function () {
+					if ( that.search() !== this.value ) {
+						that
+							.search( this.value )
+							.draw();
+					}
+				} );
+			} );
+	} );
+</script>
+{% endblock %}
