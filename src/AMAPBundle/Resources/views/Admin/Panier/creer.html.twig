@@ -1,0 +1,22 @@
+{% extends 'admin.html.twig' %}
+
+{% block title %}
+    Welcome Panier
+{% endblock%}
+
+{% block body %}
+    <div class="container">
+        <div class="" style="width:50%;float:left">
+            <h1>Création du type panier </h1>
+            {{ form_start(form2) }}
+
+            {{ form_end(form2) }}
+        </div>
+        <div class="" style="width:50%;float:left">
+            <h1>Création d'un panier</h1>
+            {{ form_start(form) }}
+
+            {{ form_end(form) }}
+        </div>
+    </div>
+{% endblock %}

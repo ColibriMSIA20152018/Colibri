@@ -1,0 +1,23 @@
+{% extends 'admin.html.twig' %}
+
+{% block body %}
+    <div class="container">
+        
+        <h1>LISTE SAISON </h1>
+        <table class="table table-striped" >
+            <th>Saison</th>
+            {% for item in listSaison %}
+		<tr><td>{{ item.libelle }}</td></tr>
+            {% endfor %}
+	</table>
+        
+
+      
+            <h1>CREER UNE SAISON</h1>
+            {{ form_start(form) }}
+                {{ form_label(form.libelle) }}
+                <br/>
+                {{ form_widget(form.libelle) }}
+            {{ form_end(form) }}
+    </div>
+{% endblock %}

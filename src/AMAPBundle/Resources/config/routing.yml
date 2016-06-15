@@ -74,6 +74,31 @@ amap_consulter_panier_admin:
     path: /admin/consulterPanier
     defaults: { _controller: AMAPBundle:Admin:consulter }
     
+amap_creer_panier:
+    path: /admin/creerPanier
+    defaults: { _controller: AMAPBundle:Admin:creerPanier }
+    
+amap_ajout_prod_panier:
+    path: /admin/ajouterProdPanier
+    defaults: { _controller: AMAPBundle:Admin:ajouterProduitPanier }
+   
+amap_retrait_panier:
+    path: /admin/retraitPanier
+    defaults: { _controller: AMAPBundle:Admin:retraitPanier }
+    
+amap_lister_produit_admin:
+    path: /admin/listerProduit
+    defaults: { _controller: AMAPBundle:Admin:listerProduit }
+    
+amap_ajout_produit:
+    path: /admin/ajouterProduit
+    defaults: { _controller: AMAPBundle:Admin:ajouterProduit }
+    
+amap_creer_saison:
+    path: /admin/creerSaison
+    defaults: { _controller: AMAPBundle:Admin:creerSaison }
+    
+    
 
 amap_select_amap:
     path:     /selectAmap
