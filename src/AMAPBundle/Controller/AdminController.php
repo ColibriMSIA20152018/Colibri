@@ -29,7 +29,7 @@ class AdminController extends Controller
     public function indexAction(Request $request)
     {
 
-        return $this->render('admin.html.twig',array());
+        return $this->render('admin.html.twig',array('page_courante' => 'AdminAccueil'));
     }
 
     /*****************************
@@ -67,7 +67,7 @@ class AdminController extends Controller
             }
         }
         
-        return $this->render('AMAPBundle:Admin/Panier:ajouterProduit.html.twig',array('form'=>$form->createView()));        
+        return $this->render('AMAPBundle:Admin/Panier:ajouterProduit.html.twig',array('page_courante' => 'AdminPanier', 'onglet_courant' => 'ajouterProduitPanierAction','form'=>$form->createView()));        
     }
     
     public function creerPanierAction(Request $request)
@@ -122,7 +122,8 @@ class AdminController extends Controller
             }
          }
          
-        return $this->render('AMAPBundle:Admin/Panier:creer.html.twig',array('form'=>$form->createView(),
+        return $this->render('AMAPBundle:Admin/Panier:creer.html.twig',array('page_courante' => 'AdminPanier', 'onglet_courant' => 'creerPanierAction',
+                                                        'form'=>$form->createView(),
                                                        'form2'=>$form2->createView()));
     }
     
@@ -136,7 +137,7 @@ class AdminController extends Controller
             ->add('ajouter', SubmitType::class, array('label' => 'Retirer un Panier'))
             ->getForm();
         
-        return $this->render('AMAPBundle:Admin/Panier:retrait.html.twig',array('form'=>$form->createView()));
+        return $this->render('AMAPBundle:Admin/Panier:retrait.html.twig',array('page_courante' => 'AdminPanier', 'onglet_courant' => 'retraitPanierAction','form'=>$form->createView()));
     }
     
     public function consulterAction()
@@ -145,7 +146,7 @@ class AdminController extends Controller
         
         $paniers = $em->getRepository('AMAPBundle:Panier')->findAll();
         
-        return $this->render('AMAPBundle:Admin/Panier:consulterPaniers.html.twig',array('paniers'=>$paniers));
+        return $this->render('AMAPBundle:Admin/Panier:consulterPaniers.html.twig',array('page_courante' => 'AdminPanier', 'onglet_courant' => 'consulterAction','paniers'=>$paniers));
     }
     
     /*******************************
@@ -161,7 +162,7 @@ class AdminController extends Controller
         
         $listProduit = $em->getRepository('AMAPBundle:Produit')->findAll();
         
-        return $this->render('AMAPBundle:Admin/Produit:listProduit.html.twig',array('listProduit'=>$listProduit));
+        return $this->render('AMAPBundle:Admin/Produit:listProduit.html.twig',array('page_courante' => 'AdminProduits', 'onglet_courant' => 'listerProduitAction', 'listProduit'=>$listProduit));
     }
     
     public function ajouterProduitAction(Request $request){
@@ -192,7 +193,7 @@ class AdminController extends Controller
            }
         }
         
-        return $this->render('AMAPBundle:Admin/Produit:ajouterProduit.html.twig',array('form'=>$form->createView()));
+        return $this->render('AMAPBundle:Admin/Produit:ajouterProduit.html.twig',array('page_courante' => 'AdminProduits', 'onglet_courant' => 'ajouterProduitAction','form'=>$form->createView()));
     }
     
     public function creerSaisonAction(Request $request){
@@ -218,7 +219,7 @@ class AdminController extends Controller
             }
         }
         
-        return $this->render('AMAPBundle:Admin/Produit:creerSaison.html.twig',array('form'=>$form->createView(),'listSaison'=>$listSaison));
+        return $this->render('AMAPBundle:Admin/Produit:creerSaison.html.twig',array('page_courante' => 'AdminProduits', 'onglet_courant' => 'creerSaisonAction','form'=>$form->createView(),'listSaison'=>$listSaison));
     }
     
     public function creerFamilleAction(Request $request){
@@ -247,7 +248,7 @@ class AdminController extends Controller
            }
         }
         
-        return $this->render('AMAPBundle:Admin/Produit:creerFamille.html.twig',array('form'=>$form->createView(),'listFamille'=>$listFamille));
+        return $this->render('AMAPBundle:Admin/Produit:creerFamille.html.twig',array('page_courante' => 'AdminProduits', 'onglet_courant' => 'creerFamilleAction','form'=>$form->createView(),'listFamille'=>$listFamille));
     }
     /********************************
      ********* FIN PRODUIT **********
@@ -268,7 +269,7 @@ class AdminController extends Controller
 	$listProd = $em->getRepository('AMAPBundle:Acteur')->findBy(array('amap' => $session->get('amap'), 'typeActeur' => $typeProd));
 	$listAd = $em->getRepository('AMAPBundle:Acteur')->findBy(array('amap' => $session->get('amap'), 'typeActeur' => $typeAd));
                 
-        return $this->render('AMAPBundle:Admin/Acteur:listerActeur.html.twig',array('listAd'=>$listAd,'listProd'=>$listProd));
+        return $this->render('AMAPBundle:Admin/Acteur:listerActeur.html.twig',array('page_courante' => 'AdminActeurs', 'onglet_courant' => 'listerActeurAction','listAd'=>$listAd,'listProd'=>$listProd));
     }
     
     public function creerActeurAction(Request $request){
@@ -339,7 +340,7 @@ class AdminController extends Controller
                $em->flush();
            }
         }
-        return $this->render('AMAPBundle:Admin/Acteur:creerActeur.html.twig',array(
+        return $this->render('AMAPBundle:Admin/Acteur:creerActeur.html.twig',array('page_courante' => 'AdminActeurs', 'onglet_courant' => 'creerActeurAction',
             'form' => $form->createView(),
             'form2' => $form2->createView()));
     }
@@ -392,7 +393,7 @@ class AdminController extends Controller
            }
         }
         
-        return $this->render('AMAPBundle:Admin/Contrat:creerContrat.html.twig',array(
+        return $this->render('AMAPBundle:Admin/Contrat:creerContrat.html.twig',array('page_courante' => 'AdminContrats', 'onglet_courant' => 'creerContratAction',
             'form' => $form->createView()));
     }
     
@@ -402,7 +403,7 @@ class AdminController extends Controller
         
         $listcontrat = $em->getRepository('AMAPBundle:Contrat')->findAll();
         
-         return $this->render('AMAPBundle:Admin/Contrat:listerContrats.html.twig',array(
+         return $this->render('AMAPBundle:Admin/Contrat:listerContrats.html.twig',array('page_courante' => 'AdminContrats', 'onglet_courant' => 'listerContratsAction',
             'listcontrat' => $listcontrat));
     }
     
@@ -457,7 +458,7 @@ class AdminController extends Controller
 
         }
         
-        return $this->render('AMAPBundle:Admin/Amap:creerAmap.html.twig',array(
+        return $this->render('AMAPBundle:Admin/Amap:creerAmap.html.twig',array('page_courante' => 'AdminAmap', 'onglet_courant' => 'creerAmapAction',
             'form' => $form->createView()));
     }
     
@@ -467,7 +468,7 @@ class AdminController extends Controller
         
         $listAmap = $em->getRepository('AMAPBundle:Amap')->findAll();
         
-        return $this->render('AMAPBundle:Admin/Amap:listerAmap.html.twig',array('listamap' => $listAmap));
+        return $this->render('AMAPBundle:Admin/Amap:listerAmap.html.twig',array('page_courante' => 'AdminAmap', 'onglet_courant' => 'listerAmapAction','listamap' => $listAmap));
     }
     
     /********************************
@@ -484,7 +485,7 @@ class AdminController extends Controller
 
         $stockFinal = $em->getRepository('AMAPBundle:Stock')->findAll();
 
-        return $this->render('AMAPBundle:Admin/Stock:listerStock.html.twig',array('stock' => $stockFinal));
+        return $this->render('AMAPBundle:Admin/Stock:listerStock.html.twig',array('page_courante' => 'AdminStock', 'onglet_courant' => 'listerStockAction','stock' => $stockFinal));
     }
     
     public function ajouterStockAction(Request $request)
@@ -536,7 +537,7 @@ class AdminController extends Controller
             }
         }
 
-        return $this->render('AMAPBundle:Admin/Stock:ajouterStock.html.twig',array('form' => $form->createView()));
+        return $this->render('AMAPBundle:Admin/Stock:ajouterStock.html.twig',array('page_courante' => 'AdminStock', 'onglet_courant' => 'ajouterStockAction','form' => $form->createView()));
     }
     
     /********************************
@@ -553,7 +554,7 @@ class AdminController extends Controller
 
 	$entrepots = $em->getRepository('AMAPBundle:Entrepot')->findAll();
 
-        return $this->render('AMAPBundle:Admin/Entrepot:listerEntrepot.html.twig',array('listEntrepot' => $entrepots));
+        return $this->render('AMAPBundle:Admin/Entrepot:listerEntrepot.html.twig',array('page_courante' => 'AdminEntrepot', 'onglet_courant' => 'listerEntrepotAction','listEntrepot' => $entrepots));
     }
     
     public function creerEntrepotAction(Request $request)
@@ -597,7 +598,7 @@ class AdminController extends Controller
             }
         }
 
-        return $this->render('AMAPBundle:Admin/Entrepot:creerEntrepot.html.twig',array('form' => $form->createView()));
+        return $this->render('AMAPBundle:Admin/Entrepot:creerEntrepot.html.twig',array('page_courante' => 'AdminEntrepot', 'onglet_courant' => 'creerEntrepotAction','form' => $form->createView()));
     }
     
     /********************************
@@ -614,7 +615,7 @@ class AdminController extends Controller
 
         $listContrat = $em->getRepository('AMAPBundle:Contrat')->findAll();
 
-        return $this->render('AMAPBundle:Admin/Livraison:listerLivraison.html.twig',array('listContrat' => $listContrat));
+        return $this->render('AMAPBundle:Admin/Livraison:listerLivraison.html.twig',array('page_courante' => 'AdminLivraison', 'onglet_courant' => 'listerLivraisonAction','listContrat' => $listContrat));
     }
     
     public function ajouterLivraisonAction(Request $request)
@@ -654,7 +655,7 @@ class AdminController extends Controller
             
         }
 
-        return $this->render('AMAPBundle:Admin/Livraison:ajouterLivraison.html.twig',array('form' => $form->createView()));
+        return $this->render('AMAPBundle:Admin/Livraison:ajouterLivraison.html.twig',array('page_courante' => 'AdminLivraison', 'onglet_courant' => 'ajouterLivraisonAction','form' => $form->createView()));
     }
     
     public function preparerLivraisonAction(Request $request)
@@ -677,7 +678,7 @@ class AdminController extends Controller
             }
         }
 
-        return $this->render('AMAPBundle:Admin/Livraison:preparerLivraison.html.twig',array('form' => $form->createView()));
+        return $this->render('AMAPBundle:Admin/Livraison:preparerLivraison.html.twig',array('page_courante' => 'AdminLivraison', 'onglet_courant' => 'ajouterLivraisonAction','form' => $form->createView()));
     }
     
     public function effectuerLivraisonAction(Request $request,$id)
@@ -708,7 +709,7 @@ class AdminController extends Controller
         }
                 
                 
-	return $this->render('AMAPBundle:Admin/Livraison:effectuerLivraison.html.twig',array('form' => $form->createView(),
+	return $this->render('AMAPBundle:Admin/Livraison:effectuerLivraison.html.twig',array('page_courante' => 'AdminLivraison', 'onglet_courant' => 'effectuerLivraisonAction','form' => $form->createView(),
                                                                                               'listContrat'=>$listContrat));
                
     }

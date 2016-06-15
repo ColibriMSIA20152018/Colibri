@@ -58,9 +58,9 @@
     <!-- sidebar: style can be found in sidebar.less -->
     <section class="sidebar">
       <!-- Sidebar user panel -->
-      <div class="user-panel">
+      <div class="user-panel" style="height: 40px;">
         <div class="pull-left image">
-          <img src="dist/img/user2-160x160.jpg" class="img-circle" alt="User Image">
+          <!--<img src="dist/img/user2-160x160.jpg" class="img-circle" alt="User Image">-->
         </div>
         <div class="pull-left info">
             <a href="{{ path('amap_homepage') }}" style="font-size:18px"><p>Retour au site</p></a>
@@ -80,89 +80,218 @@
       <!-- sidebar menu: : style can be found in sidebar.less -->
       <ul class="sidebar-menu">
         <li class="header"></br></li>
-        <li class="active treeview">
+        {%if page_courante == 'AdminPanier' %}
+          <li class="active treeview">
+        {%else%}
+          <li class="treeview">
+        {%endif%}
           <a href="#">
-            <i class="fa fa-files-o"></i>
-            <span>Paniers</span>
+            <i class="fa fa-files-o"></i><span>Paniers</span>
             <i class="fa fa-angle-left pull-right"></i>
           </a>
           <ul class="treeview-menu">
-            <li><a href="{{ path('amap_consulter_panier_admin') }}"><i class="fa fa-circle-o"></i> Consulter les paniers</a></li>
-            <li><a href="{{ path('amap_creer_panier') }}"><i class="fa fa-circle-o"></i> Création panier</a></li>
-            <li><a href="{{ path('amap_ajout_prod_panier') }}"><i class="fa fa-circle-o"></i> Ajouter un produit</a></li>
-            <li><a href="{{ path('amap_retrait_panier') }}"><i class="fa fa-circle-o"></i> Retirer un panier</a></li>
+            {%if onglet_courant == 'consulterAction' %}
+              <li class="active"><a href="{{ path('amap_consulter_panier_admin') }}"><i class="fa fa-circle-o"></i> Consulter les paniers</a></li>
+            {%else%}
+              <li><a href="{{ path('amap_consulter_panier_admin') }}"><i class="fa fa-circle-o"></i> Consulter les paniers</a></li>
+            {%endif%}
+
+            {%if onglet_courant == 'creerPanierAction' %}
+              <li class="active"><a href="{{ path('amap_creer_panier') }}"><i class="fa fa-circle-o"></i> Création panier</a></li>
+            {%else%}
+              <li><a href="{{ path('amap_creer_panier') }}"><i class="fa fa-circle-o"></i> Création panier</a></li>
+            {%endif%}
+
+            {%if onglet_courant == 'ajouterProduitPanierAction' %}
+              <li class="active"><a href="{{ path('amap_ajout_prod_panier') }}"><i class="fa fa-circle-o"></i> Ajouter un produit</a></li>
+            {%else%}
+              <li><a href="{{ path('amap_ajout_prod_panier') }}"><i class="fa fa-circle-o"></i> Ajouter un produit</a></li>
+            {%endif%}
+
+            {%if onglet_courant == 'retraitPanierAction' %}
+              <li class="active"><a href="{{ path('amap_retrait_panier') }}"><i class="fa fa-circle-o"></i> Retirer un panier</a></li>
+            {%else%}
+              <li><a href="{{ path('amap_retrait_panier') }}"><i class="fa fa-circle-o"></i> Retirer un panier</a></li>
+            {%endif%}
           </ul>
         </li>
-        <li class="treeview">
+        {%if page_courante == 'AdminProduits' %}
+          <li class="active treeview">
+        {%else%}
+          <li class="treeview">
+        {%endif%}
           <a href="#">
             <i class="fa fa-th"></i> <span>Produits</span>
             <i class="fa fa-angle-left pull-right"></i>
           </a>
            <ul class="treeview-menu">
-            <li><a href="{{ path('amap_lister_produit_admin') }}"><i class="fa fa-circle-o"></i> Lister les produits</a></li>
-            <li><a href="{{ path('amap_ajout_produit') }}"><i class="fa fa-circle-o"></i> Ajouter un produit</a></li>
-            <li><a href="{{ path('amap_creer_famille') }}"><i class="fa fa-circle-o"></i> Créer une famille</a></li>
-            <li><a href="{{ path('amap_creer_saison') }}"><i class="fa fa-circle-o"></i> Créer une saison</a></li>
+            {%if onglet_courant == 'listerProduitAction' %}
+              <li class="active"><a href="{{ path('amap_lister_produit_admin') }}"><i class="fa fa-circle-o"></i> Lister les produits</a></li>
+            {%else%}
+              <li><a href="{{ path('amap_lister_produit_admin') }}"><i class="fa fa-circle-o"></i> Lister les produits</a></li>
+            {%endif%}
+
+            {%if onglet_courant == 'ajouterProduitAction' %}
+              <li class="active"><a href="{{ path('amap_ajout_produit') }}"><i class="fa fa-circle-o"></i> Ajouter un produit</a></li>
+            {%else%}
+              <li><a href="{{ path('amap_ajout_produit') }}"><i class="fa fa-circle-o"></i> Ajouter un produit</a></li>
+            {%endif%}
+
+            {%if onglet_courant == 'creerFamilleAction' %}
+              <li class="active"><a href="{{ path('amap_creer_famille') }}"><i class="fa fa-circle-o"></i> Créer une famille</a></li>
+            {%else%}
+              <li><a href="{{ path('amap_creer_famille') }}"><i class="fa fa-circle-o"></i> Créer une famille</a></li>
+            {%endif%}
+
+            {%if onglet_courant == 'creerSaisonAction' %}
+              <li class="active"><a href="{{ path('amap_creer_saison') }}"><i class="fa fa-circle-o"></i> Créer une saison</a></li>
+            {%else%}
+              <li><a href="{{ path('amap_creer_saison') }}"><i class="fa fa-circle-o"></i> Créer une saison</a></li>
+            {%endif%}
           </ul>
         </li>
-        <li>
+        {%if page_courante == 'AdminActeurs' %}
+          <li class="active treeview">
+        {%else%}
+          <li class="treeview">
+        {%endif%}
           <a href="pages/widgets.html">
             <i class="fa fa-child"></i> <span>Acteurs</span> <i class="fa fa-angle-left pull-right"></i>
           </a>
           <ul class="treeview-menu">
-            <li><a href="{{ path('amap_lister_acteur') }}"><i class="fa fa-circle-o"></i> Liste des acteurs</a></li>
-            <li><a href="{{ path('amap_creer_acteur') }}"><i class="fa fa-circle-o"></i> Ajouter un acteur</a></li>
+            {%if onglet_courant == 'listerActeurAction' %}
+              <li class="active"><a href="{{ path('amap_lister_acteur') }}"><i class="fa fa-circle-o"></i> Liste des acteurs</a></li>
+            {%else%}
+              <li><a href="{{ path('amap_lister_acteur') }}"><i class="fa fa-circle-o"></i> Liste des acteurs</a></li>
+            {%endif%}
+
+            {%if onglet_courant == 'creerActeurAction' %}
+              <li class="active"><a href="{{ path('amap_creer_acteur') }}"><i class="fa fa-circle-o"></i> Ajouter un acteur</a></li>
+            {%else%}
+              <li><a href="{{ path('amap_creer_acteur') }}"><i class="fa fa-circle-o"></i> Ajouter un acteur</a></li>
+            {%endif%}
           </ul>
         </li>
-        <li class="treeview">
+        {%if page_courante == 'AdminContrats' %}
+          <li class="active treeview">
+        {%else%}
+          <li class="treeview">
+        {%endif%}
           <a href="#">
             <i class="fa fa-edit"></i> <span>Contrats</span> <i class="fa fa-angle-left pull-right"></i>
             <i class="fa fa-angle-left pull-right"></i>
           </a>
           <ul class="treeview-menu">
-            <li><a href="{{ path('amap_lister_contrat') }}"><i class="fa fa-circle-o"></i> Liste des contrats</a></li>
-            <li><a href="{{ path('amap_creer_contrat') }}"><i class="fa fa-circle-o"></i> Créer un contrat</a></li>
+            {%if onglet_courant == 'listerContratsAction' %}
+              <li class="active"><a href="{{ path('amap_lister_contrat') }}"><i class="fa fa-circle-o"></i> Liste des contrats</a></li>
+            {%else%}
+              <li><a href="{{ path('amap_lister_contrat') }}"><i class="fa fa-circle-o"></i> Liste des contrats</a></li>
+            {%endif%}
+
+            {%if onglet_courant == 'creerContratAction' %}
+              <li class="active"><a href="{{ path('amap_creer_contrat') }}"><i class="fa fa-circle-o"></i> Créer un contrat</a></li>
+            {%else%}
+              <li><a href="{{ path('amap_creer_contrat') }}"><i class="fa fa-circle-o"></i> Créer un contrat</a></li>
+            {%endif%}
           </ul>
         </li>
-        <li class="treeview">
+        {%if page_courante == 'AdminAmap' %}
+          <li class="active treeview">
+        {%else%}
+          <li class="treeview">
+        {%endif%}
           <a href="#">
             <i class="fa fa-building-o"></i> <span>Amap</span> <i class="fa fa-angle-left pull-right"></i>
           </a>
           <ul class="treeview-menu">
-            <li><a href="{{ path('amap_lister_amap') }}"><i class="fa fa-circle-o"></i> Lister les amap</a></li>
-            <li><a href="{{ path('amap_creer_amap') }}"><i class="fa fa-circle-o"></i> Créer une amap</a></li>
+            {%if onglet_courant == 'listerAmapAction' %}
+              <li class="active"><a href="{{ path('amap_lister_amap') }}"><i class="fa fa-circle-o"></i> Lister les amap</a></li>
+            {%else%}
+              <li><a href="{{ path('amap_lister_amap') }}"><i class="fa fa-circle-o"></i> Lister les amap</a></li>
+            {%endif%}
+
+            {%if onglet_courant == 'creerAmapAction' %}
+              <li class="active"><a href="{{ path('amap_creer_amap') }}"><i class="fa fa-circle-o"></i> Créer une amap</a></li>
+            {%else%}
+              <li><a href="{{ path('amap_creer_amap') }}"><i class="fa fa-circle-o"></i> Créer une amap</a></li>
+            {%endif%}
           </ul>
         </li>
-        <li class="treeview">
+        {%if page_courante == 'AdminStock' %}
+          <li class="active treeview">
+        {%else%}
+          <li class="treeview">
+        {%endif%}
           <a href="#">
-            <i class="fa fa-cube"></i> <span>Stock</span>
+            <i class="fa fa-cube"></i> <span>Stock</span> <i class="fa fa-angle-left pull-right"></i>
           </a>
           <ul class="treeview-menu">
-            <li><a href="{{ path('amap_lister_stock') }}"><i class="fa fa-circle-o"></i> Lister le stock</a></li>
-            <li><a href="{{ path('amap_ajouter_stock') }}"><i class="fa fa-circle-o"></i> Ajouter du stock</a></li>
+            {%if onglet_courant == 'listerStockAction' %}
+              <li class="active"><a href="{{ path('amap_lister_stock') }}"><i class="fa fa-circle-o"></i> Lister le stock</a></li>
+            {%else%}
+              <li><a href="{{ path('amap_lister_stock') }}"><i class="fa fa-circle-o"></i> Lister le stock</a></li>
+            {%endif%}
+
+            {%if onglet_courant == 'ajouterStockAction' %}
+              <li class="active"><a href="{{ path('amap_ajouter_stock') }}"><i class="fa fa-circle-o"></i> Ajouter du stock</a></li>
+            {%else%}
+              <li><a href="{{ path('amap_ajouter_stock') }}"><i class="fa fa-circle-o"></i> Ajouter du stock</a></li>
+            {%endif%}
           </ul>
         </li>
-        <li class="treeview">
+        {%if page_courante == 'AdminEntretot' %}
+          <li class="active treeview">
+        {%else%}
+          <li class="treeview">
+        {%endif%}
           <a href="#">
             <i class="fa fa-calendar"></i> <span>Entrepot</span>
             <i class="fa fa-angle-left pull-right"></i>
           </a>
            <ul class="treeview-menu">
-            <li><a href="{{ path('amap_lister_entrepot') }}"><i class="fa fa-circle-o"></i> Lister les entrepots</a></li>
-            <li><a href="{{ path('amap_creer_entrepot') }}"><i class="fa fa-circle-o"></i> Créer un entrepot</a></li>
+            {%if onglet_courant == 'listerEntrepotAction' %}
+              <li class="active"><a href="{{ path('amap_lister_entrepot') }}"><i class="fa fa-circle-o"></i> Lister les entrepots</a></li>
+            {%else%}
+              <li><a href="{{ path('amap_lister_entrepot') }}"><i class="fa fa-circle-o"></i> Lister les entrepots</a></li>
+            {%endif%}
+
+            {%if onglet_courant == 'creerEntrepotAction' %}
+              <li class="active"><a href="{{ path('amap_creer_entrepot') }}"><i class="fa fa-circle-o"></i> Créer un entrepot</a></li>
+            {%else%}
+              <li><a href="{{ path('amap_creer_entrepot') }}"><i class="fa fa-circle-o"></i> Créer un entrepot</a></li>
+            {%endif%}
           </ul>
         </li>
-        <li class="treeview">
+        {%if page_courante == 'AdminLivraison' %}
+          <li class="active treeview">
+        {%else%}
+          <li class="treeview">
+        {%endif%}
           <a href="#">
             <i class="fa fa-envelope"></i> <span>Livraison</span>
             <i class="fa fa-angle-left pull-right"></i>
           </a>
           <ul class="treeview-menu">
-            <li><a href="{{ path('amap_lister_livraison') }}"><i class="fa fa-circle-o"></i> Lister les livraisons</a></li>
-            <li><a href="{{ path('amap_ajouter_livraison') }}"><i class="fa fa-circle-o"></i> Ajouter une livraison</a></li>
-            <li><a href="{{ path('amap_preparer_livraison') }}"><i class="fa fa-circle-o"></i> Effectuer une livraison</a></li>
+            {%if onglet_courant == 'listerLivraisonAction' %}
+              <li class="active"><a href="{{ path('amap_lister_livraison') }}"><i class="fa fa-circle-o"></i> Lister les livraisons</a></li>
+            {%else%}
+              <li><a href="{{ path('amap_lister_livraison') }}"><i class="fa fa-circle-o"></i> Lister les livraisons</a></li>
+            {%endif%}
+
+            {%if onglet_courant == 'ajouterLivraisonAction' %}
+              <li class="active"><a href="{{ path('amap_ajouter_livraison') }}"><i class="fa fa-circle-o"></i> Ajouter une livraison</a></li>
+            {%else%}
+              <li><a href="{{ path('amap_ajouter_livraison') }}"><i class="fa fa-circle-o"></i> Ajouter une livraison</a></li>
+            {%endif%}
+
+            {%if onglet_courant == 'effectuerLivraisonAction' %}
+              <li class="active"><a href="{{ path('amap_preparer_livraison') }}"><i class="fa fa-circle-o"></i> Effectuer une livraison</a></li>
+            {%else%}
+              <li><a href="{{ path('amap_preparer_livraison') }}"><i class="fa fa-circle-o"></i> Effectuer une livraison</a></li>
+            {%endif%}
           </ul>
         </li>
+        <!--
         <li class="header">LABELS</li>
         <li class="active treeview">
           <a href="#">
@@ -227,12 +356,13 @@
     <!-- Content Header (Page header) -->
     <section class="content-header">
       <h1>
-        Dashboard
-        <small>Control panel</small>
+        <!--Dashboard
+        <small>Control panel</small>-->
       </h1>
       <ol class="breadcrumb">
+      <!--
         <li><a href="#"><i class="fa fa-dashboard"></i> Home</a></li>
-        <li class="active">Dashboard</li>
+        <li class="active">Dashboard</li>-->
       </ol>
     </section>
 
