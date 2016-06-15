@@ -29,7 +29,7 @@ class AdminController extends Controller
     public function indexAction(Request $request)
     {
 
-        return $this->render('admin.html.twig',array('page_courante' => 'AdminAccueil'));
+        return $this->render('admin.html.twig',array('page_courante' => 'AdminAccueil', 'onglet_courant' => 'aucun'));
     }
 
     /*****************************
