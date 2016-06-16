@@ -102,14 +102,6 @@ amap_select_amap:
     path:     /selectAmap
     defaults: { _controller: AMAPBundle:Default:selectAmap }
 
-amap_produit:
-    path:     /produit
-    defaults: { _controller: AMAPBundle:Produit:index }
-
-amap_produit_ajouter:
-    path:     /produit/ajouter
-    defaults: { _controller: AMAPBundle:Produit:ajouter }
-
 amap_panier:
     path:     /panier
     defaults: { _controller: AMAPBundle:Panier:ajouter }
@@ -122,35 +114,6 @@ amap_panier_ajouter:
     path:     /panier/ajouter
     defaults: { _controller: AMAPBundle:Panier:ajouterMessage }
 
-amap_entrepot:
-    path:     /entrepot
-    defaults: { _controller: AMAPBundle:Entrepot:creer }
-
-amap_stock:
-    path:     /stock
-    defaults: { _controller: AMAPBundle:Stock:index }
-
-amap_stock_ajouter:
-    path:     /produit/stock/ajouter
-    defaults: { _controller: AMAPBundle:Stock:ajouterStockMessage }
-
-amap_acteur:
-    path:     /acteur
-    defaults: { _controller: AMAPBundle:Acteur:ajouter }
-
 amap_contrat:
     path:     /contrat
     defaults: { _controller: AMAPBundle:Contrat:creer }
-
-amap_livraison:
-    path:     /livraison
-    defaults: { _controller: AMAPBundle:Livraison:index }
-
-amap_effectue_livraison:
-    path:     /livraison/{id}
-    defaults: { _controller: AMAPBundle:Livraison:effectuer }
-
-amap_amap:
-    path:     /amap
-    defaults: { _controller: AMAPBundle:Amap:ajouter }
-    
