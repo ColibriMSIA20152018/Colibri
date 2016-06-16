@@ -46,51 +46,15 @@
 									<!-- <li><a href="about.html">A PROPOS</a></li> -->
 
 									{%if page_courante == 'panier' %}
-									<li class="active"><a href="{{path('amap_panier')}}">PANIERS</a></li>
+									<li class="active"><a href="{{path('amap_consulter_panier')}}">PANIERS</a></li>
 									{%else%}
-									<li><a href="{{path('amap_panier')}}">PANIERS</a></li>
-									{%endif%}
-
-									{%if page_courante == 'produit' %}
-									<li class="active"><a href="{{path('amap_produit')}}">PRODUITS</a></li>
-									{%else%}
-									<li><a href="{{path('amap_produit')}}">PRODUITS</a></li>
-									{%endif%}
-
-									{% if page_courante == 'acteur' %}
-										<li class="active"><a href="{{path('amap_acteur')}}">ACTEURS</a></li>
-									{%else%}
-										<li><a href="{{path('amap_acteur')}}">ACTEURS</a></li>
+									<li><a href="{{path('amap_consulter_panier')}}">PANIERS</a></li>
 									{%endif%}
 
 									{%if page_courante == 'contrat' %}
 									<li class="active"><a href="{{path('amap_contrat')}}">CONTRATS</a></li>
 									{%else%}
 									<li><a href="{{path('amap_contrat')}}">CONTRATS</a></li>
-									{%endif%}
-
-									{%if page_courante == 'amap' %}
-									<li class="active"><a href="{{path('amap_amap')}}">AMAP</a></li>
-									{%else%}
-									<li><a href="{{path('amap_amap')}}">AMAP</a></li>
-									{%endif%}
-
-									{%if page_courante == 'stock' %}
-									<li class="active"><a href="{{path('amap_stock')}}">STOCK</a></li>
-									{%else%}
-									<li><a href="{{path('amap_stock')}}">STOCK</a></li>
-									{%endif%}
-
-									{%if page_courante == 'entrepot' %}
-									<li class="active"><a href="{{path('amap_entrepot')}}">ENTREPOT</a></li>
-									{%else%}
-									<li><a href="{{path('amap_entrepot')}}">ENTREPOT</a></li>
-									{%endif%}
-
-									{%if page_courante == 'livraison' %}
-									<li class="active"><a href="{{path('amap_livraison')}}">LIVRAISON</a></li>
-									{%else%}
-									<li><a href="{{path('amap_livraison')}}">LIVRAISON</a></li>
 									{%endif%}
 								</ul>
 							</nav>

@@ -35,44 +35,6 @@
                 </table>
             </div>
         </div>
-        <br/><br/>
-        <div class="" style="width:100%;float:left">
-            <h1>Créer un contrat</h1>
-            {{ form_start(form) }}
-
-            {{ form_end(form) }}
-        </div>
-        <br/>
-        <br/>
-        <br/>
-        <br/>
-        <h1>Quantité à produire pour les producteurs</h1>
-        <div>
-            <table class="table table-striped">
-				<thead>
-					<tr>
-						<th>Producteur</th>
-						<th>Produit</th>
-						<th>Quantité</th>
-					</tr>
-				</thead>
-            {% for producteur in tabProd %}
-                <tr>
-                    <td style="background-color:#82b440"><b>{{producteur[0]}}</b></td>
-                    <td style="background-color:#82b440"></td>
-                    <td style="background-color:#82b440"></td>
-                {% for panierproduit in producteur[1].panierproduit %}
-                    <tr>
-                        <td></td>
-                        <td>{{panierproduit.produit.libelle}}</td>
-                        <td>{{panierproduit.quantite}}</td>
-                    </tr>
-                {% endfor %}
-                </tr>
-            {% endfor %}
-				</tbody>
-            </table>
-        </div>
      </div>
 {% endblock %}
 {% block javascripts %}
