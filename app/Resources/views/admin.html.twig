@@ -80,12 +80,22 @@
       <!-- sidebar menu: : style can be found in sidebar.less -->
       <ul class="sidebar-menu">
         <li class="header"></br></li>
+        {%if page_courante == 'AdminInscription' %}
+          <li class="active treeview">
+        {%else%}
+          <li class="treeview">
+        {%endif%}
+          <a href="{{ path('amap_consulter_inscription') }}">
+            <i class="fa fa-files-o"></i><span>Inscriptions</span>
+            <small class="label pull-right bg-yellow">2</small>
+          </a>
+        </li>
         {%if page_courante == 'AdminPanier' %}
           <li class="active treeview">
         {%else%}
           <li class="treeview">
         {%endif%}
-          <a href="#">
+          <a href="">
             <i class="fa fa-files-o"></i><span>Paniers</span>
             <i class="fa fa-angle-left pull-right"></i>
           </a>
@@ -120,7 +130,7 @@
         {%else%}
           <li class="treeview">
         {%endif%}
-          <a href="#">
+          <a href="">
             <i class="fa fa-th"></i> <span>Produits</span>
             <i class="fa fa-angle-left pull-right"></i>
           </a>
@@ -177,7 +187,7 @@
         {%else%}
           <li class="treeview">
         {%endif%}
-          <a href="#">
+          <a href="">
             <i class="fa fa-edit"></i> <span>Contrats</span> <i class="fa fa-angle-left pull-right"></i>
             <i class="fa fa-angle-left pull-right"></i>
           </a>
@@ -200,7 +210,7 @@
         {%else%}
           <li class="treeview">
         {%endif%}
-          <a href="#">
+          <a href="">
             <i class="fa fa-building-o"></i> <span>Amap</span> <i class="fa fa-angle-left pull-right"></i>
           </a>
           <ul class="treeview-menu">
@@ -222,7 +232,7 @@
         {%else%}
           <li class="treeview">
         {%endif%}
-          <a href="#">
+          <a href="">
             <i class="fa fa-cube"></i> <span>Stock</span> <i class="fa fa-angle-left pull-right"></i>
           </a>
           <ul class="treeview-menu">
@@ -244,7 +254,7 @@
         {%else%}
           <li class="treeview">
         {%endif%}
-          <a href="#">
+          <a href="">
             <i class="fa fa-calendar"></i> <span>Entrepot</span>
             <i class="fa fa-angle-left pull-right"></i>
           </a>
@@ -267,7 +277,7 @@
         {%else%}
           <li class="treeview">
         {%endif%}
-          <a href="#">
+          <a href="">
             <i class="fa fa-envelope"></i> <span>Livraison</span>
             <i class="fa fa-angle-left pull-right"></i>
           </a>

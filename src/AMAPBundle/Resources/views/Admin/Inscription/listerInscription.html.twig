@@ -1,0 +1,76 @@
+{% extends 'admin.html.twig' %}
+
+{% block body %}
+    <div class="container">
+        
+        <h1>Nouvelles inscriptions en attentes</h1>
+            
+	<div class="" style="width:100%;">
+			<table class="tableau table table-striped">
+				<thead>
+					<tr>
+						<th>Nom</th>
+						<th>Panier</th>
+						<th>AMAP</th>
+					</tr>
+				</thead>
+				<tfoot>
+					<tr>
+						<th>Nom</th>
+						<th>Panier</th>
+						<th>AMAP</th>
+					</tr>
+				</tfoot>
+				<tbody>
+                                    {% for inscription in inscriptions %}
+                                        <tr>
+                                            <td>{{ inscription.acteur.nom }}</td>
+                                            <td>{{ inscription.panier.id }}</td>
+                                            <td>{{ inscription.amap.libelle }}</td>
+                                        </tr>
+                                    {% endfor %}
+				</tbody>
+			</table>
+        </div>
+    </div>
+{% endblock %}
+{% block javascripts %}
+	<script>
+	$(document).ready(function() {
+		// Setup - add a text input to each footer cell
+		$('.tableau tfoot th').each( function () {
+			var title = $(this).text();
+			$(this).html( '<input type="text" placeholder="Rechercher '+title+'" />' );
+		} );
+
+		// DataTable
+		var table = $('.tableau').DataTable({
+				"language":{
+					"search": "Recherche",
+					"lengthMenu": "Afficher _MENU_ entrées par page",
+					"zeroRecords": "Aucun élément trouvé ! Désolé...",
+					"info": "Page _PAGE_ sur _PAGES_",
+					"infoEmpty": "Les entrées ne sont pas disponibles",
+					"paginate":{
+						"previous": "Précédent",
+						"next": "Suivant"
+					},
+					"infoFiltered": "(filtré sur _MAX_ entrées)"
+				}
+		});
+
+			// Apply the search
+			table.columns().every( function () {
+				var that = this;
+
+				$( 'input', this.footer() ).on( 'keyup change', function () {
+					if ( that.search() !== this.value ) {
+						that
+							.search( this.value )
+							.draw();
+					}
+				} );
+			} );
+	} );
+</script>
+{% endblock %}

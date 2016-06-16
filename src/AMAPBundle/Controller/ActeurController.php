@@ -65,11 +65,11 @@ class ActeurController extends Controller
                 $adresse->setville($data['ville']);
                 $adresse->setCp($data['cp']);
 
-				$acteur->setAdresse($adresse);
+		$acteur->setAdresse($adresse);
 
-				$acteur->setAmap($data['amap']);
+		$acteur->setAmap($data['amap']);
 
-				$em->persist($adresse);
+		$em->persist($adresse);
                 $em->persist($acteur);
 
                 $em->flush();

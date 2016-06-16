@@ -96,28 +96,4 @@ class Inscription
     {
         return $this->panier;
     }
-
-    /**
-     * Set amap
-     *
-     * @param \AMAPBundle\Entity\amap $amap
-     *
-     * @return Inscription
-     */
-    public function setAmap(\AMAPBundle\Entity\amap $amap = null)
-    {
-        $this->amap = $amap;
-
-        return $this;
-    }
-
-    /**
-     * Get amap
-     *
-     * @return \AMAPBundle\Entity\amap
-     */
-    public function getAmap()
-    {
-        return $this->amap;
-    }
 }

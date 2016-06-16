@@ -96,7 +96,11 @@ amap_ajout_produit:
     
 amap_creer_saison:
     path: /admin/creerSaison
-    defaults: { _controller: AMAPBundle:Admin:creerSaison }    
+    defaults: { _controller: AMAPBundle:Admin:creerSaison }  
+    
+amap_consulter_inscription:
+    path: /admin/consulterInscription
+    defaults: { _controller: AMAPBundle:Admin:inscription }
 
 amap_select_amap:
     path:     /selectAmap
@@ -117,3 +121,12 @@ amap_panier_ajouter:
 amap_contrat:
     path:     /contrat
     defaults: { _controller: AMAPBundle:Contrat:creer }
+    
+amap_inscription:
+    path: /inscription/{id}
+    defaults: { _controller: AMAPBundle:Panier:inscriptionPanier }
+    
+amap_inscription_valider:
+    path: /inscription/{id}/valide
+    defaults: { _controller: AMAPBundle:Panier:validerInscription }   
+ 

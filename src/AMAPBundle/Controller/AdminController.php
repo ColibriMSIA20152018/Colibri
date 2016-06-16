@@ -28,10 +28,31 @@ class AdminController extends Controller
 {
     public function indexAction(Request $request)
     {
+        
 
         return $this->render('admin.html.twig',array('page_courante' => 'AdminAccueil', 'onglet_courant' => 'aucun'));
     }
-
+    
+    /*****************************
+     **** DEBUT INSCRIPTION  *****
+     ****************************/
+    
+    public function inscriptionAction(Request $request)
+    {
+        
+        $em = $this->getDoctrine()->getManager();
+        
+        $inscription = $em->getRepository('AMAPBundle:Inscription')->findAll();
+        
+        return $this->render('AMAPBundle:Admin/Inscription:listerInscription.html.twig',array('page_courante' => 'AdminAccueil', 
+                                                                                                'onglet_courant' => 'aucun',
+                                                                                                'inscriptions'=>$inscription));
+    }
+    
+    /*****************************
+     ****** FIN INSCRIPTION  *****
+     ****************************/
+    
     /*****************************
      ******* DEBUT PANIER  *******
      ****************************/
