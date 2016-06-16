@@ -3,14 +3,14 @@
 namespace AMAPBundle\Entity;
 
 use Doctrine\ORM\Mapping as ORM;
-
+use FOS\UserBundle\Model\User as BaseUser;
 /**
  * Acteur
  *
  * @ORM\Table(name="acteur")
  * @ORM\Entity(repositoryClass="AMAPBundle\Repository\ActeurRepository")
  */
-class Acteur
+class Acteur extends BaseUser
 {
     /**
      * @var int
@@ -19,19 +19,19 @@ class Acteur
      * @ORM\Id
      * @ORM\GeneratedValue(strategy="AUTO")
      */
-    private $id;
+    protected $id;
 
     /**
      * @var string
      *
-     * @ORM\Column(name="nom", type="string", length=255)
+     * @ORM\Column(name="nom", type="string", length=255, nullable=true)
      */
     private $nom;
 
     /**
      * @var string
      *
-     * @ORM\Column(name="prenom", type="string", length=255)
+     * @ORM\Column(name="prenom", type="string", length=255, nullable=true)
      */
     private $prenom;
 
@@ -47,16 +47,23 @@ class Acteur
     */
     private $typeActeur;
 
-	/**
-   * @ORM\OneToOne(targetEntity="AMAPBundle\Entity\Adresse", cascade={"persist"})
-   */
-	private $adresse;
+    /**
+    * @ORM\OneToOne(targetEntity="AMAPBundle\Entity\Adresse", cascade={"persist"})
+    */
+    private $adresse;
 
 	/**
     * @ORM\ManyToOne(targetEntity="AMAPBundle\Entity\Amap")
     */
     private $amap;
 
+    public function __construct()
+    {
+        parent::__construct();
+        // your own logic
+        
+    }
+    
     /**
      * Get id
      *

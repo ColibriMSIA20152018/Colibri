@@ -617,5 +617,19 @@
 <script src="{{ asset('dist/js/pages/dashboard.js') }}"></script>
 <!-- AdminLTE for demo purposes -->
 <script src="{{ asset('dist/js/demo.js') }}"></script>
+
+
+<!-- SOURCE DATATABLES JS -->
+<!-- le fichier qui fait bug <script src="{{asset('js/jquery.min.js')}}"></script> -->
+<script src="{{asset('js/jquery.dropotron.min.js')}}"></script>
+<script src="{{asset('js/skel.min.js')}}"></script>
+<script src="{{asset('js/skel-layers.min.js')}}"></script>
+<script src="{{asset('js/init.js')}}"></script>
+<script type="text/javascript" src="{{asset('DataTables/datatables.min.js')}}"></script>
+<script src="{{ asset('js/bootstrap.min.js') }}"></script>
+
+{% block javascripts %}
+    
+{% endblock %}
 </body>
 </html>

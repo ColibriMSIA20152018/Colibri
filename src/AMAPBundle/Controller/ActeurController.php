@@ -29,12 +29,12 @@ class ActeurController extends Controller
             ->add('nom', TextType::class )
             ->add('prenom', TextType::class )
             ->add('dateNaissance', DateType::class, array('input'=>'datetime','years' => range(1900, date('Y'))))
-			->add('numRue',TextType::class)
+            ->add('numRue',TextType::class)
             ->add('typeVoie', TextType::class )
             ->add('nomVoie', TextType::class )
             ->add('ville', TextType::class )
             ->add('cp', TextType::class )
-			->add('amap',EntityType::class,array('class' => 'AMAPBundle:Amap', 'choice_label' => 'libelle'))
+            ->add('amap',EntityType::class,array('class' => 'AMAPBundle:Amap', 'choice_label' => 'libelle'))
             ->add('ajouter', SubmitType::class, array('label' => 'Créer acteur'))
             ->getForm();
 

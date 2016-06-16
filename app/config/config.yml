@@ -11,7 +11,7 @@ parameters:
 
 framework:
     #esi:             ~
-    #translator:      { fallbacks: ["%locale%"] }
+    translator:      { fallbacks: ["%locale%"] }
     secret:          "%secret%"
     router:
         resource: "%kernel.root_dir%/config/routing.yml"
@@ -33,6 +33,15 @@ framework:
     fragments:       ~
     http_method_override: true
     assets: ~
+
+# FOSUser Bundle
+fos_user:
+    db_driver: orm 
+    firewall_name: main
+    user_class: AMAPBundle\Entity\Acteur
+    registration:
+        form:
+            type: AMAPBundle\Form\RegistrationType
 
 # Twig Configuration
 twig:

@@ -96,9 +96,7 @@ amap_ajout_produit:
     
 amap_creer_saison:
     path: /admin/creerSaison
-    defaults: { _controller: AMAPBundle:Admin:creerSaison }
-    
-    
+    defaults: { _controller: AMAPBundle:Admin:creerSaison }    
 
 amap_select_amap:
     path:     /selectAmap
