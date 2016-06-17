@@ -52,6 +52,11 @@ class Panier
     protected $typePanier;
     
     /**
+    * @ORM\ManyToOne(targetEntity="AMAPBundle\Entity\Amap")
+    */
+    protected $amap;
+    
+    /**
      * Constructor
      */
     public function __construct()

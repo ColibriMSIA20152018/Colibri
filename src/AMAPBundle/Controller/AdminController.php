@@ -22,14 +22,13 @@ use \Symfony\Component\Form\Extension\Core\Type\TextType;
 use Symfony\Component\Form\Extension\Core\Type\SubmitType;
 use \Symfony\Bridge\Doctrine\Form\Type\EntityType;
 use Symfony\Component\Form\Extension\Core\Type\DateTimeType;
-
+use Symfony\Component\Form\Extension\Core\Type\DateType;
+use AMAPBundle\Entity\TypePanier;
 
 class AdminController extends Controller
 {
     public function indexAction(Request $request)
-    {
-        
-
+    {        
         return $this->render('admin.html.twig',array('page_courante' => 'AdminAccueil', 'onglet_courant' => 'aucun'));
     }
     
@@ -58,10 +57,14 @@ class AdminController extends Controller
      ****************************/
     public function ajouterProduitPanierAction(Request $request){
         $em = $this->getDoctrine()->getManager();
+
+        $session = $request->getSession();
         
         $form = $this->get('form.factory')->createNamedBuilder('formulaire_ajout_produit_panier')
             ->add('produit', EntityType::class, array('class' => 'AMAPBundle:Produit', 'choice_label' => 'libelle') )
-            ->add('panier', EntityType::class, array('class' => 'AMAPBundle:Panier', 'choice_label' => 'libelle') )
+            ->add('panier', EntityType::class, array('class' => 'AMAPBundle:Panier',
+                'choice_label' => 'libelle',
+                'query_builder' => $this->getDoctrine()->getRepository('AMAPBundle:Panier')->getAmap($session->get('amap'))))
             ->add('quantite', IntegerType::class)
             ->add('ajouter', SubmitType::class, array('label' => 'Ajouter un produit à un Panier'))
             ->getForm();
@@ -114,13 +117,18 @@ class AdminController extends Controller
          {
             if ($form->get('ajouter')->isClicked())
             {
+                $session =  $request->getSession();
+                
                 $data = $form->getData();
 
                 $panier = new Panier();
 
                 $panier->setLibelle($data['libelle']);
                 $panier->setSaison($data['saison']);
+                $panier->setTypePanier($data['type_panier']);
                 $panier->setPrix($data['prix']);
+                $amap = $em->getRepository('AMAPBundle:Amap')->findOneBy(array('id' => $session->get('amap')));
+                $panier->setAmap($amap);
 
                 $em->persist($panier);
                 $em->flush();
@@ -161,11 +169,13 @@ class AdminController extends Controller
         return $this->render('AMAPBundle:Admin/Panier:retrait.html.twig',array('page_courante' => 'AdminPanier', 'onglet_courant' => 'retraitPanierAction','form'=>$form->createView()));
     }
     
-    public function consulterAction()
+    public function consulterAction(Request $request)
     {
         $em = $this->getDoctrine()->getManager();
         
-        $paniers = $em->getRepository('AMAPBundle:Panier')->findAll();
+        $session = $request->getSession();
+        
+        $paniers = $em->getRepository('AMAPBundle:Panier')->findBy(array('amap' => $session->get('amap')));
         
         return $this->render('AMAPBundle:Admin/Panier:consulterPaniers.html.twig',array('page_courante' => 'AdminPanier', 'onglet_courant' => 'consulterAction','paniers'=>$paniers));
     }
@@ -289,6 +299,8 @@ class AdminController extends Controller
 	$typeAd =$em->getRepository('AMAPBundle:TypeActeur')->findBy(array('libelle' => "Consommateur"));
 	$listProd = $em->getRepository('AMAPBundle:Acteur')->findBy(array('amap' => $session->get('amap'), 'typeActeur' => $typeProd));
 	$listAd = $em->getRepository('AMAPBundle:Acteur')->findBy(array('amap' => $session->get('amap'), 'typeActeur' => $typeAd));
+        
+        var_dump($typeProd);
                 
         return $this->render('AMAPBundle:Admin/Acteur:listerActeur.html.twig',array('page_courante' => 'AdminActeurs', 'onglet_courant' => 'listerActeurAction','listAd'=>$listAd,'listProd'=>$listProd));
     }

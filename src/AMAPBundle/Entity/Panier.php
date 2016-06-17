@@ -52,6 +52,11 @@ class Panier
     protected $typePanier;
     
     /**
+    * @ORM\ManyToOne(targetEntity="AMAPBundle\Entity\Amap")
+    */
+    protected $amap;
+    
+    /**
      * Constructor
      */
     public function __construct()
@@ -199,5 +204,29 @@ class Panier
     public function getPrix()
     {
         return $this->prix;
+    }
+
+    /**
+     * Set amap
+     *
+     * @param \AMAPBundle\Entity\Amap $amap
+     *
+     * @return Panier
+     */
+    public function setAmap(\AMAPBundle\Entity\Amap $amap = null)
+    {
+        $this->amap = $amap;
+
+        return $this;
+    }
+
+    /**
+     * Get amap
+     *
+     * @return \AMAPBundle\Entity\Amap
+     */
+    public function getAmap()
+    {
+        return $this->amap;
     }
 }
