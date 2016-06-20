@@ -10,4 +10,19 @@ namespace AMAPBundle\Repository;
  */
 class ActeurRepository extends \Doctrine\ORM\EntityRepository
 {
+    function getActeur($id){
+        return $this->getEntityManager()->createQueryBuilder('a')->select('a')->where('a.id = ?1')->from('AMAPBundle:Acteur','a')->setParameter(1,$id);
+    } 
+    
+    function getProducteurs($idType, $idAmap){
+        return $this->getEntityManager()->createQueryBuilder('p')
+                ->select('p')
+                ->where('p.typeActeur = ?1')
+                ->andWhere('p.amap = ?2')
+                ->from('AMAPBundle:Acteur','p')
+                ->setParameter(1,$idType)
+                ->setParameter(2,$idAmap);
+    } 
+    
+    
 }

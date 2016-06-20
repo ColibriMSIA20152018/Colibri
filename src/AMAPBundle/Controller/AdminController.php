@@ -433,24 +433,30 @@ class AdminController extends Controller
     public function creerContratInscriptionAction(Request $request,$idActeur, $idPanier )
     {
         $em = $this->getDoctrine()->getManager();
+        
+        $session = $request->getSession();
 
         $form = $this->get('form.factory')->createNamedBuilder('formulaire_creer_contrat')
             ->add('producteur',EntityType::class,array('class' => 'AMAPBundle:Acteur',
                                                         'choice_label' => 'nom',
-                                                        'query_builder' => function(\Doctrine\ORM\EntityRepository $er){
-                                                            return $er->createQueryBuilder('s')
-                                                            ->where('s.typeActeur = ?1')
-                                                            ->setParameter(1,'1');
-                                                        }))
+                                                        'query_builder' => $this->getDoctrine()
+                    ->getRepository('AMAPBundle:Acteur')
+                    ->getProducteurs(1,$session->get('amap'))))
             ->add('consommateur',EntityType::class,array('class' => 'AMAPBundle:Acteur',
                                                          'choice_label' => 'nom',
-                                                         'query_builder' => function(\Doctrine\ORM\EntityRepository $er){
-                                                            return $er->createQueryBuilder('s')
-                                                            ->where('s.id = ?1')
-                                                            ->setParameter(1,$idActeur);
-                                                        }))
-            ->add('amap',EntityType::class,array('class' => 'AMAPBundle:Amap', 'choice_label' => 'libelle'))
-            ->add('panier',EntityType::class,array('class' => 'AMAPBundle:Panier', 'choice_label' => 'libelle'))
+                                                         'query_builder' =>  $this->getDoctrine()
+                    ->getRepository('AMAPBundle:Acteur')
+                    ->getActeur($idActeur)))
+            ->add('amap',EntityType::class,array('class' => 'AMAPBundle:Amap', 
+                'choice_label' => 'libelle',
+                'query_builder' => $this->getDoctrine()
+                    ->getRepository('AMAPBundle:Amap')
+                    ->getAmap($session->get('amap'))))
+            ->add('panier',EntityType::class,array('class' => 'AMAPBundle:Panier',
+                'choice_label' => 'libelle',
+                'query_builder' => $this->getDoctrine()
+                    ->getRepository('AMAPBundle:Panier')
+                    ->getPanier($idPanier)))
             ->add('ajouter', SubmitType::class, array('label' => 'Créer contrat'))
             ->getForm();
 
@@ -466,6 +472,8 @@ class AdminController extends Controller
 		$contrat->setAmap($data['amap']);
                 $contrat->setPanier($data['panier']);
 
+                $this->getDoctrine()->getRepository('AMAPBundle:Inscription')->deleteInscription($data['consommateur']->getId(),$data['panier']->getId(),$data['amap']->getId());
+                
                 $em->persist($contrat);
                 $em->flush();
            }

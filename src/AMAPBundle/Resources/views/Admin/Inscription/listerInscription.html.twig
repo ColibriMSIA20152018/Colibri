@@ -29,7 +29,7 @@
                                             <td>{{ inscription.acteur.nom }}</td>
                                             <td>{{ inscription.panier.id }}</td>
                                             <td>{{ inscription.amap.libelle }}</td>
-                                            <td>OUI<a href="#"><i class="fa fa-check"/></a></td>
+                                            <td>OUI<a href="{{ path('amap_creer_contrat_inscription', {'idActeur' : inscription.acteur.id, 'idPanier':inscription.panier.id}) }}"><i class="fa fa-check"/></a></td>
                                         </tr>
                                     {% endfor %}
 				</tbody>
