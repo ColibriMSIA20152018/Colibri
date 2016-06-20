@@ -6,16 +6,78 @@
 
 {% block body %}
     <div class="container">
-        <div class="" style="width:50%;float:left">
-            <h1>Création du type panier </h1>
+        <div class="col-sm-6">
+            <h1>Création du type panier </h1></br>
             {{ form_start(form2) }}
+                <div class="form-group">
+                    <div class="row">
+                        <div class="col-sm-2" style="font-size: 20px;">
+                            {{ form_label(form2.libelle) }}
+                        </div>
+                        <div class="col-sm-8">
+                            {{ form_widget(form2.libelle, {'attr': { 'class': 'form-control'}}) }}
+                        </div>
+                    </div></br>
 
+                    <div class="row">
+                        <div class="col-sm-3"></div>
+                        <div class="col-sm-4">
+                            {{ form_label(form2.ajouter) }}
+                            {{ form_widget(form2.ajouter, {'attr': { 'class': 'btn btn-success'}}) }}
+                        </div>
+                    </div>
+                </div>
             {{ form_end(form2) }}
         </div>
-        <div class="" style="width:50%;float:left">
-            <h1>Création d'un panier</h1>
-            {{ form_start(form) }}
 
+        <div class="col-sm-6">
+            <h1>Création d'un panier</h1></br>
+            {{ form_start(form) }}
+                <div class="form-group">
+                    <div class="row">
+                        <div class="col-sm-2" style="font-size: 20px;">
+                            {{ form_label(form.libelle) }}
+                        </div>
+                        <div class="col-sm-8">
+                            {{ form_widget(form.libelle, {'attr': { 'class': 'form-control'}}) }}
+                        </div>
+                    </div></br>
+
+                    <div class="row">
+                        <div class="col-sm-2" style="font-size: 20px;">
+                            {{ form_label(form.saison) }}
+                        </div>
+                        <div class="col-sm-8">
+                            {{ form_widget(form.saison, {'attr': { 'class': 'form-control'}}) }}
+                        </div>
+                    </div></br>
+
+                    <div class="row">
+                        <div class="col-sm-2" style="font-size: 20px;">
+                            {{ form_label(form.type_panier) }}
+                        </div>
+                        <div class="col-sm-8">
+                            {{ form_widget(form.type_panier, {'attr': { 'class': 'form-control'}}) }}
+                        </div>
+                    </div></br>
+
+                    <div class="row">
+                        <div class="col-sm-2" style="font-size: 20px;">
+                            {{ form_label(form.prix) }}
+                        </div>
+                        <div class="col-sm-8">
+                            {{ form_widget(form.prix, {'attr': { 'class': 'form-control'}}) }}
+                        </div>
+                    </div></br>
+
+                    <div class="row">
+                        <div class="col-sm-4"></div>
+                        <div class="col-sm-4">
+                            {{ form_label(form.ajouter) }}
+                            {{ form_widget(form.ajouter, {'attr': { 'class': 'btn btn-success'}}) }}
+                        </div>
+                    </div>
+                </div>
             {{ form_end(form) }}
         </div>
     </div>
