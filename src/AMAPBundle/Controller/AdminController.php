@@ -300,7 +300,7 @@ class AdminController extends Controller
 	$listProd = $em->getRepository('AMAPBundle:Acteur')->findBy(array('amap' => $session->get('amap'), 'typeActeur' => $typeProd));
 	$listAd = $em->getRepository('AMAPBundle:Acteur')->findBy(array('amap' => $session->get('amap'), 'typeActeur' => $typeAd));
         
-        var_dump($typeProd);
+        //var_dump($typeProd);
                 
         return $this->render('AMAPBundle:Admin/Acteur:listerActeur.html.twig',array('page_courante' => 'AdminActeurs', 'onglet_courant' => 'listerActeurAction','listAd'=>$listAd,'listProd'=>$listProd));
     }
@@ -404,7 +404,7 @@ class AdminController extends Controller
                                                             ->where('s.typeActeur = ?1')
                                                             ->setParameter(1,'2');
                                                         }))
-			->add('amap',EntityType::class,array('class' => 'AMAPBundle:Amap', 'choice_label' => 'libelle'))
+            ->add('amap',EntityType::class,array('class' => 'AMAPBundle:Amap', 'choice_label' => 'libelle'))
             ->add('panier',EntityType::class,array('class' => 'AMAPBundle:Panier', 'choice_label' => 'libelle'))
             ->add('ajouter', SubmitType::class, array('label' => 'Créer contrat'))
             ->getForm();
@@ -419,6 +419,51 @@ class AdminController extends Controller
                 $contrat->setProducteur($data['producteur']);
                 $contrat->setConsommateur($data['consommateur']);
 				$contrat->setAmap($data['amap']);
+                $contrat->setPanier($data['panier']);
+
+                $em->persist($contrat);
+                $em->flush();
+           }
+        }
+        
+        return $this->render('AMAPBundle:Admin/Contrat:creerContrat.html.twig',array('page_courante' => 'AdminContrats', 'onglet_courant' => 'creerContratAction',
+            'form' => $form->createView()));
+    }
+    
+    public function creerContratInscriptionAction(Request $request,$idActeur, $idPanier )
+    {
+        $em = $this->getDoctrine()->getManager();
+
+        $form = $this->get('form.factory')->createNamedBuilder('formulaire_creer_contrat')
+            ->add('producteur',EntityType::class,array('class' => 'AMAPBundle:Acteur',
+                                                        'choice_label' => 'nom',
+                                                        'query_builder' => function(\Doctrine\ORM\EntityRepository $er){
+                                                            return $er->createQueryBuilder('s')
+                                                            ->where('s.typeActeur = ?1')
+                                                            ->setParameter(1,'1');
+                                                        }))
+            ->add('consommateur',EntityType::class,array('class' => 'AMAPBundle:Acteur',
+                                                         'choice_label' => 'nom',
+                                                         'query_builder' => function(\Doctrine\ORM\EntityRepository $er){
+                                                            return $er->createQueryBuilder('s')
+                                                            ->where('s.id = ?1')
+                                                            ->setParameter(1,$idActeur);
+                                                        }))
+            ->add('amap',EntityType::class,array('class' => 'AMAPBundle:Amap', 'choice_label' => 'libelle'))
+            ->add('panier',EntityType::class,array('class' => 'AMAPBundle:Panier', 'choice_label' => 'libelle'))
+            ->add('ajouter', SubmitType::class, array('label' => 'Créer contrat'))
+            ->getForm();
+
+        if ($form->handleRequest($request)->isSubmitted()){
+           if ($form->get('ajouter')->isClicked())
+           {
+                $data = $form->getData();
+
+                $contrat = new Contrat();
+
+                $contrat->setProducteur($data['producteur']);
+                $contrat->setConsommateur($data['consommateur']);
+		$contrat->setAmap($data['amap']);
                 $contrat->setPanier($data['panier']);
 
                 $em->persist($contrat);
@@ -469,19 +514,19 @@ class AdminController extends Controller
 
                 $amap = new Amap();
 
-				$amap->setLibelle($data['libelle']);
+		$amap->setLibelle($data['libelle']);
 
-				$adresse = new Adresse();
+                $adresse = new Adresse();
 
                 $adresse->setNumRue($data['numRue']);
                 $adresse->setTypeVoie($data['typeVoie']);
                 $adresse->setNomVoie($data['nomVoie']);
                 $adresse->setville($data['ville']);
                 $adresse->setCp($data['cp']);
+                
+                $amap->setAdresse($adresse);
 
-				$amap->setAdresse($adresse);
-
-				$em->persist($adresse);
+		$em->persist($adresse);
                 $em->persist($amap);
 
                 $em->flush();
@@ -525,10 +570,13 @@ class AdminController extends Controller
     {
         $em = $this->getDoctrine()->getManager();
 
-
+        $session = $request->getSession();
+        
         /* Création formulaire pour ajouter une quantité d'un produit au stock */
         $form = $this->get('form.factory')->createNamedBuilder('formulaire_stock')
-			->add('entrepot', EntityType::class,array('class' => 'AMAPBundle:Entrepot', 'choice_label' => 'libelle'))
+            ->add('entrepot', EntityType::class, array('class' => 'AMAPBundle:Entrepot',
+                'choice_label' => 'libelle',
+                'query_builder' => $this->getDoctrine()->getRepository('AMAPBundle:Panier')->getAmap($session->get('amap'))))
             ->add('produit', EntityType::class,array('class' => 'AMAPBundle:Produit', 'choice_label' => 'libelle'))
             ->add('quantite', IntegerType::class)
             ->add('ajouter', SubmitType::class, array('label' => 'Ajouter au stock'))
@@ -601,7 +649,8 @@ class AdminController extends Controller
             ->add('nomVoie', TextType::class )
             ->add('ville', TextType::class )
             ->add('cp', TextType::class )
-            ->add('creer', SubmitType::class, array('label' => 'Créer un entrepot'))
+            ->add('amap',  EntityType::class, array('class' => 'AMAPBundle:Amap', 'choice_label' => 'libelle'))
+            ->add('creer', SubmitType::class, array('label' => 'Créer un entrepot'))        
             ->getForm();
 
         if ($form->handleRequest($request)->isSubmitted()){
@@ -612,9 +661,10 @@ class AdminController extends Controller
 
                 $entrepot = new Entrepot();
 
-				$entrepot->setLibelle($data['libelle']);
+                $entrepot->setLibelle($data['libelle']);
+                $entrepot->setAmap($data['amap']);
 
-				$adresse = new Adresse();
+		$adresse = new Adresse();
 
                 $adresse->setNumRue($data['numRue']);
                 $adresse->setTypeVoie($data['typeVoie']);
@@ -695,8 +745,12 @@ class AdminController extends Controller
     {
         $em = $this->getDoctrine()->getManager();
 
+        $session = $request->getSession();
+        
 	$form = $this->get('form.factory')->createNamedBuilder('formulaire_effectuer_livraison')
-            ->add('panier', EntityType::class, array('class' => 'AMAPBundle:Panier', 'choice_label' => 'libelle'))
+           ->add('panier', EntityType::class, array('class' => 'AMAPBundle:Panier',
+                'choice_label' => 'libelle',
+                'query_builder' => $this->getDoctrine()->getRepository('AMAPBundle:Panier')->getAmap($session->get('amap'))))
             ->add('livrer', SubmitType::class, array('label' => 'Préparer la livraison'))
             ->getForm();
 

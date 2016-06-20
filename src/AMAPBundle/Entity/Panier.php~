@@ -205,4 +205,28 @@ class Panier
     {
         return $this->prix;
     }
+
+    /**
+     * Set amap
+     *
+     * @param \AMAPBundle\Entity\Amap $amap
+     *
+     * @return Panier
+     */
+    public function setAmap(\AMAPBundle\Entity\Amap $amap = null)
+    {
+        $this->amap = $amap;
+
+        return $this;
+    }
+
+    /**
+     * Get amap
+     *
+     * @return \AMAPBundle\Entity\Amap
+     */
+    public function getAmap()
+    {
+        return $this->amap;
+    }
 }

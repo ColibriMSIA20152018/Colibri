@@ -10,4 +10,7 @@ namespace AMAPBundle\Repository;
  */
 class StockRepository extends \Doctrine\ORM\EntityRepository
 {
+    function getAmap($amap){
+        return $this->getEntityManager()->createQueryBuilder('p')->select('p')->where('p.amap = ?1')->from('AMAPBundle:Entrepot','p')->setParameter(1,$amap);
+    } 
 }

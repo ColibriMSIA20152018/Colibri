@@ -12,6 +12,7 @@
 						<th>Nom</th>
 						<th>Panier</th>
 						<th>AMAP</th>
+                                                <th>Valider</th>
 					</tr>
 				</thead>
 				<tfoot>
@@ -19,6 +20,7 @@
 						<th>Nom</th>
 						<th>Panier</th>
 						<th>AMAP</th>
+                                                <th>Valider</th>
 					</tr>
 				</tfoot>
 				<tbody>
@@ -27,6 +29,7 @@
                                             <td>{{ inscription.acteur.nom }}</td>
                                             <td>{{ inscription.panier.id }}</td>
                                             <td>{{ inscription.amap.libelle }}</td>
+                                            <td>OUI<a href="#"><i class="fa fa-check"/></a></td>
                                         </tr>
                                     {% endfor %}
 				</tbody>

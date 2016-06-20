@@ -28,15 +28,20 @@ class Entrepot
      */
     private $libelle;
 
-	/**
-	* @ORM\OneToOne(targetEntity="AMAPBundle\Entity\Adresse")
-	*/
-	private $adresse;
+    /**
+    * @ORM\OneToOne(targetEntity="AMAPBundle\Entity\Adresse")
+    */
+    private $adresse;
 
-	/**
-	* @ORM\OneToMany(targetEntity="AMAPBundle\Entity\Stock", mappedBy="entrepot")
-	*/
-	private $stock;
+    /**
+    * @ORM\OneToMany(targetEntity="AMAPBundle\Entity\Stock", mappedBy="entrepot")
+    */
+    private $stock;
+        
+    /**
+    * @ORM\OneToOne(targetEntity="AMAPBundle\Entity\Amap")
+    */
+    private $amap; 
 
     /**
      * Get id
@@ -135,5 +140,53 @@ class Entrepot
     public function getAdresse()
     {
         return $this->adresse;
+    }
+
+    /**
+     * Add amap
+     *
+     * @param \AMAPBundle\Entity\Amap $amap
+     *
+     * @return Entrepot
+     */
+    public function addAmap(\AMAPBundle\Entity\Amap $amap)
+    {
+        $this->amap[] = $amap;
+
+        return $this;
+    }
+
+    /**
+     * Remove amap
+     *
+     * @param \AMAPBundle\Entity\Amap $amap
+     */
+    public function removeAmap(\AMAPBundle\Entity\Amap $amap)
+    {
+        $this->amap->removeElement($amap);
+    }
+
+    /**
+     * Get amap
+     *
+     * @return \Doctrine\Common\Collections\Collection
+     */
+    public function getAmap()
+    {
+        return $this->amap;
+    }
+
+    /**
+     * Set amap
+     *
+     * @param \AMAPBundle\Entity\Amap $amap
+     *
+     * @return Entrepot
+     */
+    public function setAmap(\AMAPBundle\Entity\Amap $amap = null)
+    {
+        $this->amap = $amap;
+
+        return $this;
     }
 }

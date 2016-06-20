@@ -28,15 +28,10 @@ class Amap
      */
     private $libelle;
 
-	/**
-	* @ORM\OneToOne(targetEntity="AMAPBundle\Entity\Adresse", cascade={"persist"})
-	*/
-	private $adresse;
-
-	/**
-	* @ORM\OneToOne(targetEntity="AMAPBundle\Entity\Entrepot", cascade={"persist"})
-	*/
-	private $entrepot;
+    /**
+    * @ORM\OneToOne(targetEntity="AMAPBundle\Entity\Adresse", cascade={"persist"})
+    */
+    private $adresse;
 
     /**
      * Get id

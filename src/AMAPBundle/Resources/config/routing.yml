@@ -21,6 +21,10 @@ amap_creer_acteur:
 amap_creer_contrat:
     path: /admin/creerContrat
     defaults: { _controller: AMAPBundle:Admin:creerContrat }
+    
+amap_creer_contrat_inscription:
+    path: /admin/creerContrat/{idActeur}/{idPanier}
+    defaults: { _controller: AMAPBundle:Admin:creerContratInscription }
 
 amap_lister_contrat:
     path: /admin/listerContrats
