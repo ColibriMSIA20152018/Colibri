@@ -52,8 +52,10 @@
     <!-- Header Navbar: style can be found in header.less -->
     <nav class="navbar navbar-static-top">
         <p style="padding: 10px 12px;font-size: 18px; margin:0">
-            {% if app.session.get('amap') %}
+            {% if app.session.get('amap_libelle') %}
                 {{ app.session.get('amap_libelle') }}
+            {% else %}
+                Veuillez choisir l'amap à administrer !
             {% endif %}
         </p>
     </nav>

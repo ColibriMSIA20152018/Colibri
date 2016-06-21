@@ -55,6 +55,6 @@
             </div>
                                 Vous êtes sur le point de vous inscrire pour ce panier. Validez-vous ce choix ?
                                 <a href="{{ path('amap_inscription_valider', { 'id': panier.id }) }}"><button class="btn btn-primary">OUI</button></a>
-                                <button class="btn btn-danger">NON</button>
+                                <a href="{{ path('amap_consulter_panier') }}"><button class="btn btn-danger">NON</button></a>
     </div>
 {% endblock %}
