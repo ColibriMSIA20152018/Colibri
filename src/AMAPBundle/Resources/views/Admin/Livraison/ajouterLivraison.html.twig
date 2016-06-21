@@ -1,14 +1,43 @@
 {% extends 'admin.html.twig' %}
 
 {% block body %}
-    <h1>Ajouter une livraison</h1>
     <div class="container">
-	{{ form_start(form) }}
+        <div class="col-sm-6">
+		    <h1>Ajouter une livraison</h1></br>
+			{{ form_start(form) }}
+                <div class="form-group">
+                    <div class="row">
+                        <div class="col-sm-2" style="font-size: 20px;">
+                            {{ form_label(form.dateTime) }}
+                        </div>
+                        <div class="col-sm-8">
+                            {{ form_widget(form.dateTime, {'attr': { 'class': 'form-control'}}) }}
+                        </div>
+                    </div></br>
 
-        {{ form_end(form) }}
-    </div>
-	
+                    <div class="row">
+                        <div class="col-sm-2" style="font-size: 20px;">
+                            {{ form_label(form.contrat) }}
+                        </div>
+                        <div class="col-sm-8">
+                            {{ form_widget(form.contrat, {'attr': { 'class': 'form-control'}}) }}
+                        </div>
+                    </div></br>
+
+                    <div class="row">
+                        <div class="col-sm-3"></div>
+                        <div class="col-sm-4">
+                            {{ form_label(form.ajouter) }}
+                            {{ form_widget(form.ajouter, {'attr': { 'class': 'btn btn-primary'}}) }}
+                        </div>
+                    </div>
+                </div>
+		    {{ form_end(form) }}
+		</div>
+	</div>	
 {% endblock %}
+
+
 {% block javascripts %}
 	<script>
 	$(document).ready(function() {

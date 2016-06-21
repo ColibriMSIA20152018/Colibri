@@ -1,50 +1,54 @@
 {% extends 'admin.html.twig' %}
 
 {% block body %}
-	<h1>Liste des livraisons par contrat</h1>
-	<table id="tableau" class="table table-striped">
-		<thead>
-			<tr>
-				<th>ID Contrat</th>
-				<th>Consommateur</th>
-				<th>Producteur</th>
-				<th>Panier</th>
-				<th>Date de livraison</th>
-				<th>Livraison effectué ?</th>
-			</tr>
-		</thead>
-		<tfoot>
-			<tr>
-				<th>ID Contrat</th>
-				<th>Consommateur</th>
-				<th>Producteur</th>
-				<th>Panier</th>
-				<th>Date de livraison</th>
-				<th>Livraison effectué ?</th>
-			</tr>
-		</tfoot>
-		<tbody>
-			{% for contrat in listContrat %}
-
-					{% for livraison in contrat.livraisons %}
+    <div class="container">
+        <div class="" style="width:100%;float:left">
+			<h1>Liste des livraisons par contrat</h1>
+			<table id="tableau" class="table table-striped">
+				<thead>
 					<tr>
-
-				<td >{{ contrat.id }}</td>
-				<td >{{ contrat.consommateur.nom}}</td>
-				<td >{{ contrat.producteur.nom}}</td>
-				<td >{{ contrat.panier.libelle }}</td>
-
-						<td>{{livraison.dateLivraison|date('d-m-Y H:i:s')}}</td>
-						{% if livraison.estLivree %}
-							<td>OUI</td>
-						{% else %}
-                                                    <td>NON</td>
-						{%endif%}
+						<th>ID Contrat</th>
+						<th>Consommateur</th>
+						<th>Producteur</th>
+						<th>Panier</th>
+						<th>Date de livraison</th>
+						<th>Livraison effectué ?</th>
 					</tr>
+				</thead>
+				<tfoot>
+					<tr>
+						<th>ID Contrat</th>
+						<th>Consommateur</th>
+						<th>Producteur</th>
+						<th>Panier</th>
+						<th>Date de livraison</th>
+						<th>Livraison effectué ?</th>
+					</tr>
+				</tfoot>
+				<tbody>
+					{% for contrat in listContrat %}
+
+							{% for livraison in contrat.livraisons %}
+							<tr>
+
+						<td >{{ contrat.id }}</td>
+						<td >{{ contrat.consommateur.nom}}</td>
+						<td >{{ contrat.producteur.nom}}</td>
+						<td >{{ contrat.panier.libelle }}</td>
+
+								<td>{{livraison.dateLivraison|date('d-m-Y H:i:s')}}</td>
+								{% if livraison.estLivree %}
+									<td>OUI</td>
+								{% else %}
+		                                                    <td>NON</td>
+								{%endif%}
+							</tr>
+							{% endfor %}
 					{% endfor %}
-			{% endfor %}
-		</tbody>
-	</table>
+				</tbody>
+			</table>
+		</div>
+	</div>
 {% endblock %}
 {% block javascripts %}
 	<script>
