@@ -10,4 +10,21 @@ namespace AMAPBundle\Repository;
  */
 class InscriptionRepository extends \Doctrine\ORM\EntityRepository
 {
+    function deleteInscription($idActeur,$idPanier,$idAmap)
+    {
+        var_dump($idActeur);
+        var_dump($idPanier);
+        var_dump($idAmap);
+        
+        $this->getEntityManager()
+                ->createQueryBuilder('i')
+                ->delete('AMAPBundle:Inscription','i')
+                ->where('i.acteur = ?1')
+                ->andWhere('i.panier = ?2')
+                ->andWhere('i.amap = ?3')
+                ->setParameter(1,$idActeur)
+                ->setParameter(2,$idPanier)
+                ->setParameter(3,$idAmap)
+                ->getQuery()->execute();
+    }
 }

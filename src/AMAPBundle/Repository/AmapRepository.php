@@ -10,4 +10,7 @@ namespace AMAPBundle\Repository;
  */
 class AmapRepository extends \Doctrine\ORM\EntityRepository
 {
+    function getAmap($id){
+        return $this->getEntityManager()->createQueryBuilder('a')->select('a')->where('a.id = ?1')->from('AMAPBundle:Amap','a')->setParameter(1,$id);
+    } 
 }
