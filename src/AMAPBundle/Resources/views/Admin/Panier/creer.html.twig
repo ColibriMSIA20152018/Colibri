@@ -1,9 +1,5 @@
 {% extends 'admin.html.twig' %}
 
-{% block title %}
-    Welcome Panier
-{% endblock%}
-
 {% block body %}
     <div class="container">
         <div class="col-sm-6">
@@ -23,7 +19,7 @@
                         <div class="col-sm-3"></div>
                         <div class="col-sm-4">
                             {{ form_label(form2.ajouter) }}
-                            {{ form_widget(form2.ajouter, {'attr': { 'class': 'btn btn-success'}}) }}
+                            {{ form_widget(form2.ajouter, {'attr': { 'class': 'btn btn-primary'}}) }}
                         </div>
                     </div>
                 </div>
@@ -74,7 +70,7 @@
                         <div class="col-sm-4"></div>
                         <div class="col-sm-4">
                             {{ form_label(form.ajouter) }}
-                            {{ form_widget(form.ajouter, {'attr': { 'class': 'btn btn-success'}}) }}
+                            {{ form_widget(form.ajouter, {'attr': { 'class': 'btn btn-primary'}}) }}
                         </div>
                     </div>
                 </div>

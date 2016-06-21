@@ -2,17 +2,60 @@
 
 {% block body %}
     <div class="container">
-        
-        <h1>CONTRATS</h1>
-            
-        <div class="" style="width:100%;float:left">
-            <h1>Créer un contrat</h1>
-            {{ form_start(form) }}
+        <div class="col-sm-6">            
+	        <h1>Créer un contrat</h1></br>
+	        {{ form_start(form) }}
+                <div class="form-group">
+                    <div class="row">
+                        <div class="col-sm-3" style="font-size: 20px;">
+                            {{ form_label(form.producteur) }}
+                        </div>
+                        <div class="col-sm-8">
+                            {{ form_widget(form.producteur, {'attr': { 'class': 'form-control'}}) }}
+                        </div>
+                    </div></br>
 
-            {{ form_end(form) }}
-        </div>
+                    <div class="row">
+                        <div class="col-sm-3" style="font-size: 20px;">
+                            {{ form_label(form.consommateur) }}
+                        </div>
+                        <div class="col-sm-8">
+                            {{ form_widget(form.consommateur, {'attr': { 'class': 'form-control'}}) }}
+                        </div>
+                    </div></br>
+
+                    <div class="row">
+                        <div class="col-sm-3" style="font-size: 20px;">
+                            {{ form_label(form.amap) }}
+                        </div>
+                        <div class="col-sm-8">
+                            {{ form_widget(form.amap, {'attr': { 'class': 'form-control'}}) }}
+                        </div>
+                    </div></br>
+
+                    <div class="row">
+                        <div class="col-sm-3" style="font-size: 20px;">
+                            {{ form_label(form.panier) }}
+                        </div>
+                        <div class="col-sm-8">
+                            {{ form_widget(form.panier, {'attr': { 'class': 'form-control'}}) }}
+                        </div>
+                    </div></br>
+
+                    <div class="row">
+                        <div class="col-sm-4"></div>
+                        <div class="col-sm-4">
+                            {{ form_label(form.ajouter) }}
+                            {{ form_widget(form.ajouter, {'attr': { 'class': 'btn btn-primary'}}) }}
+                        </div>
+                    </div>
+                </div>
+	        {{ form_end(form) }}
+	    </div>
      </div>
 {% endblock %}
+
+
 {% block javascripts %}
 	<script>
 	$(document).ready(function() {
