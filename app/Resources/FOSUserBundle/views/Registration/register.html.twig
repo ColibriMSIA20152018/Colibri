@@ -1,7 +1,138 @@
-{% extends "content.html.twig" %}
+{% extends "FSOUserBundle.html.twig" %}
 
-{% set page_courante = 'default' %}
+{% trans_default_domain 'FOSUserBundle' %}
 
 {% block body %}
-{% include "FOSUserBundle:Registration:register_content.html.twig" %}
+
+    <div class="container">
+        <div class="col-sm-12">
+            <h1>Inscription</h1></br>
+
+			<form action="{{ path("fos_user_security_check") }}" method="post">
+                <div class="form-group">
+                	{{ form_start(form, {'method': 'post', 'action': path('fos_user_registration_register'), 'attr': {'class': 'fos_user_registration_register'}}) }}
+	                    <div class="row">
+	                        <div class="col-sm-2" style="font-size: 20px;">
+						    	{{ form_label(form.email) }}
+						    </div>
+	                        <div class="col-sm-8">
+						    	{{ form_widget(form.email, {'attr': { 'class': 'form-control'}}) }}
+						    </div>
+						</div>
+
+	                    <div class="row">
+	                        <div class="col-sm-2" style="font-size: 20px;">
+						    	{{ form_label(form.username) }}
+						    </div>
+	                        <div class="col-sm-8">
+						    	{{ form_widget(form.username, {'attr': { 'class': 'form-control'}}) }}
+						    </div>
+						</div>
+
+		                <div class="row">
+		                    <div class="col-sm-2" style="font-size: 20px;">
+						    	{{ form_label(form.plainPassword) }}
+						    </div>
+		                    <div class="col-sm-8">
+						    	{{ form_widget(form.plainPassword, {'attr': { 'class': 'form-control'}}) }}
+						    </div>
+						</div>
+
+	                    <div class="row">
+	                        <div class="col-sm-2" style="font-size: 20px;">
+						    	{{ form_label(form.nom) }}
+						    </div>
+	                        <div class="col-sm-8">
+						    	{{ form_widget(form.nom, {'attr': { 'class': 'form-control'}}) }}
+						    </div>
+						</div>
+
+	                    <div class="row">
+	                        <div class="col-sm-2" style="font-size: 20px;">
+						    	{{ form_label(form.prenom) }}
+						    </div>
+	                        <div class="col-sm-8">
+						    	{{ form_widget(form.prenom, {'attr': { 'class': 'form-control'}}) }}
+						    </div>
+						</div>
+
+	                    <div class="row">
+	                        <div class="col-sm-2" style="font-size: 20px;">
+						    	{{ form_label(form.typeActeur) }}
+						    </div>
+	                        <div class="col-sm-8">
+						    	{{ form_widget(form.typeActeur, {'attr': { 'class': 'form-control'}}) }}
+						    </div>
+						</div>
+
+	                    <div class="row">
+	                        <div class="col-sm-2" style="font-size: 20px;">
+						    	{{ form_label(form.dateNaissance) }}
+						    </div>
+	                        <div class="col-sm-8">
+						    	{{ form_widget(form.dateNaissance, {'attr': { 'class': 'form-control'}}) }}
+						    </div>
+						</div>
+
+	                    <div class="row">
+	                        <div class="col-sm-2" style="font-size: 20px;">
+						    	{{ form_label(form.amap) }}
+						    </div>
+	                        <div class="col-sm-8">
+						    	{{ form_widget(form.amap, {'attr': { 'class': 'form-control'}}) }}
+						    </div>
+						</div>
+
+	                    <div class="row">
+	                        <div class="col-sm-2" style="font-size: 20px;">
+						    	{{ form_label(form.adresse.numRue) }}
+						    </div>
+	                        <div class="col-sm-8">
+						    	{{ form_widget(form.adresse.numRue, {'attr': { 'class': 'form-control'}}) }}
+						    </div>
+						</div>
+
+	                    <div class="row">
+	                        <div class="col-sm-2" style="font-size: 20px;">
+						    	{{ form_label(form.adresse.typeVoie) }}
+						    </div>
+	                        <div class="col-sm-8">
+						    	{{ form_widget(form.adresse.typeVoie, {'attr': { 'class': 'form-control'}}) }}
+						    </div>
+						</div>
+
+	                    <div class="row">
+	                        <div class="col-sm-2" style="font-size: 20px;">
+						    	{{ form_label(form.adresse.nomVoie) }}
+						    </div>
+	                        <div class="col-sm-8">
+						    	{{ form_widget(form.adresse.nomVoie, {'attr': { 'class': 'form-control'}}) }}
+						    </div>
+						</div>
+
+	                    <div class="row">
+	                        <div class="col-sm-2" style="font-size: 20px;">
+						    	{{ form_label(form.adresse.cp) }}
+						    </div>
+	                        <div class="col-sm-8">
+						    	{{ form_widget(form.adresse.cp, {'attr': { 'class': 'form-control'}}) }}
+						    </div>
+						</div>
+
+	                    <div class="row">
+	                        <div class="col-sm-2" style="font-size: 20px;">
+						    	{{ form_label(form.adresse.ville) }}
+						    </div>
+	                        <div class="col-sm-8">
+						    	{{ form_widget(form.adresse.ville, {'attr': { 'class': 'form-control'}}) }}
+						    </div>
+						</div></br>
+
+	                    <div class="col-sm-5"></div>
+					    <input class="btn btn-success col-sm-2" type="submit" id="_submit" name="_submit" value="Valider" />
+					</div>
+				{{ form_end(form) }}
+			</form>
+		</div>
+	</div>
 {% endblock body %}

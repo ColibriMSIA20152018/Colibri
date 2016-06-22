@@ -9,7 +9,7 @@
 
     <div class="container">
         <div class="col-sm-12">
-            <h1>Connection</h1></br>
+            <h1>Connexion</h1></br>
 
 			<form action="{{ path("fos_user_security_check") }}" method="post">
                 <div class="form-group">
@@ -17,7 +17,7 @@
 
                     <div class="row">
                         <div class="col-sm-2" style="font-size: 20px;">
-					    	<label for="username">{{ 'security.login.username'|trans }}</label>
+					    	Utilisateur
 					    </div>
                         <div class="col-sm-8">
 					    	<input class="form-control" type="text" id="username" name="_username" value="{{ last_username }}" required="required" />
@@ -26,23 +26,15 @@
 
                     <div class="row">
                         <div class="col-sm-2" style="font-size: 20px;">
-					    	<label for="password">{{ 'security.login.password'|trans }}</label>
+					    	Mot de passe
 					    </div>
                         <div class="col-sm-8">
 					    	<input class="form-control" type="password" id="password" name="_password" required="required" />
 					    </div>
-					</div>
-
-                    <div class="row">
-                        <div class="col-sm-2" style="font-size: 20px;">
-					    	<input type="checkbox" id="remember_me" name="_remember_me" value="on" />
-					    </div>
-                        <div class="col-sm-8">
-					    	<label for="remember_me">{{ 'security.login.remember_me'|trans }}</label>
-					    </div>
 					</div></br>
 
-				    <input class="btn btn-primary" type="submit" id="_submit" name="_submit" value="{{ 'security.login.submit'|trans }}" />
+                    <div class="col-sm-5"></div>
+				    <input class="btn btn-success col-sm-2" type="submit" id="_submit" name="_submit" value="Connection" />
 				</div>
 			</form>
 		</div>
