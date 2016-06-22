@@ -23,6 +23,8 @@ use Symfony\Component\Form\Extension\Core\Type\SubmitType;
 use \Symfony\Bridge\Doctrine\Form\Type\EntityType;
 use Symfony\Component\Form\Extension\Core\Type\DateTimeType;
 use Symfony\Component\Form\Extension\Core\Type\DateType;
+use Symfony\Component\Form\Extension\Core\Type\PasswordType;
+use Symfony\Component\Form\Extension\Core\Type\EmailType;
 use AMAPBundle\Entity\TypePanier;
 
 class AdminController extends Controller
@@ -357,8 +359,11 @@ class AdminController extends Controller
     public function creerActeurAction(Request $request){
         
         $em = $this->getDoctrine()->getManager();
+        
+        $session = $request->getSession();
 
         $form = $this->get('form.factory')->createNamedBuilder('formulaire_creation_acteur')
+            ->add('email',EmailType::class)
             ->add('typeActeur',EntityType::class,array('class' => 'AMAPBundle:TypeActeur', 'choice_label' => 'libelle'))
             ->add('nom', TextType::class )
             ->add('prenom', TextType::class )
@@ -368,7 +373,9 @@ class AdminController extends Controller
             ->add('nomVoie', TextType::class )
             ->add('ville', TextType::class )
             ->add('cp', TextType::class )
-			->add('amap',EntityType::class,array('class' => 'AMAPBundle:Amap', 'choice_label' => 'libelle'))
+            ->add('amap',EntityType::class,array('class' => 'AMAPBundle:Amap', 
+                'choice_label' => 'libelle',
+                'query_builder' => $this->getDoctrine()->getRepository('AMAPBundle:Amap')->getAmap($session->get('amap'))))
             ->add('ajouter', SubmitType::class, array('label' => 'Créer acteur'))
             ->getForm();
 
@@ -391,7 +398,7 @@ class AdminController extends Controller
                 $acteur->setPrenom($data['prenom']);
                 $acteur->setDateNaissance($data['dateNaissance']);
 
-				$adresse = new Adresse();
+                $adresse = new Adresse();
 
                 $adresse->setNumRue($data['numRue']);
                 $adresse->setTypeVoie($data['typeVoie']);
@@ -399,11 +406,13 @@ class AdminController extends Controller
                 $adresse->setville($data['ville']);
                 $adresse->setCp($data['cp']);
 
-				$acteur->setAdresse($adresse);
+		$acteur->setAdresse($adresse);
+                
+                $acteur->setEmail($data['email']);
+                $acteur->setEmailCanonical($data['email']);
+		$acteur->setAmap($data['amap']);
 
-				$acteur->setAmap($data['amap']);
-
-				$em->persist($adresse);
+		$em->persist($adresse);
                 $em->persist($acteur);
 
                 $em->flush();

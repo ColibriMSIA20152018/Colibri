@@ -48,8 +48,10 @@
                                 {% endfor %}
                                 </ul>
                           </p>
-                          <p><a href="{{ path('amap_inscription', { 'id': panier.id }) }}" class="btn btn-primary" role="button">Choisir ce panier</a></p>
-                        </div>
+                          {% if app.user.typeActeur.id == 2 %}
+                            <p><a href="{{ path('amap_inscription', { 'id': panier.id }) }}" class="btn btn-primary" role="button">Choisir ce panier</a></p>
+                          {% endif %}
+                          </div>
                       </div>
                     </div>
             {% endfor %}

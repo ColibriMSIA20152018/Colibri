@@ -38,6 +38,7 @@ class DefaultController extends Controller
 			$session =  $request->getSession();
 
                         $session->set('amap',$data['amap']->getId());
+                        $session->set('nameAmap',$data['amap']->getLibelle());
 			return $this->redirectToRoute('amap_homepage');
 		}
 

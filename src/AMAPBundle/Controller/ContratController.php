@@ -23,11 +23,14 @@ class ContratController extends Controller
     public function creerAction(Request $request)
     {
         $em = $this->getDoctrine()->getManager();
-
-        
+  
         $session = $request->getSession();
-   
-        $listcontrat = $em->getRepository('AMAPBundle:Contrat')->findBy(array('consommateur'=>$this->getUser()->getId(),'amap'=>$session->get('amap')));
+        
+        if($this->getUser()->getTypeActeur()->getId()==2){
+            $listcontrat = $em->getRepository('AMAPBundle:Contrat')->findBy(array('consommateur'=>$this->getUser()->getId(),'amap'=>$session->get('amap')));
+        }else{
+            $listcontrat = $em->getRepository('AMAPBundle:Contrat')->findBy(array('producteur'=>$this->getUser()->getId(),'amap'=>$session->get('amap')));
+        }
         $typeProducteur = $em->getRepository('AMAPBundle:TypeActeur')->findBy(array('libelle' => 'Producteur'));
         $listproducteur = $em->getRepository('AMAPBundle:Acteur')->findBy(array('typeActeur' => $typeProducteur));
 
