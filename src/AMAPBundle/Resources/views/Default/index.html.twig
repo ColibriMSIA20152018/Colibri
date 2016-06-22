@@ -21,8 +21,19 @@
 						<div class="12u">
 							<div style="text-align:center">
                                                             <h3>Une agriculture, une ville, un panier</h3>
-                                                            <p>Pour commencer la navigation veuillez selectionner l'AMAP sur laquelle vous souhaitez travailler.</p>
-                                                            <a href="{{path('amap_select_amap')}}" class="button">Choisir son amap</a>
+                                                            {% if app.user %}
+                                                                {% if app.session.get('nameAmap') %}
+                                                                    <p>Vous avez choisi l'amap de <b>{{ app.session.get('nameAmap') }}</b></p>
+                                                                    <a href="{{path('amap_select_amap')}}" class="button">Changer d'amap</a>
+                                                                {% else %}
+                                                                    <p>Pour commencer la navigation veuillez selectionner l'AMAP sur laquelle vous souhaitez travailler.</p>
+                                                                    <a href="{{path('amap_select_amap')}}" class="button">Choisir son amap</a>
+                                                                {% endif %}
+                                                            {% else %}
+                                                                <p>Pour commencer la navigation veuillez vous inscrire ou vous connecter</p>
+                                                                <a href="{{path('fos_user_registration_register')}}" class="button">S'inscrire</a>
+                                                                <a href="{{path('fos_user_security_login')}}" class="button">Connexion</a>
+                                                            {% endif %}
                                                         </div>
 						</div>
 					</div>
@@ -34,7 +45,7 @@
 					<header class="major">
 						<h2>Objectif des AMAP</h2>
 					</header>
-					<p>Notre systeme de partenariat entre consommateur et producteur permet d'organiser des ventes sous forme de panier dont le prix est fixé de maniere equitable.</p>
+					<p>Notre systeme de partenariat entre consommateur et producteur permet d'organiser des ventes sous forme de panier dont le prix est fixé de manière équitable.</p>
 				</section>
 			</div>
 <!--

@@ -23,14 +23,38 @@ use Symfony\Component\Form\Extension\Core\Type\SubmitType;
 use \Symfony\Bridge\Doctrine\Form\Type\EntityType;
 use Symfony\Component\Form\Extension\Core\Type\DateTimeType;
 use Symfony\Component\Form\Extension\Core\Type\DateType;
+use Symfony\Component\Form\Extension\Core\Type\PasswordType;
+use Symfony\Component\Form\Extension\Core\Type\EmailType;
 use AMAPBundle\Entity\TypePanier;
 
 class AdminController extends Controller
 {
     public function indexAction(Request $request)
     {        
-        return $this->render('admin.html.twig',array('page_courante' => 'AdminAccueil', 'onglet_courant' => 'aucun'));
+        $em = $this->getDoctrine()->getManager();
+
+        $form = $this->get('form.factory')->createNamedBuilder('formulaire_select_amap')
+            ->add('amap',EntityType::class,array('class' => 'AMAPBundle:Amap', 'choice_label' => 'libelle'))
+            ->add('ajouter', SubmitType::class, array('label' => 'Selection d\'une AMAP'))
+            ->getForm();
+
+        if ($form->handleRequest($request)->isSubmitted()){
+            
+            $data = $form->getData();
+            
+            $session =  $request->getSession();
+
+            $session->set('amap',$data['amap']->getId());
+            $session->set('amap_libelle',$data['amap']->getLibelle());
+            
+            return $this->redirectToRoute('amap_admin');
+	}
+        
+        return $this->render('AMAPBundle:Admin/Default:selectAmap.html.twig',array('page_courante' => 'AdminAccueil',
+            'onglet_courant' => 'aucun',
+            'form' => $form->createView()));
     }
+    
     
     /*****************************
      **** DEBUT INSCRIPTION  *****
@@ -41,7 +65,9 @@ class AdminController extends Controller
         
         $em = $this->getDoctrine()->getManager();
         
-        $inscription = $em->getRepository('AMAPBundle:Inscription')->findAll();
+        $session = $request->getSession();
+        
+        $inscription = $em->getRepository('AMAPBundle:Inscription')->findBy(array('amap'=>$session->get('amap')));
         
         return $this->render('AMAPBundle:Admin/Inscription:listerInscription.html.twig',array('page_courante' => 'AdminAccueil', 
                                                                                                 'onglet_courant' => 'aucun',
@@ -166,6 +192,31 @@ class AdminController extends Controller
             ->add('ajouter', SubmitType::class, array('label' => 'Retirer un Panier'))
             ->getForm();
         
+        if($form->handleRequest($request)->isSubmitted()){
+            if ($form->get('ajouter')->isClicked())
+            {               
+ 
+                $data = $form->getData();                                
+                $panier = $data['panier'];
+               
+                $panierproduit = $panier->getPanierproduit();
+              
+                $entrepot = $em->getRepository('AMAPBundle:Entrepot')->findOneBy(array('amap'=>$request->getSession()->get('amap')));
+                var_dump('ici avant for');
+                foreach ($panierproduit as $produit) {
+
+                    $stock = $em->getRepository('AMAPBundle:Stock')->findBy(array('produit' => $produit->getProduit(), 'entrepot' => $entrepot));
+                    var_dump('ici');
+                    $stock[0]->setQuantite($stock[0]->getQuantite() - $produit->getQuantite());
+
+                    $em->persist($stock[0]);         
+                }
+
+                $em->flush();
+
+                 //return $this->redirect($this->generateUrl('amap_panier_ajouter'));
+            }
+        }
         return $this->render('AMAPBundle:Admin/Panier:retrait.html.twig',array('page_courante' => 'AdminPanier', 'onglet_courant' => 'retraitPanierAction','form'=>$form->createView()));
     }
     
@@ -308,8 +359,11 @@ class AdminController extends Controller
     public function creerActeurAction(Request $request){
         
         $em = $this->getDoctrine()->getManager();
+        
+        $session = $request->getSession();
 
         $form = $this->get('form.factory')->createNamedBuilder('formulaire_creation_acteur')
+            ->add('email',EmailType::class)
             ->add('typeActeur',EntityType::class,array('class' => 'AMAPBundle:TypeActeur', 'choice_label' => 'libelle'))
             ->add('nom', TextType::class )
             ->add('prenom', TextType::class )
@@ -319,7 +373,9 @@ class AdminController extends Controller
             ->add('nomVoie', TextType::class )
             ->add('ville', TextType::class )
             ->add('cp', TextType::class )
-			->add('amap',EntityType::class,array('class' => 'AMAPBundle:Amap', 'choice_label' => 'libelle'))
+            ->add('amap',EntityType::class,array('class' => 'AMAPBundle:Amap', 
+                'choice_label' => 'libelle',
+                'query_builder' => $this->getDoctrine()->getRepository('AMAPBundle:Amap')->getAmap($session->get('amap'))))
             ->add('ajouter', SubmitType::class, array('label' => 'Créer acteur'))
             ->getForm();
 
@@ -342,7 +398,7 @@ class AdminController extends Controller
                 $acteur->setPrenom($data['prenom']);
                 $acteur->setDateNaissance($data['dateNaissance']);
 
-				$adresse = new Adresse();
+                $adresse = new Adresse();
 
                 $adresse->setNumRue($data['numRue']);
                 $adresse->setTypeVoie($data['typeVoie']);
@@ -350,11 +406,13 @@ class AdminController extends Controller
                 $adresse->setville($data['ville']);
                 $adresse->setCp($data['cp']);
 
-				$acteur->setAdresse($adresse);
+		$acteur->setAdresse($adresse);
+                
+                $acteur->setEmail($data['email']);
+                $acteur->setEmailCanonical($data['email']);
+		$acteur->setAmap($data['amap']);
 
-				$acteur->setAmap($data['amap']);
-
-				$em->persist($adresse);
+		$em->persist($adresse);
                 $em->persist($acteur);
 
                 $em->flush();
@@ -388,24 +446,30 @@ class AdminController extends Controller
     public function creerContratAction(Request $request)
     {
         $em = $this->getDoctrine()->getManager();
+        
+        $session = $request->getSession();        
 
         $form = $this->get('form.factory')->createNamedBuilder('formulaire_creer_contrat')
             ->add('producteur',EntityType::class,array('class' => 'AMAPBundle:Acteur',
                                                         'choice_label' => 'nom',
-                                                        'query_builder' => function(\Doctrine\ORM\EntityRepository $er){
-                                                            return $er->createQueryBuilder('s')
-                                                            ->where('s.typeActeur = ?1')
-                                                            ->setParameter(1,'1');
-                                                        }))
+                                                        'query_builder' => $this->getDoctrine()
+                    ->getRepository('AMAPBundle:Acteur')
+                    ->getProducteurs(1,$session->get('amap'))))
             ->add('consommateur',EntityType::class,array('class' => 'AMAPBundle:Acteur',
                                                          'choice_label' => 'nom',
-                                                         'query_builder' => function(\Doctrine\ORM\EntityRepository $er){
-                                                            return $er->createQueryBuilder('s')
-                                                            ->where('s.typeActeur = ?1')
-                                                            ->setParameter(1,'2');
-                                                        }))
-            ->add('amap',EntityType::class,array('class' => 'AMAPBundle:Amap', 'choice_label' => 'libelle'))
-            ->add('panier',EntityType::class,array('class' => 'AMAPBundle:Panier', 'choice_label' => 'libelle'))
+                                                         'query_builder' => $this->getDoctrine()
+                    ->getRepository('AMAPBundle:Acteur')
+                    ->getActeurs(2,$session->get('amap'))))
+            ->add('amap',EntityType::class,array('class' => 'AMAPBundle:Amap', 
+                'choice_label' => 'libelle',
+                'query_builder' => $this->getDoctrine()
+                    ->getRepository('AMAPBundle:Amap')
+                    ->getAmap($session->get('amap'))))
+            ->add('panier',EntityType::class,array('class' => 'AMAPBundle:Panier', 
+                'choice_label' => 'libelle',
+                'query_builder' => $this->getDoctrine()
+                    ->getRepository('AMAPBundle:Panier')
+                    ->getAmap($session->get('amap'))))
             ->add('ajouter', SubmitType::class, array('label' => 'Créer contrat'))
             ->getForm();
 
@@ -483,11 +547,13 @@ class AdminController extends Controller
             'form' => $form->createView()));
     }
     
-    public function listerContratsAction()
+    public function listerContratsAction(Request $request)
     {
         $em = $this->getDoctrine()->getManager();
         
-        $listcontrat = $em->getRepository('AMAPBundle:Contrat')->findAll();
+        $session = $request->getSession();
+        
+        $listcontrat = $em->getRepository('AMAPBundle:Contrat')->findBy(array('amap'=>$session->get('amap')));
         
          return $this->render('AMAPBundle:Admin/Contrat:listerContrats.html.twig',array('page_courante' => 'AdminContrats', 'onglet_courant' => 'listerContratsAction',
             'listcontrat' => $listcontrat));
@@ -565,13 +631,15 @@ class AdminController extends Controller
      ********* DEBUT STOCK **********
      *******************************/
     
-    public function listerStockAction()
+    public function listerStockAction(Request $request)
     {
         $em = $this->getDoctrine()->getManager();
 
-        $stockFinal = $em->getRepository('AMAPBundle:Stock')->findAll();
+        $session = $request->getSession();
+        
+        $entrepot = $em->getRepository('AMAPBundle:Entrepot')->findOneBy(array('amap'=>$session->get('amap')));
 
-        return $this->render('AMAPBundle:Admin/Stock:listerStock.html.twig',array('page_courante' => 'AdminStock', 'onglet_courant' => 'listerStockAction','stock' => $stockFinal));
+        return $this->render('AMAPBundle:Admin/Stock:listerStock.html.twig',array('page_courante' => 'AdminStock', 'onglet_courant' => 'listerStockAction','entrepot' => $entrepot));
     }
     
     public function ajouterStockAction(Request $request)
@@ -700,11 +768,13 @@ class AdminController extends Controller
      ******** DEBUT LIVRAISON *******
      *******************************/
     
-    public function listerLivraisonAction()
+    public function listerLivraisonAction(Request $request)
     {
         $em = $this->getDoctrine()->getManager();
+        
+        $session = $request->getSession();
 
-        $listContrat = $em->getRepository('AMAPBundle:Contrat')->findAll();
+        $listContrat = $em->getRepository('AMAPBundle:Contrat')->findBy(array('amap'=>$session->get('amap')));
 
         return $this->render('AMAPBundle:Admin/Livraison:listerLivraison.html.twig',array('page_courante' => 'AdminLivraison', 'onglet_courant' => 'listerLivraisonAction','listContrat' => $listContrat));
     }
@@ -713,10 +783,15 @@ class AdminController extends Controller
     {
         $em = $this->getDoctrine()->getManager();
 
+        $session = $request->getSession();
 
         $form = $this->get('form.factory')->createNamedBuilder('formulaire_livraison')
             ->add('dateTime', DateTimeType::class)
-            ->add('contrat',EntityType::class, array('class' => 'AMAPBundle:Contrat', 'choice_label' => 'id'))
+            ->add('contrat',EntityType::class, array('class' => 'AMAPBundle:Contrat',
+                'choice_label' => 'id',
+                'query_builder' => $this->getDoctrine()
+                    ->getRepository('AMAPBundle:Contrat')
+                    ->getContrats(1,$session->get('amap'))))
             ->add('ajouter', SubmitType::class, array('label' => 'Ajouter livraison'))
             ->getForm();
 
@@ -791,6 +866,23 @@ class AdminController extends Controller
                 foreach ($listContrat as $contrat) {
                     foreach ($contrat->getLivraisons() as $livraison) {
                         
+                        
+                        $panier = $contrat->getPanier();
+
+                        $panierproduit = $panier->getPanierproduit();
+                            
+                        $entrepot = $em->getRepository('AMAPBundle:Entrepot')->findOneBy(array('amap'=>$request->getSession()->get('amap')));
+                        
+                        foreach ($panierproduit as $produit) {
+
+                            $stock = $em->getRepository('AMAPBundle:Stock')->findBy(array('produit' => $produit->getProduit(), 'entrepot' => $entrepot));
+
+                            $stock[0]->setQuantite($stock[0]->getQuantite() - $produit->getQuantite());
+
+                            $em->persist($stock[0]);
+
+                        }                        
+                        
                         $livraison->setEstLivree(true);
                                 
                         $em->persist($livraison);                                
@@ -809,7 +901,7 @@ class AdminController extends Controller
                
     }
     
-    public function effectuerOneAction($idpanier,$id,$date)
+    public function effectuerOneAction(Request $request,$idpanier,$id,$date)
     {
             $em = $this->getDoctrine()->getManager();
             
@@ -821,6 +913,23 @@ class AdminController extends Controller
                 if($livraison->getDateLivraison()->format('Y-m-d H:i:s') == $date)
                 {
                     $livraison->setEstLivree(true);
+                    
+                    $panier = $contrat[0]->getPanier();
+
+                        $panierproduit = $panier->getPanierproduit();
+                            
+                        $entrepot = $em->getRepository('AMAPBundle:Entrepot')->findOneBy(array('amap'=>$request->getSession()->get('amap')));
+                        
+                        foreach ($panierproduit as $produit) {
+
+                            $stock = $em->getRepository('AMAPBundle:Stock')->findBy(array('produit' => $produit->getProduit(), 'entrepot' => $entrepot));
+
+                            $stock[0]->setQuantite($stock[0]->getQuantite() - $produit->getQuantite());
+
+                            $em->persist($stock[0]);
+
+                        } 
+                    
                     $em->persist($livraison);
                 }
             }

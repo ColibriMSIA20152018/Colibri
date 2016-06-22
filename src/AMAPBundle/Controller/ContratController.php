@@ -23,45 +23,14 @@ class ContratController extends Controller
     public function creerAction(Request $request)
     {
         $em = $this->getDoctrine()->getManager();
-
-        $form = $this->get('form.factory')->createNamedBuilder('formulaire_creer_contrat')
-            ->add('producteur',EntityType::class,array('class' => 'AMAPBundle:Acteur',
-                                                        'choice_label' => 'nom',
-                                                        'query_builder' => function(\Doctrine\ORM\EntityRepository $er){
-                                                            return $er->createQueryBuilder('s')
-                                                            ->where('s.typeActeur = ?1')
-                                                            ->setParameter(1,'1');
-                                                        }))
-            ->add('consommateur',EntityType::class,array('class' => 'AMAPBundle:Acteur',
-                                                         'choice_label' => 'nom',
-                                                         'query_builder' => function(\Doctrine\ORM\EntityRepository $er){
-                                                            return $er->createQueryBuilder('s')
-                                                            ->where('s.typeActeur = ?1')
-                                                            ->setParameter(1,'2');
-                                                        }))
-			->add('amap',EntityType::class,array('class' => 'AMAPBundle:Amap', 'choice_label' => 'libelle'))
-            ->add('panier',EntityType::class,array('class' => 'AMAPBundle:Panier', 'choice_label' => 'libelle'))
-            ->add('ajouter', SubmitType::class, array('label' => 'Créer contrat'))
-            ->getForm();
-
-        if ($form->handleRequest($request)->isSubmitted()){
-           if ($form->get('ajouter')->isClicked())
-           {
-                $data = $form->getData();
-
-                $contrat = new Contrat();
-
-                $contrat->setProducteur($data['producteur']);
-                $contrat->setConsommateur($data['consommateur']);
-				$contrat->setAmap($data['amap']);
-                $contrat->setPanier($data['panier']);
-
-                $em->persist($contrat);
-                $em->flush();
-           }
+  
+        $session = $request->getSession();
+        
+        if($this->getUser()->getTypeActeur()->getId()==2){
+            $listcontrat = $em->getRepository('AMAPBundle:Contrat')->findBy(array('consommateur'=>$this->getUser()->getId(),'amap'=>$session->get('amap')));
+        }else{
+            $listcontrat = $em->getRepository('AMAPBundle:Contrat')->findBy(array('producteur'=>$this->getUser()->getId(),'amap'=>$session->get('amap')));
         }
-
-        $listcontrat = $em->getRepository('AMAPBundle:Contrat')->findAll();
         $typeProducteur = $em->getRepository('AMAPBundle:TypeActeur')->findBy(array('libelle' => 'Producteur'));
         $listproducteur = $em->getRepository('AMAPBundle:Acteur')->findBy(array('typeActeur' => $typeProducteur));
 
@@ -121,7 +90,6 @@ class ContratController extends Controller
             }
 
         return $this->render('AMAPBundle:Contrat:index.html.twig',array(
-            'form' => $form->createView(),
             'page_courante' => 'contrat',
             'listproducteur' => $listproducteur,
             'listcontrat' => $listcontrat,

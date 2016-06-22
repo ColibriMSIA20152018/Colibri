@@ -8,6 +8,7 @@
                 <table id="tableau" class="table table-striped">
 					<thead>
 						<tr>
+                                                        <th>ID</th>
 							<th>Producteur</th>
 							<th>Consommateur</th>
 							<th>Amap</th>
@@ -16,6 +17,7 @@
 					</thead>
 					<tfoot>
 						<tr>
+                                                        <th>ID</th>
 							<th>Producteur</th>
 							<th>Consommateur</th>
 							<th>Amap</th>
@@ -25,6 +27,7 @@
 					<tbody>
 					{% for item in listcontrat %}
 						<tr>
+                                                        <td>{{item.id}}</td>
 							<td>{{item.producteur.nom}}</td>
 							<td>{{item.consommateur.nom}}</td>
 							<td>{{item.amap.libelle}}</td>
