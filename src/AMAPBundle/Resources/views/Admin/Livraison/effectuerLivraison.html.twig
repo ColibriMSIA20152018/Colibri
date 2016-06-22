@@ -45,10 +45,20 @@
 			{% endfor %}
 		</tbody>
 	</table>
-        <h1> Effectuer livraisons !</h1>
         {{ form_start(form) }}
+        	<div class="form-group">
+                <div class="row">
+                    <div class="col-sm-4"></div>
+                    <div class="col-sm-4">
+                        {{ form_label(form.livrer) }}
+                        {{ form_widget(form.livrer, {'attr': { 'class': 'btn btn-primary'}}) }}
+                    </div>
+                </div>
+            </div>
         {{ form_end(form) }}
 {% endblock %}
+
+
 {% block javascripts %}
 	<script>
 	$(document).ready(function() {
